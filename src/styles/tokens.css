@@ -1,0 +1,68 @@
+/*
+  Design tokens: every colour, font and spacing value the site uses lives here.
+  Components only ever use var(--name), so changing a colour means changing one line.
+
+  The palette matches the CV and letter set: white page, orange accent #FF5100, ink #18181B.
+  #FF5100 is only used for lines and shapes, because orange text on white is hard to read;
+  text links use the darker --accent-text, which passes WCAG AA contrast (4.5:1).
+*/
+:root {
+  --bg: #ffffff;
+  --surface: #fafafa;
+  --surface-raised: #ffffff;
+  --tint: #fff3ec;
+  --border: #e4e4e7;
+  --ink: #18181b;
+  --muted: #52525b;
+  --accent: #ff5100;
+  --accent-text: #c2410c;
+  --on-accent: #ffffff;
+  --shadow: 0 1px 2px rgb(24 24 27 / 0.06), 0 4px 16px rgb(24 24 27 / 0.06);
+
+  --font-serif: 'Source Serif 4', Georgia, serif;
+  --font-sans: 'Inter', system-ui, -apple-system, 'Segoe UI', sans-serif;
+  --font-mono: 'JetBrains Mono', ui-monospace, Consolas, monospace;
+
+  --radius: 10px;
+  --gutter: 16px;
+  --content: 1080px;
+  --reading: 68ch;
+}
+
+/* Dark theme, used when the visitor's system prefers it and they haven't picked light by hand. */
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --bg: #111113;
+    --surface: #18181b;
+    --surface-raised: #1f1f23;
+    --tint: #2a1a12;
+    --border: #2e2e33;
+    --ink: #f4f4f5;
+    --muted: #a1a1aa;
+    --accent: #ff5100;
+    --accent-text: #fb923c;
+    --on-accent: #111113;
+    --shadow: none;
+  }
+}
+
+/* The same dark values, used when the visitor picked dark with the theme button. */
+:root[data-theme='dark'] {
+  --bg: #111113;
+  --surface: #18181b;
+  --surface-raised: #1f1f23;
+  --tint: #2a1a12;
+  --border: #2e2e33;
+  --ink: #f4f4f5;
+  --muted: #a1a1aa;
+  --accent: #ff5100;
+  --accent-text: #fb923c;
+  --on-accent: #111113;
+  --shadow: none;
+}
+
+@media (min-width: 720px) {
+  :root {
+    --gutter: 32px;
+  }
+}
