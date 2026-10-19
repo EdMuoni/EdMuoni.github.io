@@ -1,14 +1,16 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
+import MotionToggle from './MotionToggle.vue'
 import ThemeToggle from './ThemeToggle.vue'
 import { profile } from '@/data/profile'
 
-// The four pages, in the order a recruiter should read them.
+// The five pages, in the order a recruiter should read them.
 const pages = [
   { to: '/', label: 'About Me' },
   { to: '/what-i-bring', label: 'What I bring' },
   { to: '/now-building', label: 'Now building' },
   { to: '/work', label: 'Finished work' },
+  { to: '/school', label: 'School' },
 ]
 </script>
 
@@ -19,7 +21,10 @@ const pages = [
         {{ profile.name }}
         <span class="brand-role">{{ profile.role }}</span>
       </RouterLink>
-      <ThemeToggle />
+      <div class="tools">
+        <MotionToggle />
+        <ThemeToggle />
+      </div>
       <!-- RouterLink adds aria-current="page" to the link of the page you are on. -->
       <nav class="nav" aria-label="Pages">
         <RouterLink v-for="page in pages" :key="page.to" :to="page.to" class="nav-link">
@@ -31,14 +36,14 @@ const pages = [
 </template>
 
 <style scoped>
-/* Scrolls away on phones, where two rows of header would eat a fifth of the screen;
-   stays pinned on wider screens, where it is one slim row. */
+/* Scrolls away on phones and tablets, where two rows of header would eat a fifth of the screen;
+   stays pinned on wide screens, where it is one slim row. */
 .site-header {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
 }
 
-@media (min-width: 860px) {
+@media (min-width: 1024px) {
   .site-header {
     position: sticky;
     top: 0;
@@ -46,7 +51,7 @@ const pages = [
   }
 }
 
-/* Phone: name and theme button on the first row, the four links on a second row. */
+/* Phone: name and the two buttons on the first row, the links on a second row. */
 .bar {
   display: grid;
   grid-template-columns: 1fr auto;
@@ -76,15 +81,30 @@ const pages = [
   color: var(--accent-text);
 }
 
-/* Narrow phones: the four links as a 2 × 2 grid, so none of them is hidden off-screen. */
+/* Phones: the five links as a grid of three and two, so none of them is hidden off-screen or
+   behind a menu button. Six columns: the first three links take two each, the last two take three. */
 .nav {
   grid-column: 1 / -1;
   display: grid;
-  grid-template-columns: 1fr 1fr;
+  grid-template-columns: repeat(6, minmax(0, 1fr));
   gap: 0 4px;
 }
 
-@media (min-width: 520px) {
+.nav-link {
+  grid-column: span 2;
+}
+
+.nav-link:nth-child(n + 4) {
+  grid-column: span 3;
+}
+
+.tools {
+  display: flex;
+  gap: 8px;
+}
+
+/* Tablets: the links in one row under the name. */
+@media (min-width: 720px) {
   .nav {
     display: flex;
     gap: 4px;
@@ -111,8 +131,8 @@ const pages = [
   border-bottom-color: var(--accent);
 }
 
-/* Wider screens: everything on one row, links before the theme button. */
-@media (min-width: 860px) {
+/* Wide screens: everything on one row, links before the buttons. */
+@media (min-width: 1024px) {
   .bar {
     grid-template-columns: auto 1fr auto;
     padding-top: 12px;
@@ -125,8 +145,7 @@ const pages = [
     justify-content: flex-end;
   }
 
-  /* The theme button's root element also carries this component's scoped style attribute. */
-  .theme-toggle {
+  .tools {
     grid-column: 3;
     grid-row: 1;
   }

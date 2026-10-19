@@ -3,8 +3,8 @@
   "extends": "@tsconfig/node24/tsconfig.json",
   "include": [
     "vite.config.*",
-    // Page list shared with the router; vite.config.ts reads it at build time.
-    "src/router/pages.ts",
+    // Build scripts that Node.js runs directly, e.g. scripts/prerender.ts.
+    "scripts/**/*.ts",
     "vitest.config.*",
     "cypress.config.*",
     "playwright.config.*",

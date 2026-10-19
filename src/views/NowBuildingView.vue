@@ -1,8 +1,12 @@
 <script setup lang="ts">
-import CaseStudy from '@/components/CaseStudy.vue'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
-import { nowBuilding } from '@/data/projects'
+import SectionHeading from '@/components/SectionHeading.vue'
+import ProjectCard from '@/components/ProjectCard.vue'
+import { mascot } from '@/data/mascot'
+import { isCaseStudy, projectsIn } from '@/data/projects'
+
+const current = projectsIn('now')
 </script>
 
 <template>
@@ -10,23 +14,21 @@ import { nowBuilding } from '@/data/projects'
     kicker="Now building"
     title="What I am working on now"
     lead="I am growing my diploma thesis into VoltVibe: a web shop for electrical components with the panel calculator built in."
+    :mascot="mascot.nowBuilding"
   />
 
-  <div class="container">
-    <CaseStudy v-for="study in nowBuilding" :key="study.id" :study="study" />
-  </div>
-
   <section class="section">
-    <div class="container this-site">
-      <span class="kicker">Also in progress</span>
-      <h2>This website</h2>
-      <p>
-        Built with Vue 3, TypeScript, Vue Router and Vite. Every project on these pages comes from
-        one typed data file, and GitHub Actions builds and publishes the site on every push.
-      </p>
-      <a href="https://github.com/EdMuoni/EdMuoni.github.io" class="btn">
-        Code on GitHub <span aria-hidden="true">↗</span>
-      </a>
+    <div class="container">
+      <SectionHeading kicker="In progress" title="On my bench" />
+      <div class="grid">
+        <ProjectCard
+          v-for="(project, i) in current"
+          :key="project.slug"
+          v-reveal="i"
+          :project="project"
+          :large="isCaseStudy(project)"
+        />
+      </div>
     </div>
   </section>
 
@@ -34,7 +36,16 @@ import { nowBuilding } from '@/data/projects'
 </template>
 
 <style scoped>
-.this-site p {
-  max-width: var(--reading);
+.grid {
+  display: grid;
+  gap: 16px;
+  margin-top: 24px;
+}
+
+@media (min-width: 900px) {
+  .grid {
+    grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+    align-items: start;
+  }
 }
 </style>

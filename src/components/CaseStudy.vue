@@ -1,59 +1,68 @@
 <script setup lang="ts">
-import type { CaseStudy } from '@/data/projects'
+import { computed } from 'vue'
+import type { Project } from '@/data/projects'
+import ThemedImage from './ThemedImage.vue'
+import TypeText from './TypeText.vue'
 
-// One large project, always in the same order so a reader knows where to look:
-// problem → what I built → stack → proof → what's next.
-defineProps<{ study: CaseStudy }>()
+// The body of a project's page, always in the same order so a reader knows where to look:
+// problem → what I built → what's next, with proof, stack and links beside it.
+// A small project has fewer parts; the empty ones are simply left out.
+const props = defineProps<{ project: Project }>()
+
+const hasStory = computed(() =>
+  Boolean(props.project.problem || props.project.built?.length || props.project.next?.length),
+)
 </script>
 
 <template>
-  <article :id="study.id" class="case-study">
-    <header class="cs-head">
-      <h2>{{ study.title }}</h2>
-      <p class="cs-context">{{ study.context }}</p>
-    </header>
-
+  <article class="case-study" :class="{ 'no-story': !hasStory }">
     <div class="cs-body">
-      <div class="cs-main">
-        <h3>The problem</h3>
-        <p>{{ study.problem }}</p>
+      <div v-if="hasStory" v-reveal class="cs-main">
+        <template v-if="project.problem">
+          <TypeText as="h2" text="The problem" :speed="26" when-visible />
+          <p>{{ project.problem }}</p>
+        </template>
 
-        <h3>What I built</h3>
-        <ul>
-          <li v-for="item in study.built" :key="item">{{ item }}</li>
-        </ul>
-
-        <template v-if="study.next.length">
-          <h3>What I'd do next</h3>
+        <template v-if="project.built?.length">
+          <TypeText as="h2" :text="project.problem ? 'What I built' : 'What it does'" :speed="26" when-visible />
           <ul>
-            <li v-for="item in study.next" :key="item">{{ item }}</li>
+            <li v-for="item in project.built" :key="item">{{ item }}</li>
+          </ul>
+        </template>
+
+        <template v-if="project.next?.length">
+          <TypeText as="h2" text="What I’d do next" :speed="26" when-visible />
+          <ul>
+            <li v-for="item in project.next" :key="item">{{ item }}</li>
           </ul>
         </template>
       </div>
 
-      <aside class="cs-side">
-        <h3 class="side-title">Proof</h3>
-        <ul class="proof">
-          <li v-for="item in study.proof" :key="item">{{ item }}</li>
-        </ul>
+      <aside v-reveal="1" class="cs-side">
+        <template v-if="project.proof?.length">
+          <h2 class="side-title">Proof</h2>
+          <ul class="proof">
+            <li v-for="item in project.proof" :key="item">{{ item }}</li>
+          </ul>
+        </template>
 
-        <h3 class="side-title">Stack</h3>
+        <h2 class="side-title">Stack</h2>
         <ul class="chips">
-          <li v-for="tech in study.stack" :key="tech">{{ tech }}</li>
+          <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
         </ul>
 
-        <div v-if="study.links.length || study.codeNote" class="cs-links">
-          <a v-for="link in study.links" :key="link.href" :href="link.href" class="btn">
+        <div v-if="project.links?.length || project.codeNote" class="cs-links">
+          <a v-for="link in project.links" :key="link.href" :href="link.href" class="btn">
             {{ link.label }} <span aria-hidden="true">↗</span>
           </a>
-          <p v-if="study.codeNote" class="muted note">{{ study.codeNote }}</p>
+          <p v-if="project.codeNote" class="muted note">{{ project.codeNote }}</p>
         </div>
       </aside>
     </div>
 
-    <div v-if="study.screenshots.length" class="shots">
-      <figure v-for="shot in study.screenshots" :key="shot.src">
-        <img :src="shot.src" :alt="shot.alt" loading="lazy" />
+    <div v-if="project.screenshots.length" class="shots">
+      <figure v-for="(shot, i) in project.screenshots" :key="shot.src" v-reveal="i">
+        <ThemedImage :shot="shot" />
         <figcaption v-if="shot.caption">{{ shot.caption }}</figcaption>
       </figure>
     </div>
@@ -65,21 +74,6 @@ defineProps<{ study: CaseStudy }>()
   padding: 48px 0;
 }
 
-.case-study + .case-study {
-  border-top: 1px solid var(--border);
-}
-
-.cs-head h2 {
-  margin-bottom: 6px;
-}
-
-.cs-context {
-  font-family: var(--font-mono);
-  font-size: 0.82rem;
-  color: var(--muted);
-  margin-bottom: 24px;
-}
-
 .cs-body {
   display: grid;
   gap: 28px;
@@ -89,11 +83,12 @@ defineProps<{ study: CaseStudy }>()
   max-width: var(--reading);
 }
 
-.cs-main h3 {
-  margin-top: 20px;
+.cs-main h2 {
+  font-size: 1.35rem;
+  margin-top: 28px;
 }
 
-.cs-main h3:first-child {
+.cs-main h2:first-child {
   margin-top: 0;
 }
 
@@ -171,6 +166,11 @@ defineProps<{ study: CaseStudy }>()
   .cs-body {
     grid-template-columns: minmax(0, 1fr) 340px;
     gap: 48px;
+  }
+
+  /* With nothing to tell in the main column, the side box takes a sensible width on its own. */
+  .no-story .cs-body {
+    grid-template-columns: minmax(0, 520px);
   }
 
   .shots {

@@ -2,8 +2,10 @@
 import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
+import SectionHeading from '@/components/SectionHeading.vue'
 import TimelineList from '@/components/TimelineList.vue'
 import { education, experience, languages, outcomes, skillGroups, strengths } from '@/data/career'
+import { mascot } from '@/data/mascot'
 </script>
 
 <template>
@@ -11,13 +13,14 @@ import { education, experience, languages, outcomes, skillGroups, strengths } fr
     kicker="What I bring"
     title="What your team gets"
     lead="A developer who reproduces a bug before fixing it, works in small reviewed steps, and knows the electrical domain from the inside."
+    :mascot="mascot.whatIBring"
   />
 
   <section class="section">
     <div class="container">
       <h2 class="sr-only">Results you can expect</h2>
       <ul class="outcomes">
-        <li v-for="item in outcomes" :key="item.title">
+        <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i">
           <h3 class="outcome-title">{{ item.title }}</h3>
           <p class="outcome-text">{{ item.text }}</p>
         </li>
@@ -27,10 +30,9 @@ import { education, experience, languages, outcomes, skillGroups, strengths } fr
 
   <section class="section">
     <div class="container">
-      <span class="kicker">How I would be useful</span>
-      <h2>How I work on every job</h2>
+      <SectionHeading kicker="How I would be useful" title="How I work on every job" />
       <ol class="strengths">
-        <li v-for="(item, i) in strengths" :key="item.title">
+        <li v-for="(item, i) in strengths" :key="item.title" v-reveal>
           <span class="num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
           <div>
             <h3>{{ item.title }}</h3>
@@ -44,15 +46,14 @@ import { education, experience, languages, outcomes, skillGroups, strengths } fr
 
   <section class="section">
     <div class="container">
-      <span class="kicker">Skills</span>
-      <h2>What I have used in real projects</h2>
+      <SectionHeading kicker="Skills" title="What I have used in real projects" />
       <p class="muted intro">
         Every item below appears in a project on
         <RouterLink to="/now-building">Now building</RouterLink> or
         <RouterLink to="/work">Finished work</RouterLink>.
       </p>
       <dl class="skills">
-        <div v-for="group in skillGroups" :key="group.name" class="skill-group">
+        <div v-for="group in skillGroups" :key="group.name" v-reveal class="skill-group">
           <dt>{{ group.name }}</dt>
           <dd>
             <ul class="chips">
@@ -67,13 +68,11 @@ import { education, experience, languages, outcomes, skillGroups, strengths } fr
   <section class="section">
     <div class="container columns">
       <div>
-        <span class="kicker">Experience</span>
-        <h2>Where I have worked</h2>
+        <SectionHeading kicker="Experience" title="Where I have worked" />
         <TimelineList :entries="experience" />
       </div>
       <div>
-        <span class="kicker">Education</span>
-        <h2>What I have learned</h2>
+        <SectionHeading kicker="Education" title="What I have learned" />
         <TimelineList :entries="education" />
         <p><strong>Languages:</strong> {{ languages }}</p>
       </div>

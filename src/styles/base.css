@@ -182,9 +182,4 @@ img {
   border: 0;
 }
 
-@media (prefers-reduced-motion: reduce) {
-  * {
-    transition: none !important;
-    scroll-behavior: auto !important;
-  }
-}
+/* Reduced motion is handled in motion.css. */

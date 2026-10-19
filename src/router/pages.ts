@@ -3,9 +3,9 @@
 //
 // Two places read this file, so a page is only ever described here:
 // - src/router/index.ts, which shows the right page in the browser;
-// - vite.config.ts, which writes a real HTML file for every page at build time, so GitHub Pages
-//   answers "200 OK" (not "404") and a shared link shows that page's own title.
-// It must stay plain data with no imports, because vite.config.ts runs in Node.js, not the browser.
+// - src/entry-server.ts, whose list of addresses the build (scripts/prerender.ts) turns into one
+//   real HTML file per page, so GitHub Pages answers "200 OK" (not "404") and a shared link shows
+//   that page's own title.
 
 export interface PageInfo {
   path: string
@@ -33,7 +33,12 @@ export const pages = {
   work: {
     path: '/work',
     title: 'Finished work · Edgar Muoni',
+    description: 'My diploma thesis, an AI nurse assistant and a Defence Forces internship, each told as a case study.',
+  },
+  school: {
+    path: '/school',
+    title: 'School projects · Edgar Muoni',
     description:
-      'My diploma thesis, an AI nurse assistant, a Defence Forces internship and the projects you can open and play.',
+      'Course projects from my software development studies, grouped by course: web apps, APIs, browser tests, mobile apps and games.',
   },
 } satisfies Record<string, PageInfo>

@@ -9,7 +9,16 @@ import SiteFooter from '@/components/SiteFooter.vue'
   <a class="skip-link" href="#main">Skip to content</a>
   <SiteHeader />
   <main id="main" tabindex="-1">
-    <RouterView />
+    <!-- Changing pages fades the old page out and the new one in (classes in styles/motion.css).
+         The key makes Vue build a fresh page even between two pages of the same kind, e.g. one
+         project to the next, so each page's animations play from the start. -->
+    <RouterView v-slot="{ Component, route }">
+      <Transition name="page" mode="out-in">
+        <div :key="route.path" class="page">
+          <component :is="Component" />
+        </div>
+      </Transition>
+    </RouterView>
   </main>
   <SiteFooter />
 </template>

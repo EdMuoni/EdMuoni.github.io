@@ -9,31 +9,46 @@
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
     <!-- Link previews (LinkedIn, Slack, e-mail) read these tags without running any JavaScript.
-         The build fills in each page's own title, description and og:* values from
-         src/router/pages.ts (see vite.config.ts), so the values below are only used by `npm run dev`. -->
+         The build fills in each page's own title, description and og:* values (see
+         scripts/prerender.ts), so the values below are only used by `npm run dev`. -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Edgar Muoni · Full-stack developer">
     <meta property="og:description" content="Vue 3 · TypeScript · Rust · C# / .NET · Automated testing. Tallinn, Estonia.">
     <meta property="og:url" content="https://edmuoni.github.io/">
 
-    <!-- Set the colour theme before the page paints, so a dark-mode visitor never sees a white
-         flash. The same storage key is used by src/composables/useTheme.ts. -->
+    <!-- Runs before the page paints, so nothing flashes or jumps:
+         - the colour theme, so a dark-mode visitor never sees a white flash
+           (same storage key as src/composables/useTheme.ts);
+         - the class "js", which tells the CSS that JavaScript runs and text may start hidden until
+           it is typed or slid in (src/styles/motion.css). Without JavaScript nothing is ever hidden;
+         - data-motion: "reduced" when the visitor turned animations off with the motion button,
+           or their system asks for reduced motion and they haven't turned them on
+           (same storage key as src/composables/useMotion.ts).
+         If the app's script never starts (blocked or failed download), a safety net removes "js"
+         after a few seconds, so hidden text appears anyway. -->
     <script>
-      try {
-        var saved = localStorage.getItem('theme')
-        if (saved === 'light' || saved === 'dark') document.documentElement.dataset.theme = saved
-      } catch (e) {}
+      ;(function () {
+        var root = document.documentElement
+        var theme = null
+        var motion = null
+        root.classList.add('js')
+        try {
+          theme = localStorage.getItem('theme')
+          motion = localStorage.getItem('motion')
+        } catch (e) {}
+        if (theme === 'light' || theme === 'dark') root.dataset.theme = theme
+        var systemReduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches
+        root.dataset.motion = motion === 'off' || (motion !== 'on' && systemReduce) ? 'reduced' : 'on'
+        setTimeout(function () {
+          if (!root.classList.contains('app-ready')) root.classList.remove('js')
+        }, 4000)
+      })()
     </script>
   </head>
   <body>
-    <div id="app"></div>
-    <noscript>
-      <p style="font-family: sans-serif; padding: 16px">
-        This site needs JavaScript. You can still reach me at
-        <a href="mailto:edgar.muoni@gmail.com">edgar.muoni@gmail.com</a> or see my code at
-        <a href="https://github.com/EdMuoni">github.com/EdMuoni</a>.
-      </p>
-    </noscript>
+    <!-- Empty in the source. The build (scripts/prerender.ts) puts each page's finished HTML here,
+         so the page reads fine before, or without, JavaScript. -->
+    <div id="app"><!--app-html--></div>
     <script type="module" src="/src/main.ts"></script>
   </body>
 </html>

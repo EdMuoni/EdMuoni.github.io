@@ -1,5 +1,6 @@
 <script setup lang="ts">
 import { contactLinks } from '@/data/profile'
+import TypeText from './TypeText.vue'
 
 // The closing block on a page: one sentence and the ways to reach me.
 withDefaults(defineProps<{ heading?: string }>(), {
@@ -10,11 +11,11 @@ withDefaults(defineProps<{ heading?: string }>(), {
 <template>
   <section class="section contact-cta">
     <div class="container">
-      <h2>{{ heading }}</h2>
+      <TypeText as="h2" :text="heading" :speed="40" when-visible />
       <p class="lead">
         I am looking for a developer role in Estonia. The quickest way to reach me is e-mail.
       </p>
-      <ul class="contact-list">
+      <ul v-reveal class="contact-list">
         <li v-for="link in contactLinks" :key="link.label">
           <span class="label">{{ link.label }}</span>
           <a :href="link.href">{{ link.detail }}</a>

@@ -1,35 +1,46 @@
 <script setup lang="ts">
-import CaseStudy from '@/components/CaseStudy.vue'
+import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
+import SectionHeading from '@/components/SectionHeading.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
-import { finishedCaseStudies, moreProjects } from '@/data/projects'
+import { mascot } from '@/data/mascot'
+import { isCaseStudy, projectsIn } from '@/data/projects'
+
+const caseStudies = projectsIn('finished').filter(isCaseStudy)
 </script>
 
 <template>
   <PageIntro
     kicker="Finished work"
     title="Work I have finished"
-    lead="Larger projects, each told as problem → what I built → proof. Below them, smaller projects from my studies, several of which you can open and play."
-  >
-    <nav class="jump" aria-label="On this page">
-      <a v-for="study in finishedCaseStudies" :key="study.id" :href="`#${study.id}`">{{ study.title }}</a>
-      <a href="#more-projects">More projects</a>
-    </nav>
-  </PageIntro>
+    lead="The larger projects, each with its own page: the problem, what I built and the proof."
+    :mascot="mascot.work"
+  />
 
-  <div class="container">
-    <CaseStudy v-for="study in finishedCaseStudies" :key="study.id" :study="study" />
-  </div>
-
-  <section id="more-projects" class="section more">
+  <section class="section">
     <div class="container">
-      <span class="kicker">From my studies</span>
-      <h2>More projects</h2>
-      <p class="muted">“Open it” runs the project right in your browser; “Code” shows the source on GitHub.</p>
+      <SectionHeading kicker="Case studies" title="The larger projects" />
       <div class="grid">
-        <ProjectCard v-for="project in moreProjects" :key="project.title" :project="project" />
+        <ProjectCard
+          v-for="(project, i) in caseStudies"
+          :key="project.slug"
+          v-reveal="i"
+          :project="project"
+          large
+        />
       </div>
+    </div>
+  </section>
+
+  <section class="section more">
+    <div class="container">
+      <SectionHeading kicker="From my studies" title="School projects" />
+      <p class="muted">
+        Web apps, APIs, browser tests, mobile apps and games from my courses, grouped by course. Several
+        of them run right in your browser.
+      </p>
+      <RouterLink to="/school" class="btn btn-primary">See the school projects <span aria-hidden="true">→</span></RouterLink>
     </div>
   </section>
 
@@ -37,18 +48,8 @@ import { finishedCaseStudies, moreProjects } from '@/data/projects'
 </template>
 
 <style scoped>
-.jump {
-  display: flex;
-  flex-wrap: wrap;
-  gap: 8px 18px;
-  margin-top: 8px;
-  font-weight: 500;
-  font-size: 0.95rem;
-}
-
 .more {
   background: var(--surface);
-  border-top: 1px solid var(--border);
 }
 
 .grid {
