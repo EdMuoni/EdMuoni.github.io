@@ -1,6 +1,7 @@
 import { createRouter, createWebHistory } from 'vue-router'
 
 import HomeView from '@/views/HomeView.vue'
+import { pages, type PageInfo } from './pages'
 
 // Each route carries its own browser-tab title and search-result description in `meta`.
 declare module 'vue-router' {
@@ -10,47 +11,36 @@ declare module 'vue-router' {
   }
 }
 
+// Paths, titles and descriptions come from pages.ts, which the build also uses (see that file).
+const meta = (page: PageInfo) => ({ title: page.title, description: page.description })
+
 const router = createRouter({
   history: createWebHistory(import.meta.env.BASE_URL),
   routes: [
     {
-      path: '/',
+      path: pages.home.path,
       name: 'home',
       component: HomeView,
-      meta: {
-        title: 'Edgar Muoni · Full-stack developer',
-        description:
-          'Edgar Muoni, full-stack developer in Tallinn. From electrician to developer: I find the cause, fix it and prove the fix with a test.',
-      },
+      meta: meta(pages.home),
     },
     {
-      path: '/what-i-bring',
+      path: pages.whatIBring.path,
       name: 'what-i-bring',
       // Loaded only when visited, so the first page stays small.
       component: () => import('@/views/WhatIBringView.vue'),
-      meta: {
-        title: 'What I bring · Edgar Muoni',
-        description: 'Skills, results with numbers, experience and how I would be useful to your team.',
-      },
+      meta: meta(pages.whatIBring),
     },
     {
-      path: '/now-building',
+      path: pages.nowBuilding.path,
       name: 'now-building',
       component: () => import('@/views/NowBuildingView.vue'),
-      meta: {
-        title: 'Now building · Edgar Muoni',
-        description: 'VoltVibe, the electrical panel calculator I am growing from my thesis into a product.',
-      },
+      meta: meta(pages.nowBuilding),
     },
     {
-      path: '/work',
+      path: pages.work.path,
       name: 'work',
       component: () => import('@/views/WorkView.vue'),
-      meta: {
-        title: 'Finished work · Edgar Muoni',
-        description:
-          'My diploma thesis, an AI nurse assistant, a Defence Forces internship and the projects you can open and play.',
-      },
+      meta: meta(pages.work),
     },
     {
       path: '/:pathMatch(.*)*',

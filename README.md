@@ -63,8 +63,16 @@ Everything outside `src/` is setup, written once and rarely touched:
 
 To add a project, add an entry to `src/data/projects.ts`; the pages pick it up automatically.
 
-## Why `404.html` is a copy of `index.html`
+## One HTML file per page
 
-GitHub Pages only serves files. Opening `edmuoni.github.io/work` directly asks for a file called
-`work`, which does not exist, so GitHub answers with `404.html`. The build copies the app into
-`404.html` (see `vite.config.ts`), so that answer is the site itself and Vue Router shows the right page.
+GitHub Pages only serves files. If there were no file for `edmuoni.github.io/work`, GitHub would answer
+with `404.html` and the status "404 Not Found". The page would still appear, but link previews and search
+engines would treat it as missing.
+
+So after every build, `vite.config.ts` writes a real file for each page listed in
+`src/router/pages.ts` (`dist/work/index.html` and so on). Each file carries that page's own title and
+description, and GitHub answers "200 OK". `404.html` is still a copy of the app, for addresses that
+really don't exist, so Vue Router can show its "page not found" view.
+
+To add a page: add it to `src/router/pages.ts`, give it a route in `src/router/index.ts`, and the
+build creates its file.

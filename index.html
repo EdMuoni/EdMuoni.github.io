@@ -8,7 +8,9 @@
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-    <!-- Link previews (LinkedIn, Slack, e-mail) read these tags without running any JavaScript. -->
+    <!-- Link previews (LinkedIn, Slack, e-mail) read these tags without running any JavaScript.
+         The build fills in each page's own title, description and og:* values from
+         src/router/pages.ts (see vite.config.ts), so the values below are only used by `npm run dev`. -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Edgar Muoni · Full-stack developer">
     <meta property="og:description" content="Vue 3 · TypeScript · Rust · C# / .NET · Automated testing. Tallinn, Estonia.">
