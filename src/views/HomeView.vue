@@ -17,8 +17,8 @@ const path = [
   },
   {
     period: '2026',
-    title: 'Two internships',
-    text: 'Six weeks in Italy building an AI nurse assistant (Erasmus+), then three and a half months on a Defence Forces development team.',
+    title: 'Internships',
+    text: 'In Italy (Erasmus+) I took an AI nurse assistant from idea to a working prototype. On a Defence Forces development team I delivered frontend and backend tickets through code review.',
   },
 ]
 
@@ -48,7 +48,7 @@ const nextPages = [
       <span class="kicker">{{ profile.role }} · {{ profile.location }}</span>
       <h1>{{ profile.name }}</h1>
       <p class="pitch">
-        Ten years of electrical work taught me to find the cause of a fault before fixing anything.
+        Electrical work taught me to find the cause of a fault before fixing anything.
         I bring the same habit to software: trace the bug, fix the cause, and prove the fix with a test.
       </p>
       <p class="stack" aria-label="Main technologies">
@@ -115,7 +115,7 @@ const nextPages = [
     <div class="container outside">
       <span class="kicker">Outside work</span>
       <p>
-        For over two years I have volunteered with older people through Seltsilised. Away from the
+        I volunteer with older people through Seltsilised. Away from the
         keyboard: disc golf, swimming, long walks, board games, and books (science fiction, crime and
         popular science).
       </p>

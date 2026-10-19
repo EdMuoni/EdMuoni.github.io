@@ -1,4 +1,4 @@
-// Content for the "What I bring" page: what a team gets, the numbers behind it, skills,
+// Content for the "What I bring" page: the results a team gets, how I work, skills,
 // experience and education. Only claims that a project on this site can back up.
 
 export interface Strength {
@@ -8,9 +8,10 @@ export interface Strength {
   evidence: string
 }
 
-export interface Stat {
-  value: string
-  label: string
+/** A result a company gets from hiring me, shown as a tile at the top of the page. */
+export interface Outcome {
+  title: string
+  text: string
 }
 
 export interface SkillGroup {
@@ -29,7 +30,7 @@ export const strengths: Strength[] = [
   {
     title: 'I find the cause before I fix anything',
     text:
-      'Ten years of electrical installation and testing taught me that a fix without a cause ' +
+      'Electrical installation and testing taught me that a fix without a cause ' +
       'is a guess. In software I reproduce the bug first, then fix it, then prove it with a test.',
     evidence:
       'Defence Forces team: found a race condition, blocked it with a guard, proved it with rapid repeated requests and locked it in with a Playwright test.',
@@ -56,15 +57,37 @@ export const strengths: Strength[] = [
       'Tangled code slows down every change that comes after it. I split it into clear parts and ' +
       'write down how it works, so the next person does not have to guess.',
     evidence:
-      'aChiral Nurse Assistant: a 1,154-line single file split into modules, 8 bugs fixed, plus a workflow diagram and an access matrix.',
+      'aChiral Nurse Assistant: a tangled single-file app split into clear modules, its bugs fixed, and a workflow diagram and access matrix written for the next developer.',
   },
 ]
 
-export const stats: Stat[] = [
-  { value: '3.5 months', label: 'on a Defence Forces development team' },
-  { value: '6 weeks', label: 'from idea to a working AI prototype' },
-  { value: '218', label: 'automated tests run on every push' },
-  { value: '5', label: 'interface languages in VoltVibe' },
+// Written as results for the business, not as hours or counts: what changes for a team
+// when I am on it.
+export const outcomes: Outcome[] = [
+  {
+    title: 'Bugs fixed at the root',
+    text:
+      'I reproduce a fault, find what really causes it and fix that, so the same problem does ' +
+      'not come back and cost the team time again.',
+  },
+  {
+    title: 'Changes protected by tests',
+    text:
+      'Unit and end-to-end tests run automatically on every change, so errors are caught before ' +
+      'a customer ever sees them.',
+  },
+  {
+    title: 'Problems turned into solutions',
+    text:
+      'Give me an unclear problem and I break it down, choose a workable approach and deliver ' +
+      'something that runs, then improve it from feedback.',
+  },
+  {
+    title: 'Less risk in what ships',
+    text:
+      'Small reviewed changes, security checks on login and user input, and clear documentation ' +
+      'mean fewer surprises in production and code others can maintain.',
+  },
 ]
 
 export const skillGroups: SkillGroup[] = [
@@ -100,7 +123,7 @@ export const experience: TimelineEntry[] = [
     period: 'Apr – May 2026',
     title: 'Software Development Intern (Erasmus+)',
     place: 'Techdgiteasy · San Cataldo, Italy',
-    text: 'Built the aChiral Nurse Assistant prototype in six weeks, working in English.',
+    text: 'Took the aChiral Nurse Assistant from idea to a working prototype, working in English.',
   },
   {
     period: '2015 – 2025',

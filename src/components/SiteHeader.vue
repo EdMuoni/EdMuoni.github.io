@@ -5,7 +5,7 @@ import { profile } from '@/data/profile'
 
 // The four pages, in the order a recruiter should read them.
 const pages = [
-  { to: '/', label: 'About' },
+  { to: '/', label: 'About Me' },
   { to: '/what-i-bring', label: 'What I bring' },
   { to: '/now-building', label: 'Now building' },
   { to: '/work', label: 'Finished work' },

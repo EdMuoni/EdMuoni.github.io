@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
 import TimelineList from '@/components/TimelineList.vue'
-import { education, experience, languages, skillGroups, stats, strengths } from '@/data/career'
+import { education, experience, languages, outcomes, skillGroups, strengths } from '@/data/career'
 </script>
 
 <template>
@@ -15,11 +15,11 @@ import { education, experience, languages, skillGroups, stats, strengths } from 
 
   <section class="section">
     <div class="container">
-      <h2 class="sr-only">In numbers</h2>
-      <ul class="stats">
-        <li v-for="stat in stats" :key="stat.label">
-          <span class="stat-value">{{ stat.value }}</span>
-          <span class="stat-label">{{ stat.label }}</span>
+      <h2 class="sr-only">Results you can expect</h2>
+      <ul class="outcomes">
+        <li v-for="item in outcomes" :key="item.title">
+          <h3 class="outcome-title">{{ item.title }}</h3>
+          <p class="outcome-text">{{ item.text }}</p>
         </li>
       </ul>
     </div>
@@ -28,7 +28,7 @@ import { education, experience, languages, skillGroups, stats, strengths } from 
   <section class="section">
     <div class="container">
       <span class="kicker">How I would be useful</span>
-      <h2>Five things I do on every job</h2>
+      <h2>How I work on every job</h2>
       <ol class="strengths">
         <li v-for="(item, i) in strengths" :key="item.title">
           <span class="num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
@@ -84,33 +84,43 @@ import { education, experience, languages, skillGroups, stats, strengths } from 
 </template>
 
 <style scoped>
-.stats {
+/* Four result tiles: one column on phones, two on tablets, four in a row on wide screens. */
+.outcomes {
   list-style: none;
   padding: 0;
   margin: 0;
   display: grid;
-  grid-template-columns: repeat(2, minmax(0, 1fr));
   gap: 12px;
 }
 
-.stats li {
-  display: grid;
-  gap: 4px;
-  padding: 18px;
+.outcomes li {
+  padding: 20px;
   border-radius: var(--radius);
+  border-top: 4px solid var(--accent);
   background: var(--tint);
 }
 
-.stat-value {
-  font-family: var(--font-serif);
-  font-weight: 700;
-  font-size: clamp(1.6rem, 5vw, 2.2rem);
-  line-height: 1.1;
+.outcome-title {
+  font-size: 1.2rem;
+  margin: 0 0 8px;
 }
 
-.stat-label {
-  font-size: 0.92rem;
+.outcome-text {
+  margin: 0;
+  font-size: 0.97rem;
   color: var(--muted);
+}
+
+@media (min-width: 640px) {
+  .outcomes {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+}
+
+@media (min-width: 1000px) {
+  .outcomes {
+    grid-template-columns: repeat(4, minmax(0, 1fr));
+  }
 }
 
 .strengths {
@@ -180,10 +190,6 @@ import { education, experience, languages, skillGroups, stats, strengths } from 
 }
 
 @media (min-width: 720px) {
-  .stats {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
-  }
-
   .skill-group {
     display: grid;
     grid-template-columns: 200px 1fr;

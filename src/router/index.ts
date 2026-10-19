@@ -20,7 +20,7 @@ const router = createRouter({
       meta: {
         title: 'Edgar Muoni · Full-stack developer',
         description:
-          'Edgar Muoni, full-stack developer in Tallinn. Ten years of electrical work, now building and testing software.',
+          'Edgar Muoni, full-stack developer in Tallinn. From electrician to developer: I find the cause, fix it and prove the fix with a test.',
       },
     },
     {

@@ -10,7 +10,7 @@ import { finishedCaseStudies, moreProjects } from '@/data/projects'
   <PageIntro
     kicker="Finished work"
     title="Work I have finished"
-    lead="Three larger projects, each told as problem → what I built → proof. Below them, smaller projects from my studies, several of which you can open and play."
+    lead="Larger projects, each told as problem → what I built → proof. Below them, smaller projects from my studies, several of which you can open and play."
   >
     <nav class="jump" aria-label="On this page">
       <a v-for="study in finishedCaseStudies" :key="study.id" :href="`#${study.id}`">{{ study.title }}</a>
