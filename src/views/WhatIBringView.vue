@@ -6,6 +6,7 @@ import SectionHeading from '@/components/SectionHeading.vue'
 import TimelineList from '@/components/TimelineList.vue'
 import { education, experience, languages, outcomes, skillGroups, strengths } from '@/data/career'
 import { mascot } from '@/data/mascot'
+import { headerPhotos } from '@/data/photos'
 </script>
 
 <template>
@@ -14,6 +15,7 @@ import { mascot } from '@/data/mascot'
     title="What your team gets"
     lead="A developer who reproduces a bug before fixing it, works in small reviewed steps, and knows the electrical domain from the inside."
     :mascot="mascot.whatIBring"
+    :photo="headerPhotos.whatIBring"
   />
 
   <section class="section">

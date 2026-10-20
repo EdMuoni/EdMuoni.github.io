@@ -5,6 +5,7 @@ import PageIntro from '@/components/PageIntro.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { mascot } from '@/data/mascot'
+import { headerPhotos } from '@/data/photos'
 import { isCaseStudy, projectsIn } from '@/data/projects'
 
 const caseStudies = projectsIn('finished').filter(isCaseStudy)
@@ -16,6 +17,7 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
     title="Work I have finished"
     lead="The larger projects, each with its own page: the problem, what I built and the proof."
     :mascot="mascot.work"
+    :photo="headerPhotos.work"
   />
 
   <section class="section">

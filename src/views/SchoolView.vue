@@ -4,6 +4,7 @@ import PageIntro from '@/components/PageIntro.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import { mascot } from '@/data/mascot'
+import { headerPhotos } from '@/data/photos'
 import { courses, projectsIn } from '@/data/projects'
 
 // Every school project, under the course it was made for, in the order of `courses`.
@@ -24,6 +25,7 @@ const byCourse = courses
     title="What I built while studying"
     lead="Course projects from my software development studies, grouped by course. Every card opens the project’s own page; “Open it” runs it right in your browser."
     :mascot="mascot.school"
+    :photo="headerPhotos.school"
   >
     <nav class="jump" aria-label="Courses on this page">
       <a v-for="group in byCourse" :key="group.id" :href="`#${group.id}`">{{ group.course }}</a>

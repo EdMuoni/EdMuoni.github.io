@@ -1,5 +1,9 @@
 <script setup lang="ts">
+import { headerPhotos, withReferral } from '@/data/photos'
 import { contactLinks, profile } from '@/data/profile'
+
+// Every header photo's author, credited on every page (also in CREDITS.md).
+const photos = Object.values(headerPhotos)
 </script>
 
 <template>
@@ -17,6 +21,12 @@ import { contactLinks, profile } from '@/data/profile'
       <p class="muted small">
         Built with Vue 3, TypeScript and Vite, deployed by GitHub Actions.
         <a href="https://github.com/EdMuoni/EdMuoni.github.io">Source code</a>.
+      </p>
+      <p class="muted small credits">
+        Header photos from <a :href="withReferral('https://unsplash.com/')">Unsplash</a> by
+        <template v-for="(photo, i) in photos" :key="photo.name">
+          <a :href="withReferral(photo.url)">{{ photo.author }}</a>{{ i < photos.length - 2 ? ', ' : i === photos.length - 2 ? ' and ' : '.' }}
+        </template>
       </p>
     </div>
   </footer>
@@ -67,6 +77,10 @@ import { contactLinks, profile } from '@/data/profile'
 
   .footer-inner .small {
     grid-column: 1 / -1;
+  }
+
+  .credits {
+    margin-top: -8px;
   }
 }
 </style>

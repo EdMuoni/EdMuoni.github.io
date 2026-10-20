@@ -88,3 +88,26 @@
     --gutter: 32px;
   }
 }
+
+/* A header with a darkened photo behind it (HeaderBackdrop.vue) uses the dark values in both
+   themes, so its text, buttons and Ohm's bubble stay readable on the photo. */
+.on-photo {
+  --bg: #111113;
+  --surface: #18181b;
+  --surface-raised: #1f1f23;
+  --tint: #2a1a12;
+  --border: #3a3a40;
+  --ink: #f4f4f5;
+  --muted: #d4d4d8;
+  --accent: #ff5100;
+  --accent-text: #fb923c;
+  --on-accent: #111113;
+  --shadow: none;
+  --ohm-body: #2a2a30;
+  --ohm-line: #e4e4e7;
+  --ohm-screen: #0b0b0d;
+  --ohm-glow: #ff7a3d;
+  --circuit: rgb(251 146 60 / 0.3);
+  color: var(--ink);
+  background: var(--bg);
+}

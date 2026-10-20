@@ -7,7 +7,9 @@ import OhmMascot from '@/components/OhmMascot.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import TerminalWindow from '@/components/TerminalWindow.vue'
 import TypeText from '@/components/TypeText.vue'
+import HeaderBackdrop from '@/components/HeaderBackdrop.vue'
 import { mascot } from '@/data/mascot'
+import { headerPhotos } from '@/data/photos'
 import { contactLinks, profile } from '@/data/profile'
 
 const pitch =
@@ -59,7 +61,8 @@ const nextPages = [
 </script>
 
 <template>
-  <section class="hero">
+  <section class="hero on-photo">
+    <HeaderBackdrop :photo="headerPhotos.home" />
     <span class="header-glow" aria-hidden="true"></span>
     <CircuitBackground seed="home" />
     <div class="container hero-grid">

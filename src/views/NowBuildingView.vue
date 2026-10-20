@@ -4,6 +4,7 @@ import PageIntro from '@/components/PageIntro.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
 import { mascot } from '@/data/mascot'
+import { headerPhotos } from '@/data/photos'
 import { isCaseStudy, projectsIn } from '@/data/projects'
 
 const current = projectsIn('now')
@@ -15,6 +16,7 @@ const current = projectsIn('now')
     title="What I am working on now"
     lead="I am growing my diploma thesis into VoltVibe: a web shop for electrical components with the panel calculator built in."
     :mascot="mascot.nowBuilding"
+    :photo="headerPhotos.nowBuilding"
   />
 
   <section class="section">

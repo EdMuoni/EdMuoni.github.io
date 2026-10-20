@@ -1,7 +1,9 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
 import type { MascotScript } from '@/data/mascot'
+import type { HeaderPhoto } from '@/data/photos'
 import CircuitBackground from './CircuitBackground.vue'
+import HeaderBackdrop from './HeaderBackdrop.vue'
 import OhmMascot from './OhmMascot.vue'
 import TypeText from './TypeText.vue'
 
@@ -9,17 +11,20 @@ import TypeText from './TypeText.vue'
 // typing themselves in that order as the page opens.
 // `back` adds a link above them, e.g. from a project page to its overview page.
 // `mascot` is what Ohm says on this page; Ohm stands beside the text on wide screens, below it on phones.
+// `photo` puts a darkened photo behind the header, with its credit.
 defineProps<{
   kicker: string
   title: string
   lead?: string
   back?: { to: string; label: string }
   mascot?: MascotScript
+  photo?: HeaderPhoto
 }>()
 </script>
 
 <template>
-  <section class="page-intro">
+  <section class="page-intro" :class="{ 'on-photo': photo }">
+    <HeaderBackdrop v-if="photo" :photo="photo" />
     <!-- Moving background: a soft drifting light and circuit traces that draw themselves. -->
     <span class="header-glow" aria-hidden="true"></span>
     <CircuitBackground :seed="title" />
