@@ -24,6 +24,8 @@ On the site every photo sits under a dark shade, so the text on top stays readab
 
 - **Ohm**, the mascot, the circuit backgrounds and the project covers are drawn for this site
   (SVG and CSS).
+- **Link-preview image** (`public/og-image.jpg`): a capture of the home page's header, so it
+  contains the circuit-board photo by Alexandre Debiève, with its credit line visible.
 - **VoltVibe screenshots** (`public/img/voltvibe-calculator-*.jpg`) show my own application. The
   catalogue's product photos are left out of them.
 - **Fonts:** Source Serif 4, Inter and JetBrains Mono, bundled from npm (`@fontsource/*`), all under
