@@ -21,12 +21,6 @@ const photos = Object.values(headerPhotos)
       <p class="muted small">
         Built with Vue 3, TypeScript and Vite, deployed by GitHub Actions.
       </p>
-      <p class="muted small credits">
-        Header photos from <a :href="withReferral('https://unsplash.com/')">Unsplash</a> by
-        <template v-for="(photo, i) in photos" :key="photo.name">
-          <a :href="withReferral(photo.url)">{{ photo.author }}</a>{{ i < photos.length - 2 ? ', ' : i === photos.length - 2 ? ' and ' : '.' }}
-        </template>
-      </p>
     </div>
   </footer>
 </template>
