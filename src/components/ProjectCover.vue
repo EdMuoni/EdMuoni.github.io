@@ -4,11 +4,8 @@ import type { Project } from '@/data/projects'
 import CircuitBackground from './CircuitBackground.vue'
 import ThemedImage from './ThemedImage.vue'
 
-// The picture at the top of a project card. A project with a screenshot shows it; every other
-// project gets a drawn one: a small dark code window with the project's file name, its main
-// technology in large type, and a circuit pattern of its own (made from the slug). Decoration,
-// so it is hidden from screen readers (the project page describes its screenshots properly); its
-// fixed shape means the card never changes size when it appears.
+// Top of a project card: the screenshot if there is one, otherwise a drawn code window with the
+// project's main technology. Decoration only.
 const props = defineProps<{ project: Project }>()
 
 // The file extension and the large label for the first technology in the stack we know.

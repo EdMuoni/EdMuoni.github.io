@@ -4,7 +4,7 @@ import MotionToggle from './MotionToggle.vue'
 import ThemeToggle from './ThemeToggle.vue'
 import { profile } from '@/data/profile'
 
-// The five pages, in the order a recruiter should read them.
+// Menu order.
 const pages = [
   { to: '/', label: 'About Me' },
   { to: '/what-i-bring', label: 'What I bring' },
@@ -36,8 +36,7 @@ const pages = [
 </template>
 
 <style scoped>
-/* Scrolls away on phones and tablets, where two rows of header would eat a fifth of the screen;
-   stays pinned on wide screens, where it is one slim row. */
+/* Sticky only on wide screens, where the header is one row. */
 .site-header {
   background: var(--bg);
   border-bottom: 1px solid var(--border);
@@ -81,8 +80,7 @@ const pages = [
   color: var(--accent-text);
 }
 
-/* Phones: the five links as a grid of three and two, so none of them is hidden off-screen or
-   behind a menu button. Six columns: the first three links take two each, the last two take three. */
+/* Phones: links in two rows (3 + 2) on a six-column grid. */
 .nav {
   grid-column: 1 / -1;
   display: grid;

@@ -1,13 +1,8 @@
 <script setup lang="ts">
 import TypeText from './TypeText.vue'
 
-// A small terminal window that plays out the way I work when it scrolls into view: a failing test
-// reproduces the bug, the cause gets a fix on its own branch, the tests pass, a pull request opens.
-// Commands type themselves; the computer's answers appear a moment later.
-//
-// Every line is a TypeText, so the same rules hold as for all typed text: the pre-rendered HTML
-// shows the whole session, screen readers read it at once, the window has its final size from the
-// start, and with reduced motion everything is simply there.
+// A small terminal that plays a bug fix, from a failing test to a pull request, when it scrolls
+// into view.
 
 interface Line {
   kind: 'command' | 'fail' | 'pass' | 'note'
@@ -28,8 +23,7 @@ const lines: Line[] = [
 const COMMAND_SPEED = 26 // milliseconds per character a command takes to type
 const PAUSE = 350 // milliseconds before the next line
 
-// When each line starts: a command (with its "$ " prompt) takes as long as its characters, an
-// answer is instant.
+// Start time for each line. Commands take as long as their text, answers are instant.
 const timed = lines.reduce<{ line: Line; text: string; delay: number; speed: number }[]>((list, line) => {
   const previous = list[list.length - 1]
   const delay = previous ? previous.delay + previous.text.length * previous.speed + PAUSE : 200

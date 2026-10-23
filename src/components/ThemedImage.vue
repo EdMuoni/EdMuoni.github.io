@@ -1,9 +1,8 @@
 <script setup lang="ts">
 import type { Screenshot } from '@/data/projects'
 
-// A screenshot that follows the site's theme: the dark version for dark-theme visitors, when there
-// is one. Both are in the HTML and CSS shows the right one, like the theme button's icons; the
-// browser only downloads the one it shows. Width and height keep the picture's place before it loads.
+// Screenshot that follows the theme. CSS shows the light or dark image, and the browser only
+// downloads the one it shows.
 defineProps<{ shot: Screenshot; loading?: 'lazy' | 'eager' }>()
 </script>
 

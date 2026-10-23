@@ -3,9 +3,8 @@ import { RouterLink } from 'vue-router'
 import { projectPath, type Project } from '@/data/projects'
 import ProjectCover from './ProjectCover.vue'
 
-// One project on an overview page. The whole card opens the project's own page; "Open it" and
-// "Code" go straight to the live project and its source. `large` is for the case studies.
-// The class "lift" (styles/motion.css) raises the card on hover and runs a spark around its border.
+// A project card. The whole card links to the project page, while "Open it" and "Code" go
+// straight to the project. `large` is used for the bigger projects.
 defineProps<{ project: Project; large?: boolean }>()
 </script>
 

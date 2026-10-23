@@ -1,5 +1,4 @@
-// Personal details shown in the header, on the home page and in the footer.
-// Deliberately no phone number, address, birth date or photo: this page is public.
+// Name, role and contact links.
 
 export interface ContactLink {
   label: string

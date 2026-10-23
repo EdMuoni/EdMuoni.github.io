@@ -2,15 +2,9 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { motionAllowed, useMotion } from '@/composables/useMotion'
 
-// Text that writes itself, one character at a time, very fast.
-//
-// How it stays accessible and keeps the page from jumping:
-// - The element always contains the WHOLE text, split in two: the part typed so far and the rest.
-//   The rest is transparent but still there, so the block has its final size and line breaks from
-//   the first frame (no layout shift), and screen readers always read the full text.
-// - The pre-rendered HTML has everything typed, so with JavaScript off the text simply shows.
-//   With JavaScript on, motion.css keeps it invisible until the app starts and typing begins.
-// - Reduced motion (button or system setting): nothing is typed, the text is just there.
+// Text that types itself very fast. The whole text is always in the element (the untyped part is
+// transparent), so the size never changes and screen readers get all of it. With reduced motion
+// the text is simply shown.
 const props = withDefaults(
   defineProps<{
     text: string
@@ -29,7 +23,7 @@ const props = withDefaults(
 const emit = defineEmits<{ done: [] }>()
 
 const root = ref<HTMLElement | null>(null)
-// How many characters are visible. Starts at "all", like the pre-rendered HTML.
+// Visible characters. Starts at all of them, like the pre-rendered HTML.
 const count = ref(props.text.length)
 const typing = ref(false)
 const typed = computed(() => props.text.slice(0, count.value))
@@ -52,8 +46,7 @@ function finish() {
   emit('done')
 }
 
-// Types from the first character. requestAnimationFrame draws once per screen refresh, and the
-// count comes from the time passed, so the speed is the same on slow and fast devices.
+// The count comes from elapsed time, so the speed is the same on slow and fast devices.
 function type() {
   typing.value = true
   const start = performance.now()
@@ -121,8 +114,7 @@ defineExpose({ start })
   color: transparent;
 }
 
-/* A thin blinking bar. It takes no width (so lines break exactly as in the finished text) and
-   draws itself just after the last typed character. */
+/* Blinking cursor with no width, so it never changes where lines break. */
 .tw-cursor {
   position: relative;
 }

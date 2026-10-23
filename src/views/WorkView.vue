@@ -15,7 +15,7 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
   <PageIntro
     kicker="Finished work"
     title="Work I have finished"
-    lead="The larger projects, each with its own page: the problem, what I built and the proof."
+    lead="My bigger projects so far. Each one has its own page with the details."
     :mascot="mascot.work"
     :photo="headerPhotos.work"
   />
@@ -39,8 +39,8 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
     <div class="container">
       <SectionHeading kicker="From my studies" title="School projects" />
       <p class="muted">
-        Web apps, APIs, browser tests, mobile apps and games from my courses, grouped by course. Several
-        of them run right in your browser.
+        Web apps, APIs, browser tests, mobile apps and a few games from my courses. Some of them run
+        right in your browser.
       </p>
       <RouterLink to="/school" class="btn btn-primary">See the school projects <span aria-hidden="true">→</span></RouterLink>
     </div>

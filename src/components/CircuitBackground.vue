@@ -2,14 +2,8 @@
 import { computed, ref } from 'vue'
 import { usePauseOffscreen } from '@/composables/useMotion'
 
-// Circuit-board traces behind a page header: they draw themselves when the page opens, end in a
-// solder pad, and small pulses of "current" keep running along some of them.
-//
-// - Each page gets its own pattern, made from `seed` (e.g. the page title) by a small random-number
-//   generator that always gives the same numbers for the same seed. So the pattern is the same on
-//   every visit, and the build and the browser draw exactly the same picture.
-// - Drawn lines are the resting look: with animations off you see the finished circuit, without
-//   the pulses. Pure decoration, hidden from screen readers.
+// Circuit traces behind a page header. They draw themselves and small pulses run along some of
+// them. The pattern comes from `seed`, so it is the same on every visit and in the build.
 const props = defineProps<{ seed: string }>()
 
 const WIDTH = 1200
@@ -48,8 +42,7 @@ const traces = computed<Trace[]>(() => {
   const list: Trace[] = []
 
   for (let i = 0; i < 14; i++) {
-    // Every trace comes in from the right edge, behind Ohm; a mask (see the styles) fades them out
-    // before they reach the text on the left.
+    // Traces start at the right edge. A mask fades them out before they reach the text.
     const dir = -1
     let x = WIDTH
     let y = pick(1, HEIGHT / GRID - 1) * GRID

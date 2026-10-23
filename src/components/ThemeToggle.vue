@@ -10,8 +10,7 @@ const label = computed(() => (theme.value === 'dark' ? 'Switch to light theme' :
 
 <template>
   <button type="button" class="theme-toggle needs-js" :aria-label="label" :title="label" @click="toggle">
-    <!-- Both icons are always in the HTML and CSS shows the right one, so the button looks right
-         from the first paint, before JavaScript has read the visitor's theme. -->
+    <!-- Both icons are in the HTML and CSS shows the right one. -->
     <!-- Sun, shown in dark mode -->
     <svg class="icon-sun" viewBox="0 0 24 24" aria-hidden="true">
       <circle cx="12" cy="12" r="4.5" />

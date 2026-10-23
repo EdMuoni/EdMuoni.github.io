@@ -1,21 +1,5 @@
-/*
-  Motion rules for the whole site.
-
-  Three things decide how much moves (all set before the first paint, see index.html):
-  - html.js: JavaScript runs, so text may start hidden and then be typed or slid in.
-    Without JavaScript the class is missing and nothing is ever hidden.
-  - html[data-motion]: "on", or "reduced" when the visitor turned animations off with the motion
-    button or their system asks for reduced motion.
-  - @media (prefers-reduced-motion): the system setting itself, used when JavaScript is off.
-
-  Every animation on the site is written so that an element's normal style is its finished look and
-  the animation only plays the way there. Switching animations off therefore shows the finished
-  page, never a half-drawn one.
-
-  Only properties that never push other content around are animated (`transform`, `opacity`, and
-  the dash offset of an SVG line), so nothing on the page jumps (no layout shift) and the browser
-  can animate them cheaply.
-*/
+/* Animations. html.js and html[data-motion] are set in index.html. An element's normal style is its
+   end state, so turning motion off shows the finished page. */
 
 /* The calm version: nothing moves, everything is shown at once. */
 :root[data-motion='reduced'] *,
@@ -26,8 +10,7 @@
   scroll-behavior: auto !important;
 }
 
-/* The same when JavaScript is off and the system asks for reduced motion. With JavaScript on,
-   data-motion already says "reduced" in that case, unless the visitor turned animations on. */
+/* Same thing without JavaScript. */
 @media (prefers-reduced-motion: reduce) {
   :root:not([data-motion='on']) *,
   :root:not([data-motion='on']) *::before,
@@ -38,9 +21,7 @@
   }
 }
 
-/* Text that types itself (TypeText.vue) is invisible from the first paint until the app starts and
-   begins typing it, so a visitor never sees it appear, vanish and then type. Only with JavaScript
-   and motion on; the safety net in index.html removes "js" if the app never starts. */
+/* Typed text stays hidden until the app starts, so it doesn't flash before typing. */
 :root.js[data-motion='on']:not(.app-ready) .tw {
   color: transparent;
 }
@@ -133,8 +114,7 @@ body::before {
   box-shadow: 0 6px 18px -6px var(--accent);
 }
 
-/* Cards lift on hover and keyboard focus, and a spark of "current" runs around the border.
-   The spark is a turning gradient, cut down to a thin ring by a mask. */
+/* Cards lift on hover and focus. The spark on the border is a rotating gradient with a mask. */
 @property --spark-angle {
   syntax: '<angle>';
   inherits: false;

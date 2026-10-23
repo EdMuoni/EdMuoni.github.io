@@ -4,9 +4,7 @@ import type { Project } from '@/data/projects'
 import ThemedImage from './ThemedImage.vue'
 import TypeText from './TypeText.vue'
 
-// The body of a project's page, always in the same order so a reader knows where to look:
-// problem → what I built → what's next, with proof, stack and links beside it.
-// A small project has fewer parts; the empty ones are simply left out.
+// The main part of a project page. Parts a project doesn't have are left out.
 const props = defineProps<{ project: Project }>()
 
 const hasStory = computed(() =>
@@ -40,7 +38,7 @@ const hasStory = computed(() =>
 
       <aside v-reveal="1" class="cs-side">
         <template v-if="project.proof?.length">
-          <h2 class="side-title">Proof</h2>
+          <h2 class="side-title">Highlights</h2>
           <ul class="proof">
             <li v-for="item in project.proof" :key="item">{{ item }}</li>
           </ul>

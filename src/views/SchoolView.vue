@@ -23,7 +23,7 @@ const byCourse = courses
   <PageIntro
     kicker="School projects"
     title="What I built while studying"
-    lead="Course projects from my software development studies, grouped by course. Every card opens the project’s own page; “Open it” runs it right in your browser."
+    lead="Projects from my software development courses, sorted by course. Click a card for the details, or press “Open it” to try a project in your browser."
     :mascot="mascot.school"
     :photo="headerPhotos.school"
   >

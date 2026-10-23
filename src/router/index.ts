@@ -10,7 +10,7 @@ import { findProject } from '@/data/projects'
 import HomeView from '@/views/HomeView.vue'
 import { pages, type PageInfo } from './pages'
 
-// Each route carries its own browser-tab title and search-result description in `meta`.
+// Tab title and description for each route.
 declare module 'vue-router' {
   interface RouteMeta {
     title: string
@@ -18,15 +18,12 @@ declare module 'vue-router' {
   }
 }
 
-// Paths, titles and descriptions come from pages.ts, which the build also uses (see that file).
+// Paths, titles and descriptions come from pages.ts.
 const meta = (page: PageInfo) => ({ title: page.title, description: page.description })
 
 const notFound = { title: 'Page not found · Edgar Muoni', description: 'This page does not exist.' }
 
-/**
- * The tab title and description for any address. A project page takes them from its project
- * (src/data/projects.ts); every other page from its route's `meta`.
- */
+/** Tab title and description for any route. Project pages take them from the project data. */
 export function titleAndDescription(route: RouteLocationNormalized): { title: string; description: string } {
   if (route.name === 'project') {
     const project = findProject(String(route.params.slug))
@@ -35,12 +32,10 @@ export function titleAndDescription(route: RouteLocationNormalized): { title: st
   return { title: route.meta.title, description: route.meta.description }
 }
 
-// A function rather than one shared router, because the build (scripts/prerender.ts) renders
-// every page in turn and each render needs a router of its own.
+// A factory, because pre-rendering needs a new router for every page.
 export function createAppRouter(): Router {
   const router = createRouter({
-    // In the browser the address bar drives the router. During the build there is no address bar
-    // (the page is rendered in Node.js), so the router keeps its history in memory instead.
+    // Memory history while pre-rendering, there is no address bar in Node.js.
     history: import.meta.env.SSR
       ? createMemoryHistory(import.meta.env.BASE_URL)
       : createWebHistory(import.meta.env.BASE_URL),
@@ -81,10 +76,9 @@ export function createAppRouter(): Router {
         path: '/projects/:slug',
         name: 'project',
         component: () => import('@/views/ProjectView.vue'),
-        // The title and description come from the project; see titleAndDescription().
+        // Title and description come from the project (see titleAndDescription).
         meta: notFound,
-        // A slug that isn't in the data shows the "page not found" view. The address stays as it
-        // was typed, so the visitor can see what was wrong with it.
+        // Unknown slug: show the 404 view but keep the typed address.
         beforeEnter: (to) =>
           findProject(String(to.params.slug))
             ? true
@@ -102,7 +96,7 @@ export function createAppRouter(): Router {
         meta: notFound,
       },
     ],
-    // A new page starts at the top; the browser's Back button returns to where you were.
+    // New pages start at the top, Back restores the old position.
     scrollBehavior(to, _from, savedPosition) {
       if (savedPosition) return savedPosition
       if (to.hash) return { el: to.hash, top: 96 }
@@ -110,8 +104,7 @@ export function createAppRouter(): Router {
     },
   })
 
-  // The tab title and description change as the visitor moves between pages. Only in the browser:
-  // during the build there is no document, and scripts/prerender.ts writes them into each file.
+  // Update the tab title in the browser. Pre-rendering writes it into the HTML instead.
   if (!import.meta.env.SSR) {
     router.afterEach((to) => {
       const { title, description } = titleAndDescription(to)

@@ -7,11 +7,8 @@ import HeaderBackdrop from './HeaderBackdrop.vue'
 import OhmMascot from './OhmMascot.vue'
 import TypeText from './TypeText.vue'
 
-// The top block of every page: a small label, the page heading and one introductory paragraph,
-// typing themselves in that order as the page opens.
-// `back` adds a link above them, e.g. from a project page to its overview page.
-// `mascot` is what Ohm says on this page; Ohm stands beside the text on wide screens, below it on phones.
-// `photo` puts a darkened photo behind the header, with its credit.
+// Top of every page: label, heading and lead, typed in that order.
+// Optional: a back link, Ohm with a line for the page, and a header photo.
 defineProps<{
   kicker: string
   title: string

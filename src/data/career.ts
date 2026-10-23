@@ -1,14 +1,12 @@
-// Content for the "What I bring" page: the results a team gets, how I work, skills,
-// experience and education. Only claims that a project on this site can back up.
+// Text for the "What I bring" page.
 
 export interface Strength {
   title: string
   text: string
-  /** The project that proves it, shown under the text. */
+  /** Where I did it, shown under the text. */
   evidence: string
 }
 
-/** A result a company gets from hiring me, shown as a tile at the top of the page. */
 export interface Outcome {
   title: string
   text: string
@@ -28,65 +26,52 @@ export interface TimelineEntry {
 
 export const strengths: Strength[] = [
   {
-    title: 'I find the cause before I fix anything',
+    title: 'I look for the cause first',
     text:
-      'Electrical installation and testing taught me that a fix without a cause ' +
-      'is a guess. In software I reproduce the bug first, then fix it, then prove it with a test.',
+      'As an electrician I learned that replacing parts until the fault goes away fixes nothing. ' +
+      'With software I do it the same way. First I make the bug happen again, then I fix what causes it.',
     evidence:
-      'Defence Forces team: found a race condition, blocked it with a guard, proved it with rapid repeated requests and locked it in with a Playwright test.',
+      'At the Defence Forces I found a race condition, stopped it with a guard and checked it by firing the same request many times in a row. After that I wrote a Playwright test for it.',
   },
   {
-    title: 'I work in small, reviewed steps',
+    title: 'I work in small steps',
     text:
-      'One ticket, one branch, one pull request. Small changes are easier to review, easier to test ' +
-      'and easier to undo, so the team can trust what reaches main.',
+      'A ticket gets its own branch and its own pull request. Small changes are easy to review ' +
+      'and easy to undo if something goes wrong.',
     evidence:
-      'Defence Forces team: daily grooming, branch per ticket, pull requests and reviews in Azure DevOps, in both directions.',
+      'Daily grooming with the team, a branch for every ticket, and code reviews in Azure DevOps. Other developers reviewed my code and I reviewed theirs.',
   },
   {
-    title: 'I understand the domain I build for',
+    title: 'I know the electrical side',
     text:
-      'I am a qualified electrician (level 4). When software has to follow an electrical standard, ' +
-      'I can read the rules and check the result myself instead of guessing what the customer meant.',
-    evidence:
-      'Diploma thesis and VoltVibe: a calculator that does a cost estimator’s routine work for electrical panels.',
+      'I am a qualified electrician (level 4). When an app has to follow an electrical standard, ' +
+      'I can read the rules myself and see if the result makes sense.',
+    evidence: 'My diploma thesis and VoltVibe, a calculator for electrical panel parts.',
   },
   {
-    title: 'I leave code easier to change',
+    title: 'I tidy up as I go',
     text:
-      'Tangled code slows down every change that comes after it. I split it into clear parts and ' +
-      'write down how it works, so the next person does not have to guess.',
+      'Messy code makes every later change slower. If I work in a file like that, I split it into ' +
+      'parts that make sense and write down how they fit together.',
     evidence:
-      'aChiral Nurse Assistant: a tangled single-file app split into clear modules, its bugs fixed, and a workflow diagram and access matrix written for the next developer.',
+      'My first version of the aChiral Nurse Assistant was one big file. I split it into modules, fixed the bugs I found on the way and drew a workflow diagram and an access matrix for the next developer.',
   },
 ]
 
-// Written as results for the business, not as hours or counts: what changes for a team
-// when I am on it.
 export const outcomes: Outcome[] = [
   {
-    title: 'Bugs fixed at the root',
-    text:
-      'I reproduce a fault, find what really causes it and fix that, so the same problem does ' +
-      'not come back and cost the team time again.',
+    title: 'Tests with every fix',
+    text: 'When I fix something, a test comes with it. It runs on every change, so the bug does not quietly come back.',
   },
   {
-    title: 'Changes protected by tests',
+    title: 'Unclear tasks are fine',
     text:
-      'Unit and end-to-end tests run automatically on every change, so errors are caught before ' +
-      'a customer ever sees them.',
+      'Give me a problem without a ready answer. I will split it into pieces, pick an approach and ' +
+      'have something running early, then improve it with your feedback.',
   },
   {
-    title: 'Problems turned into solutions',
-    text:
-      'Give me an unclear problem and I break it down, choose a workable approach and deliver ' +
-      'something that runs, then improve it from feedback.',
-  },
-  {
-    title: 'Less risk in what ships',
-    text:
-      'Small reviewed changes, security checks on login and user input, and clear documentation ' +
-      'mean fewer surprises in production and code others can maintain.',
+    title: 'Fewer surprises',
+    text: 'Small reviewed changes, input checks and short docs. That keeps the code safe to change later.',
   },
 ]
 
@@ -106,7 +91,7 @@ export const skillGroups: SkillGroup[] = [
   },
   { name: 'Mobile', skills: ['.NET MAUI'] },
   {
-    name: 'AI',
+    name: 'Chatbots and search',
     skills: ['Flowise', 'Groq', 'RAG with Pinecone', 'Gemini embeddings'],
   },
   { name: 'Also', skills: ['Python', 'Figma', 'Vue DevTools'] },
@@ -117,13 +102,13 @@ export const experience: TimelineEntry[] = [
     period: 'Jun – Sep 2026',
     title: 'Software Development Intern (full-stack)',
     place: 'Estonian Defence Forces',
-    text: 'Development team building a messaging app for military personnel. Vue 3 + TypeScript frontend, Rust backend.',
+    text: 'I worked in a team building a messaging app for military personnel. Vue 3 and TypeScript on the front end, Rust on the back end.',
   },
   {
     period: 'Apr – May 2026',
     title: 'Software Development Intern (Erasmus+)',
     place: 'Techdgiteasy · San Cataldo, Italy',
-    text: 'Took the aChiral Nurse Assistant from idea to a working prototype, working in English.',
+    text: 'I built the aChiral Nurse Assistant from the first idea to a working prototype. Everything at work was in English.',
   },
   {
     period: '2015 – 2025',

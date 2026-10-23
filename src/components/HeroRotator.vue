@@ -2,12 +2,8 @@
 import { computed, onBeforeUnmount, onMounted, ref, watch } from 'vue'
 import { motionAllowed, useMotion } from '@/composables/useMotion'
 
-// The home page's rotating line: types a line, holds it, deletes it, types the next, and so on.
-//
-// - Every line sits invisibly in the same spot, so the block is as big as the longest line from
-//   the start and nothing below it moves when the line changes.
-// - Screen readers get all lines once, as one sentence; the moving copy is hidden from them.
-// - The pre-rendered HTML and reduced motion show the first line and nothing moves.
+// Rotating line on the home page: types a line, waits, deletes it and types the next one.
+// All lines share one grid cell, so nothing below moves. Screen readers get every line once.
 const props = defineProps<{ lines: string[] }>()
 
 const TYPE_SPEED = 38 // milliseconds per character typed

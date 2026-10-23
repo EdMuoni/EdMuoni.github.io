@@ -2,13 +2,8 @@
 import { computed } from 'vue'
 import { photoWidths, withReferral, type HeaderPhoto } from '@/data/photos'
 
-// A page header's photo: it fills the header behind everything else, under a dark shade so the
-// text on top stays easy to read, and zooms in very slowly. The parent header carries the class
-// "on-photo" (tokens.css), which switches its text and colours to the dark set in both themes.
-//
-// - The photo is decoration, so it has an empty alt text; the credit below it is real text.
-// - It is absolutely positioned, so it never pushes anything around while it loads.
-// - srcset lists the three widths and the browser downloads only the one that fits the screen.
+// Header photo under a dark shade, with a slow zoom. It is decoration (empty alt), the credit
+// below it is real text. The parent needs the class "on-photo".
 const props = defineProps<{ photo: HeaderPhoto }>()
 
 const file = (width: number) => `/img/headers/${props.photo.name}-${width}.jpg`

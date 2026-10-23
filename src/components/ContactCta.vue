@@ -13,7 +13,8 @@ withDefaults(defineProps<{ heading?: string }>(), {
     <div class="container">
       <TypeText as="h2" :text="heading" :speed="40" when-visible />
       <p class="lead">
-        I am looking for a developer role in Estonia. The quickest way to reach me is e-mail.
+        I’m looking for a developer job in Estonia, elsewhere in the EU or anywhere in the world.
+        Email is the quickest way to reach me.
       </p>
       <ul v-reveal class="contact-list">
         <li v-for="link in contactLinks" :key="link.label">

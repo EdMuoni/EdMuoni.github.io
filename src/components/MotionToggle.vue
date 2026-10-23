@@ -2,8 +2,7 @@
 import { computed } from 'vue'
 import { useMotion } from '@/composables/useMotion'
 
-// Turns the site's animations off and on. The choice is remembered, like the theme. Visitors whose
-// system already asks for reduced motion get the calm version without pressing anything.
+// Turns animations off and on. The choice is saved, like the theme.
 const { motionOn, toggle } = useMotion()
 
 // The button names what a click will do.

@@ -1,11 +1,5 @@
-/*
-  Design tokens: every colour, font and spacing value the site uses lives here.
-  Components only ever use var(--name), so changing a colour means changing one line.
-
-  The palette matches the CV and letter set: white page, orange accent #FF5100, ink #18181B.
-  #FF5100 is only used for lines and shapes, because orange text on white is hard to read;
-  text links use the darker --accent-text, which passes WCAG AA contrast (4.5:1).
-*/
+/* Colours and fonts. #FF5100 is only used for lines and shapes, text uses the darker
+   --accent-text for contrast. */
 :root {
   --bg: #ffffff;
   --surface: #fafafa;
@@ -89,8 +83,7 @@
   }
 }
 
-/* A header with a darkened photo behind it (HeaderBackdrop.vue) uses the dark values in both
-   themes, so its text, buttons and Ohm's bubble stay readable on the photo. */
+/* Headers with a photo use the dark colours in both themes. */
 .on-photo {
   --bg: #111113;
   --surface: #18181b;

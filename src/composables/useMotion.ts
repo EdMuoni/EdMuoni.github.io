@@ -1,13 +1,9 @@
 import { onBeforeUnmount, onMounted, ref, type Ref } from 'vue'
 
-const STORAGE_KEY = 'motion' // index.html reads the same key before the page paints
+const STORAGE_KEY = 'motion' // index.html uses the same key
 const reduceQuery = '(prefers-reduced-motion: reduce)'
 
-/**
- * May things move right now? False during the build (there is no page in Node.js) and when the
- * visitor or their system asked for reduced motion. index.html sets data-motion before the first
- * paint; the motion button changes it.
- */
+/** False during the build and when reduced motion is on. */
 export function motionAllowed(): boolean {
   return typeof document !== 'undefined' && document.documentElement.dataset.motion !== 'reduced'
 }
@@ -16,7 +12,7 @@ function storedChoice(): string | null {
   try {
     return localStorage.getItem(STORAGE_KEY)
   } catch {
-    return null // private windows and blocked storage
+    return null
   }
 }
 
@@ -25,18 +21,15 @@ function applyMotion(on: boolean) {
   motionOn.value = on
 }
 
-// Shared by every component that calls useMotion(). It starts as true everywhere, so the first
-// render in the browser matches the pre-rendered HTML; the real setting is read in onMounted.
+// Starts as true to match the pre-rendered HTML; the real value is read in onMounted.
 const motionOn = ref(true)
 let followingSystem = false
 
-/** Call from a component's setup. */
 export function useMotion() {
   onMounted(() => {
     motionOn.value = motionAllowed()
 
-    // If the visitor changes the system setting while the page is open, follow it, unless they
-    // already chose with the motion button. Set up once for the whole page.
+    // Follow the system setting if it changes, unless the visitor used the motion button.
     if (!followingSystem) {
       followingSystem = true
       window.matchMedia(reduceQuery).addEventListener('change', (event) => {
@@ -50,17 +43,14 @@ export function useMotion() {
     try {
       localStorage.setItem(STORAGE_KEY, motionOn.value ? 'on' : 'off')
     } catch {
-      /* the choice still holds for this visit */
+      // storage can be blocked (private window)
     }
   }
 
   return { motionOn, toggle }
 }
 
-/**
- * Pauses the CSS animations inside `target` while it is far off-screen (adds the class
- * "offscreen", see motion.css), so a long page doesn't keep animating parts nobody can see.
- */
+/** Pauses CSS animations inside `target` while it is far off screen. */
 export function usePauseOffscreen(target: Ref<HTMLElement | null>) {
   let observer: IntersectionObserver | undefined
 

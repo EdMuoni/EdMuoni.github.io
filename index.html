@@ -4,35 +4,24 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Edgar Muoni · Full-stack developer</title>
-    <meta name="description" content="Edgar Muoni, full-stack developer in Tallinn. Vue 3, TypeScript, Rust, C# / .NET and automated testing. An electrician's habit: find the cause before fixing anything.">
+    <meta name="description" content="Edgar Muoni, a full-stack developer in Tallinn and a former electrician. Vue 3, TypeScript, C# / .NET and Rust.">
     <meta name="color-scheme" content="light dark">
     <link rel="icon" href="/favicon.svg" type="image/svg+xml">
 
-    <!-- Link previews (LinkedIn, Slack, e-mail) read these tags without running any JavaScript.
-         The build fills in each page's own title, description and og:* values (see
-         scripts/prerender.ts), so the values below are only used by `npm run dev`. -->
+    <!-- Link previews. The pre-render step fills in each page's own values. -->
     <meta property="og:type" content="website">
     <meta property="og:title" content="Edgar Muoni · Full-stack developer">
     <meta property="og:description" content="Vue 3 · TypeScript · Rust · C# / .NET · Automated testing. Tallinn, Estonia.">
     <meta property="og:url" content="https://edmuoni.github.io/">
-    <!-- The picture a shared link shows (LinkedIn, Slack, e-mail). It is a capture of the home page's
-         header, 1200 x 630 pixels, the size those previews use. -->
     <meta property="og:image" content="https://edmuoni.github.io/og-image.jpg">
     <meta property="og:image:width" content="1200">
     <meta property="og:image:height" content="630">
     <meta property="og:image:alt" content="Edgar Muoni, full-stack developer: the top of the home page, with Ohm, the site's robot mascot.">
     <meta name="twitter:card" content="summary_large_image">
 
-    <!-- Runs before the page paints, so nothing flashes or jumps:
-         - the colour theme, so a dark-mode visitor never sees a white flash
-           (same storage key as src/composables/useTheme.ts);
-         - the class "js", which tells the CSS that JavaScript runs and text may start hidden until
-           it is typed or slid in (src/styles/motion.css). Without JavaScript nothing is ever hidden;
-         - data-motion: "reduced" when the visitor turned animations off with the motion button,
-           or their system asks for reduced motion and they haven't turned them on
-           (same storage key as src/composables/useMotion.ts).
-         If the app's script never starts (blocked or failed download), a safety net removes "js"
-         after a few seconds, so hidden text appears anyway. -->
+    <!-- Set theme and motion before the first paint so nothing flashes.
+         "js" lets the CSS hide text until it is typed in. If the app never starts, it is removed
+         after 4 seconds so the text shows anyway. -->
     <script>
       ;(function () {
         var root = document.documentElement
@@ -53,8 +42,6 @@
     </script>
   </head>
   <body>
-    <!-- Empty in the source. The build (scripts/prerender.ts) puts each page's finished HTML here,
-         so the page reads fine before, or without, JavaScript. -->
     <div id="app"><!--app-html--></div>
     <script type="module" src="/src/main.ts"></script>
   </body>

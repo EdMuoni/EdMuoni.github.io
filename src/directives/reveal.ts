@@ -1,23 +1,16 @@
 import type { Directive } from 'vue'
 import { motionAllowed } from '@/composables/useMotion'
 
-// v-reveal: the element fades and slides in the first time it scrolls into view.
-//
-// - Only elements that start below the visible part of the screen are hidden, at the moment the
-//   app starts. Something already on screen is never hidden, so nothing blinks out and back.
-// - Without JavaScript, during the build and with reduced motion, nothing is hidden at all.
-// - The value, if given, is the element's place in a row (v-reveal="i"), so cards in a row arrive
-//   one after another instead of all at once.
-// - The browser's IntersectionObserver reports when an element enters the screen, so the page
-//   doesn't have to check on every scroll. One observer serves every element.
+// v-reveal: fades and slides an element in the first time it scrolls into view.
+// Elements that are already on screen at start are left alone. v-reveal="i" staggers a row.
 
-const DURATION = 600 // milliseconds; matches the transition in styles/motion.css
+const DURATION = 600 // same as the transition in motion.css
 let observer: IntersectionObserver | undefined
 
 function show(el: HTMLElement) {
   observer?.unobserve(el)
   el.classList.remove('reveal-hidden')
-  // Once it has arrived, drop the reveal styles, so the delay doesn't slow later hover effects.
+  // Remove the reveal class afterwards so its delay doesn't affect hover effects.
   const delay = parseFloat(el.style.getPropertyValue('--reveal-delay')) || 0
   window.setTimeout(() => el.classList.remove('reveal'), DURATION + delay + 50)
 }
@@ -33,7 +26,6 @@ function getObserver(): IntersectionObserver {
 }
 
 export const reveal: Directive<HTMLElement, number | undefined> = {
-  // Nothing to add to the pre-rendered HTML: the element starts visible.
   getSSRProps: () => ({}),
 
   mounted(el, binding) {
@@ -49,7 +41,6 @@ export const reveal: Directive<HTMLElement, number | undefined> = {
   },
 }
 
-// Lets TypeScript check v-reveal in templates.
 declare module 'vue' {
   interface GlobalDirectives {
     vReveal: typeof reveal

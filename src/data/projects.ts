@@ -1,6 +1,5 @@
-// Every project on the site comes from this file. The overview pages (Now building, Finished work,
-// School projects) show them as cards, and every project also gets its own page at /projects/<slug>, which the build
-// pre-renders like any other page. To add or change a project, edit the list below.
+// All projects on the site. Each one shows up as a card on its overview page and gets its own
+// page at /projects/<slug>.
 
 export interface Link {
   label: string
@@ -39,7 +38,7 @@ export interface Project {
   /** One line under the title: where, when, what role. */
   context?: string
 
-  // The case study, always told in this order: problem → what I built → proof → what's next.
+  // Case study parts, all optional.
   problem?: string
   built?: string[]
   proof?: string[]
@@ -72,25 +71,25 @@ export const projects: Project[] = [
     problem:
       'Before an electrician can quote a job, someone has to work out which breakers, how much cable, ' +
       'which residual-current device and what size of panel enclosure the building needs, and then ' +
-      'look up every price. That is normally a cost estimator’s job. I know these parts from working ' +
-      'as an electrician; VoltVibe turns the routine into a web shop with the calculator built in.',
+      'look up every price. That is normally a cost estimator’s job. I know these parts from my ' +
+      'electrician years, so I built VoltVibe: a web shop with that calculator built in.',
     built: [
-      'Enter the building type, rooms, sockets, lights and whether there is an electric cooker; get a priced bill of materials from a real product catalogue.',
-      'Every line shows its circuit type and cable cross-section, so an electrician can check the result instead of trusting it.',
-      'Since the thesis: a new interface in Tailwind CSS 4 and TypeScript, available in Estonian, English, Finnish, Swedish and Norwegian so it can serve customers across the Nordics, and orders that are saved with stock reserved.',
-      'The goal is a Nordic wholesale web shop for electrical components, with the calculator as its main feature.',
+      'You enter the building type, the number of rooms, sockets and lights, and whether there is an electric cooker. The app gives back a priced bill of materials from a real product catalogue.',
+      'Every line shows the circuit type and the cable cross-section, so an electrician can check the numbers.',
+      'After the thesis I rebuilt the interface with Tailwind CSS 4 and TypeScript and added Estonian, English, Finnish, Swedish and Norwegian. Orders are now saved and the stock gets reserved.',
+      'The plan is a wholesale web shop for electrical parts in the Nordic countries, with the calculator at the centre.',
     ],
     proof: [
-      'Automated tests run by GitHub Actions on every push, so a change that breaks something is caught at once, not by a customer.',
-      'A security-check script repeats real attack attempts against the running app: login, CSRF protection, open redirects and input validation.',
-      'Every page works without JavaScript; TypeScript only makes it more convenient.',
-      'Layered solution (Core, Data, ApplicationServices, Web, Tests): the calculation rules sit apart from the web pages, so either can change without breaking the other.',
+      'GitHub Actions runs the automated tests on every push.',
+      'A security script tries real attacks on the running app: login, CSRF, open redirects and bad input.',
+      'Every page also works with JavaScript turned off.',
+      'The solution is split into layers (Core, Data, ApplicationServices, Web, Tests), and the calculation rules live apart from the web pages.',
     ],
     next: [
       'Payments and order e-mails.',
-      'Putting it online; today it runs on my machine.',
+      'Putting it online. Right now it only runs on my computer.',
       'Checking every calculation rule against the exact clauses of EVS-HD 60364.',
-      'Native speakers to review the Finnish, Swedish and Norwegian translations.',
+      'Getting native speakers to check the Finnish, Swedish and Norwegian texts.',
     ],
     stack: [
       'ASP.NET Core 9 MVC',
@@ -120,25 +119,25 @@ export const projects: Project[] = [
         alt:
           'VoltVibe’s calculator: a detached house with 5 rooms, 20 sockets, 12 lights and an electric cooker, next to the priced list of breakers and cables it needs.',
         caption:
-          'Building details in, a priced bill of materials out. Product photos are left out of this screenshot.',
+          'The building details next to the priced parts list. I left the product photos out of this screenshot.',
       },
     ],
   },
   {
     slug: 'portfolio-website',
-    mascotLine: 'You are standing in it. Every page here was typed out by the build before you arrived.',
+    mascotLine: 'You’re looking at it right now.',
     title: 'This website',
     group: 'now',
     summary:
-      'The site you are reading: Vue 3 and TypeScript, pre-rendered so every page also reads without JavaScript.',
+      'The site you are on now, made with Vue 3 and TypeScript. Every page also works without JavaScript.',
     context: 'Personal project · 2026 · solo developer',
     built: [
-      'Every project on the site comes from one typed data file; the cards, the overview pages and each project’s own page are generated from it.',
-      'The build pre-renders every page to HTML, so the text is there before any JavaScript runs, link previews show each page’s own title, and every page answers “200 OK”.',
+      'All projects come from one data file. The cards, the overview pages and each project page are made from it.',
+      'The build writes every page out as plain HTML first. The text is there before any JavaScript runs, and a shared link shows the right title.',
     ],
     proof: [
       'GitHub Actions type-checks, builds and publishes the site on every push to main.',
-      'TypeScript checks the data file, so a missing or misspelt field stops the build instead of breaking a page.',
+      'If I mistype a field in the data file, TypeScript stops the build before a broken page goes live.',
     ],
     stack: ['Vue 3', 'TypeScript', 'Vue Router', 'Vite', 'GitHub Actions', 'GitHub Pages'],
     code: 'https://github.com/EdMuoni/EdMuoni.github.io',
@@ -148,7 +147,7 @@ export const projects: Project[] = [
   // ---------------------------------------------------------------- Finished work
   {
     slug: 'panel-calculator-thesis',
-    mascotLine: 'Where it all started: an electrician’s routine, turned into tested code.',
+    mascotLine: 'This is where VoltVibe started.',
     title: 'Electrical Panel and Supplies Component Calculator',
     group: 'finished',
     summary:
@@ -156,19 +155,19 @@ export const projects: Project[] = [
     context:
       'Diploma thesis (ElektriKalkulaator) · Tallinna Tehnoloogiakolledž, 2026 · supervisor Kalle Olumets',
     problem:
-      'Turning basic building data into a priced list of electrical panel components takes an ' +
-      'estimator’s time and knowledge of the wiring standard. My thesis asked whether a web app could ' +
-      'do the routine part reliably, from a real product catalogue.',
+      'Pricing the parts for an electrical panel takes an estimator time and a good knowledge of the ' +
+      'wiring standard. In my thesis I wanted to find out if a web app could do the routine part ' +
+      'reliably, using a real product catalogue.',
     built: [
       'A web app that groups the building’s loads into circuits, based on the Estonian wiring standard EVS-HD 60364, and picks the cheapest suitable breaker and cable that is in stock.',
       'The result is a priced bill of materials: breakers, cable quantity, residual-current device and panel enclosure.',
       'A product catalogue with stock, an admin login and a shopping basket around the calculator.',
     ],
     proof: [
-      'Unit and integration tests run by GitHub Actions on every commit, so a wrong result is caught before anyone relies on it.',
+      'Unit and integration tests run in GitHub Actions on every commit.',
       'Security tests for authentication, CSRF, open redirects and input validation.',
-      'Layered solution (Core, Data, ApplicationServices, Web, Tests) that keeps the calculation rules testable on their own.',
-      'Public code with a changelog that explains why each change was made.',
+      'Split into layers (Core, Data, ApplicationServices, Web, Tests), so the calculation rules can be tested on their own.',
+      'The code is public, and the changelog says why each change was made.',
     ],
     next: ['This became VoltVibe: see “Now building”.'],
     stack: [
@@ -196,18 +195,18 @@ export const projects: Project[] = [
       'Nurses need a patient’s data and the right care guide quickly. The company wanted to see ' +
       'whether an AI chat assistant could provide both.',
     built: [
-      'Took the idea through design to a working prototype within the internship.',
+      'I took it from an idea to a working prototype during the internship.',
       'A Flowise Tool Agent with a Groq language model, conversation memory per session, and request tools that fetch each kind of patient record from a test database (json-server).',
       'RAG search (the model looks up relevant text before answering) with Pinecone and Gemini text embeddings over the nursing guide.',
       'Interface designed in Figma and built in HTML, CSS and JavaScript, fully translated into English, French and Italian so staff can use it in their own language.',
     ],
     proof: [
-      'Split a single-file app that had become hard to change into modules (API, UI, app logic, config, guides, translations), so each part can be fixed without breaking the others.',
-      'Fixed the bugs found while restructuring it.',
+      'My first version was one big file. I split it into modules: API, UI, app logic, config, guides and translations.',
+      'I fixed the bugs that turned up while doing that.',
       'Wrote a workflow diagram, a role-based access matrix and a code analysis report.',
     ],
     next: [
-      'The prototype fed the model in two ways at once: data fetched from the database and RAG search. They conflicted. Next version: patient data only from the database, vector search only for the guides.',
+      'The prototype gave the model data in two ways at once, straight from the database and through RAG search, and the two got in each other’s way. In a next version I would take patient data only from the database and use vector search only for the guides.',
     ],
     stack: ['Flowise', 'Groq LLM', 'Pinecone', 'Gemini embeddings', 'JavaScript', 'HTML / CSS', 'json-server', 'Figma'],
     code: 'https://github.com/EdMuoni/aChiral-Nurse-Assistant',
@@ -216,25 +215,25 @@ export const projects: Project[] = [
   },
   {
     slug: 'defence-forces-internship',
-    mascotLine: 'An internal project, so no code or screenshots here. What he did is all below.',
+    mascotLine: 'This one is internal, so there is no code and no screenshots. His part is described below.',
     title: 'Messaging app for military personnel (KOLT-chat)',
     group: 'finished',
     summary:
-      'Full-stack tickets on a development team building a messaging app for military personnel: Vue 3 frontend, Rust backend.',
+      'Full-stack work in a team building a messaging app for military personnel, with a Vue 3 front end and a Rust back end.',
     context: 'Software Development Intern, full-stack · Estonian Defence Forces · June–September 2026',
     problem:
-      'A development team building a messaging app for communication between military personnel. ' +
-      'I worked on tickets across the whole stack, inside the team’s normal process.',
+      'The team was building a messaging app for military personnel. I took tickets on both the ' +
+      'front end and the back end and worked inside the team’s normal process.',
     built: [
-      'Frontend tickets in Vue 3, TypeScript, Pinia and Quasar; backend tickets in Rust with Actix-web and SQLite.',
-      'Fixed a race condition (two copies of the same action running at once) with a guard that blocks the second copy, and proved the fix with rapid repeated requests.',
-      'Traced state-management bugs with Vue DevTools by comparing the state before and after an action.',
-      'Got the development container working again when a security policy blocked a library.',
+      'On the front end I used Vue 3, TypeScript, Pinia and Quasar. On the back end, Rust with Actix-web and SQLite.',
+      'I fixed a race condition where the same action could run twice at the same time. A guard now blocks the second one, and I tested it by sending the same request many times very fast.',
+      'I tracked down state bugs in Vue DevTools by comparing the store before and after an action.',
+      'When a security policy blocked a library, I got the development container working again.',
     ],
     proof: [
-      'Wrote a Playwright end-to-end test so the race condition cannot come back unnoticed.',
-      'Daily grooming at 8:50; ticket → own branch → pull request → review → main.',
-      'Code review in both directions: my pull requests were reviewed, and I reviewed others’.',
+      'I wrote a Playwright end-to-end test for the race condition.',
+      'Daily grooming at 8:50. Every ticket went through its own branch, a pull request and a review before it reached main.',
+      'I reviewed other people’s pull requests, and they reviewed mine.',
     ],
     stack: ['Vue 3', 'TypeScript', 'Pinia', 'Quasar', 'Rust', 'Actix-web', 'SQLite', 'Playwright', 'Azure DevOps'],
     codeNote: 'Internal project: no code, screenshots or internal details are published.',
@@ -242,7 +241,6 @@ export const projects: Project[] = [
   },
 
   // ---------------------------------------------------------------- School projects, by course
-  // Each described from reading its repository's code. Course order: see `courses` below.
   {
     slug: 'shop-targe24',
     title: 'ShopTARge24',
@@ -252,13 +250,13 @@ export const projects: Project[] = [
       'An ASP.NET Core MVC web app for managing kindergarten groups, real estate and spaceships, with image uploads.',
     built: [
       'Create, view, edit and delete kindergartens, real-estate listings and spaceships.',
-      'Upload several images per record and remove them again; real-estate images are stored in the database.',
+      'Upload several images for a record and delete them again. Real-estate images are saved in the database.',
       'Real-estate forms check their input before anything is saved.',
       'Every form field has a stable id, so automated browser tests can find it (see “Browser tests with Selenium”).',
     ],
     proof: [
       'Layered solution: Core (domain, DTOs, interfaces), Data (EF Core and its migrations), ApplicationServices and the web project, joined by dependency injection.',
-      'Unit tests (xUnit) run the services against an in-memory database, so the logic is checked without a real one.',
+      'xUnit tests check the services against an in-memory database.',
     ],
     stack: ['C#', 'ASP.NET Core 9 MVC', 'EF Core 9', 'SQL Server', 'xUnit'],
     code: 'https://github.com/EdMuoni/ShopTARge24/tree/Kindergarten',
@@ -275,11 +273,9 @@ export const projects: Project[] = [
       'The API returns all schools, or one school by its id, or “404 Not Found” when there is none.',
       'React pages show the schools in a table and open a details page for each one, using React Router.',
       'The data comes from SQL Server through EF Core.',
+      'The back end has the same layers as my bigger .NET projects: Core, Data, ApplicationServices and Server.',
     ],
-    proof: [
-      'Layered back end (Core, Data, ApplicationServices, Server), the same structure as my larger .NET projects.',
-    ],
-    next: ['Creating, editing and deleting schools: the API endpoints and pages for them are the next step.'],
+    next: ['Adding, editing and deleting schools.'],
     stack: ['React 19', 'TypeScript', 'Vite', 'ASP.NET Core 9 Web API', 'EF Core 9', 'SQL Server'],
     code: 'https://github.com/EdMuoni/ReactCRUD',
     screenshots: [],
@@ -320,7 +316,7 @@ export const projects: Project[] = [
     built: [
       'Shows the monthly gross salary, the tax-free income, the income tax and the net salary.',
       'The tax-free allowance shrinks as income grows, and invalid input gets a clear message.',
-      'Simplified on purpose: it leaves out the unemployment-insurance and pension contributions.',
+      'It is simplified: unemployment insurance and pension payments are left out.',
     ],
     stack: ['HTML', 'JavaScript'],
     code: 'https://github.com/EdMuoni/SalaryCalculator',
@@ -336,16 +332,16 @@ export const projects: Project[] = [
     context: 'Course project · planned as user stories, one Git branch per story',
     built: [
       'A REST API in Express and Sequelize on MariaDB: recipes, users, ratings, registration, login and logout.',
-      'Passwords stored as bcrypt hashes; logins kept as server-side sessions in the database.',
+      'Passwords are saved as bcrypt hashes, and logins are kept as sessions in the database.',
       'API documentation in Swagger (OpenAPI), served by the API itself.',
       'A Vue 3 front end: recipes with ratings, registration and login, and an admin page to add, edit and delete recipes.',
     ],
     proof: [
       'Planned in LiteTracker as user stories. Every story got its own Git branch named after it, and the commits name the story they deliver.',
-      'Database settings come from environment variables; the repository holds an example file, and the real one stays out of Git.',
+      'Database settings come from environment variables. The repo has an example file and the real one stays out of Git.',
     ],
     next: [
-      'Check permissions on the server as well, not only in the front end, so that only an admin can change recipes.',
+      'Check admin rights on the server too, so only an admin can change recipes.',
       'Automated tests for the API.',
     ],
     stack: ['Node.js', 'Express 5', 'Sequelize', 'MariaDB', 'bcrypt', 'Swagger', 'Vue 3', 'Pinia', 'Vue Router'],
@@ -363,9 +359,9 @@ export const projects: Project[] = [
       'NUnit tests drive Firefox through Selenium against my ShopTARge24 web app.',
       'For kindergartens and spaceships: create a record, check its details, edit it and delete it.',
       'Negative tests: text typed into a number field must not create a record, and the form must stay open.',
-      'The ids the tests rely on were added to the app’s pages for exactly this purpose.',
+      'I added the ids the tests need to the app’s pages.',
     ],
-    next: ['Page objects, waits that watch the page instead of fixed pauses, and closing the browser after each test.'],
+    next: ['Page objects, proper waits in place of fixed pauses, and closing the browser after each test.'],
     stack: ['C#', 'NUnit', 'Selenium WebDriver', 'Firefox'],
     code: 'https://github.com/EdMuoni/SeleniumTester',
     screenshots: [],
@@ -377,7 +373,7 @@ export const projects: Project[] = [
     course: 'Programming basics',
     summary: 'A pair project: Tetris in Python, with score, levels, music and a restart.',
     built: [
-      'Pieces fall, move and turn with the arrow keys; full lines are cleared.',
+      'Pieces fall and you move and turn them with the arrow keys. Full lines disappear.',
       'My part: the game loop, the keyboard handling, line clearing, score and levels that speed the game up, the music and the restart.',
       'Planned with user stories and a paper prototype before any code was written.',
     ],
@@ -392,7 +388,7 @@ export const projects: Project[] = [
     course: 'Programming basics',
     summary: 'Tic-tac-toe in Python and Pygame: you play X against the computer.',
     built: [
-      'Click a square to place your X; the computer answers with an O.',
+      'Click a square to put your X there, and the computer answers with an O.',
       'Spots a line of three in any row, column or diagonal, and a full board.',
     ],
     stack: ['Python', 'Pygame'],

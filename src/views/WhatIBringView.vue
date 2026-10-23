@@ -13,14 +13,14 @@ import { headerPhotos } from '@/data/photos'
   <PageIntro
     kicker="What I bring"
     title="What your team gets"
-    lead="A developer who reproduces a bug before fixing it, works in small reviewed steps, and knows the electrical domain from the inside."
+    lead="What I can do for your team, where I learned it and the tools I have used."
     :mascot="mascot.whatIBring"
     :photo="headerPhotos.whatIBring"
   />
 
   <section class="section">
     <div class="container">
-      <h2 class="sr-only">Results you can expect</h2>
+      <h2 class="sr-only">In short</h2>
       <ul class="outcomes">
         <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i">
           <h3 class="outcome-title">{{ item.title }}</h3>
@@ -32,14 +32,14 @@ import { headerPhotos } from '@/data/photos'
 
   <section class="section">
     <div class="container">
-      <SectionHeading kicker="How I would be useful" title="How I work on every job" />
+      <SectionHeading kicker="Strengths" title="What I am good at" />
       <ol class="strengths">
         <li v-for="(item, i) in strengths" :key="item.title" v-reveal>
           <span class="num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
           <div>
             <h3>{{ item.title }}</h3>
             <p>{{ item.text }}</p>
-            <p class="evidence"><span class="evidence-label">Proof:</span> {{ item.evidence }}</p>
+            <p class="evidence">{{ item.evidence }}</p>
           </div>
         </li>
       </ol>
@@ -50,8 +50,8 @@ import { headerPhotos } from '@/data/photos'
     <div class="container">
       <SectionHeading kicker="Skills" title="What I have used in real projects" />
       <p class="muted intro">
-        Every item below appears in a project on
-        <RouterLink to="/now-building">Now building</RouterLink> or
+        You can find all of these in my projects under
+        <RouterLink to="/now-building">Now building</RouterLink> and
         <RouterLink to="/work">Finished work</RouterLink>.
       </p>
       <dl class="skills">
@@ -85,7 +85,7 @@ import { headerPhotos } from '@/data/photos'
 </template>
 
 <style scoped>
-/* Four result tiles: one column on phones, two on tablets, four in a row on wide screens. */
+/* One column on phones, three in a row on wider screens. */
 .outcomes {
   list-style: none;
   padding: 0;
@@ -112,15 +112,9 @@ import { headerPhotos } from '@/data/photos'
   color: var(--muted);
 }
 
-@media (min-width: 640px) {
+@media (min-width: 800px) {
   .outcomes {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-}
-
-@media (min-width: 1000px) {
-  .outcomes {
-    grid-template-columns: repeat(4, minmax(0, 1fr));
+    grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 }
 
@@ -159,11 +153,6 @@ import { headerPhotos } from '@/data/photos'
   color: var(--muted);
   padding-left: 12px;
   border-left: 3px solid var(--accent);
-}
-
-.evidence-label {
-  font-weight: 600;
-  color: var(--ink);
 }
 
 .intro {

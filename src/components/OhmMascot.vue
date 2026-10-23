@@ -2,16 +2,8 @@
 import { computed, ref } from 'vue'
 import TypeText from './TypeText.vue'
 
-// Ohm, the site's mascot: a small robot with a cable tail and a plug, drawn for this site as an SVG
-// and animated with CSS only (hover, blink, antenna spark, current running along the cable, a wave
-// as the page opens). Its speech bubble greets the visitor with a line for the page; pressing Ohm
-// brings the next line.
-//
-// - It sits in the normal page flow (never on top of content), and the bubble is as big as the
-//   longest line from the start, so nothing moves when a new line appears.
-// - The robot itself is decoration (hidden from screen readers); the bubble's words are real text.
-// - Without JavaScript the first line shows and the CSS animations still play. With reduced
-//   motion nothing moves (motion.css).
+// Ohm, the mascot: an SVG robot animated with CSS. A click shows his next line.
+// The bubble is sized for the longest line, so nothing moves when the text changes.
 const props = defineProps<{
   /** What Ohm says, first line first. */
   lines: string[]
@@ -23,8 +15,7 @@ const index = ref(0)
 const line = computed(() => props.lines[index.value] ?? '')
 const bubbleHidden = ref(false)
 
-// Each press makes Ohm jump and wave. A CSS animation only plays again under a new name, so the
-// presses alternate between two copies of the same animation ("press-a" / "press-b" below).
+// A CSS animation only restarts under a new name, so clicks switch between press-a and press-b.
 const presses = ref(0)
 const pressClass = computed(() => (presses.value === 0 ? '' : presses.value % 2 ? 'press-a' : 'press-b'))
 
@@ -106,8 +97,7 @@ function next() {
 </template>
 
 <style scoped>
-/* Phones: Ohm on the left, the bubble on the right. Wide screens (inside a page header): the
-   bubble above Ohm. */
+/* Phones: Ohm on the left and the bubble on the right. Wide screens: bubble above Ohm. */
 .mascot {
   display: grid;
   grid-template-columns: 92px minmax(0, 1fr);

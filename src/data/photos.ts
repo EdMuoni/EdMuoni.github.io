@@ -1,14 +1,10 @@
-// The photos behind the top pages' headers. All come from Unsplash under the Unsplash License
-// (https://unsplash.com/license): free to use, including commercially, and credit is not required.
-// Every photo is credited anyway: in its header, in the footer and in CREDITS.md.
-//
-// Each photo exists in public/img/headers/ in three widths (640, 1280 and 1920 pixels), and the
-// browser downloads only the one that fits the screen.
+// Header photos from Unsplash (Unsplash License). They are credited in the header, the footer and
+// CREDITS.md. Each one is stored in three widths in public/img/headers/.
 
 export interface HeaderPhoto {
   /** The file name without its width, e.g. 'circuit-board' for circuit-board-1280.jpg. */
   name: string
-  /** The 1280-wide file's size in pixels, so the browser knows the photo's shape in advance. */
+  /** Size of the 1280px file, so the layout doesn't jump while it loads. */
   width: number
   height: number
   /** What the photo shows, for the credits. */

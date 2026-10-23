@@ -1,11 +1,5 @@
-// The site's top-level pages: their URL, browser-tab title and the description that search engines
-// and link previews (LinkedIn, Slack, e-mail) show.
-//
-// Two places read this file, so a page is only ever described here:
-// - src/router/index.ts, which shows the right page in the browser;
-// - src/entry-server.ts, whose list of addresses the build (scripts/prerender.ts) turns into one
-//   real HTML file per page, so GitHub Pages answers "200 OK" (not "404") and a shared link shows
-//   that page's own title.
+// The main pages with their URL, tab title and description (used by search engines and link
+// previews). The router and the pre-render step both read this list.
 
 export interface PageInfo {
   path: string
@@ -18,12 +12,12 @@ export const pages = {
     path: '/',
     title: 'Edgar Muoni · Full-stack developer',
     description:
-      'Edgar Muoni, full-stack developer in Tallinn. From electrician to developer: I find the cause, fix it and prove the fix with a test.',
+      'Edgar Muoni, a full-stack developer in Tallinn and a former electrician. Vue 3, TypeScript, C# / .NET and Rust.',
   },
   whatIBring: {
     path: '/what-i-bring',
     title: 'What I bring · Edgar Muoni',
-    description: 'Skills, results and experience, and how I would be useful to your team.',
+    description: 'My strengths, skills, work history and education.',
   },
   nowBuilding: {
     path: '/now-building',
@@ -33,12 +27,12 @@ export const pages = {
   work: {
     path: '/work',
     title: 'Finished work · Edgar Muoni',
-    description: 'My diploma thesis, an AI nurse assistant and a Defence Forces internship, each told as a case study.',
+    description: 'My diploma thesis, an AI assistant for nurses and my internship with the Defence Forces.',
   },
   school: {
     path: '/school',
     title: 'School projects · Edgar Muoni',
     description:
-      'Course projects from my software development studies, grouped by course: web apps, APIs, browser tests, mobile apps and games.',
+      'Projects from my software development courses: web apps, APIs, browser tests, mobile apps and games.',
   },
 } satisfies Record<string, PageInfo>

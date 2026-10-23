@@ -70,7 +70,13 @@ const nextPages = [
         <TypeText as="span" class="kicker" :text="`${profile.role} · ${profile.location}`" :speed="22" />
         <TypeText as="h1" :text="profile.name" :speed="55" :delay="300" />
         <TypeText as="p" class="pitch" :text="pitch" :speed="9" :delay="900" />
-        <HeroRotator :lines="['I find the cause.', 'I fix it.', 'I prove it with a test.']" />
+        <HeroRotator
+          :lines="[
+            'I build web apps from the database up to the buttons.',
+            'Lately mostly Vue 3 and TypeScript, with some Rust.',
+            'Ask me about the race condition I tracked down.',
+          ]"
+        />
         <p class="stack" aria-label="Main technologies">
           <span v-for="(tech, i) in profile.stack" :key="tech">
             {{ tech }}<span v-if="i < profile.stack.length - 1" aria-hidden="true"> · </span>
@@ -100,18 +106,18 @@ const nextPages = [
 
   <section class="section">
     <div class="container">
-      <SectionHeading kicker="How I work" title="Cause first, then the fix, then the test" />
+      <SectionHeading kicker="Day to day" title="How I work" />
       <div class="how">
         <div v-reveal class="how-text">
           <p>
-            An electrician who swaps parts until the fault goes away has not fixed anything; the fault
-            comes back. Software is the same. I reproduce a bug before I touch the code, fix what caused
-            it, and add a test so it cannot return unnoticed.
+            As an electrician I learned not to swap parts until a fault goes away, because it usually
+            comes back. I treat code the same way. I make the bug happen again, fix what really causes
+            it and add a test so it can’t sneak back in.
           </p>
           <p>
-            I work in small steps: one ticket, one branch, one pull request, reviewed before it reaches
-            main.
-            The decisions are mine, and nothing stays until the running app and the tests agree.
+            I like to work in small steps. Each ticket gets its own branch and pull request, and someone
+            reviews it before it goes into main. I only call a change done when it works in the running
+            app and the tests pass.
           </p>
         </div>
         <TerminalWindow v-reveal="1" />
