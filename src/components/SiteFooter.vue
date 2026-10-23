@@ -20,7 +20,6 @@ const photos = Object.values(headerPhotos)
       </ul>
       <p class="muted small">
         Built with Vue 3, TypeScript and Vite, deployed by GitHub Actions.
-        <a href="https://github.com/EdMuoni/EdMuoni.github.io">Source code</a>.
       </p>
       <p class="muted small credits">
         Header photos from <a :href="withReferral('https://unsplash.com/')">Unsplash</a> by
