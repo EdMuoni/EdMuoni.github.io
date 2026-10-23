@@ -53,4 +53,5 @@ still there.
 
 ## Credits
 
-Photos and fonts are listed in [CREDITS.md](CREDITS.md).
+The header photos are from Unsplash. Each one is credited under the photo, on the page that shows
+it.

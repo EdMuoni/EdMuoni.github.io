@@ -1,5 +1,5 @@
-// Header photos from Unsplash (Unsplash License). They are credited in the header, the footer and
-// CREDITS.md. Each one is stored in three widths in public/img/headers/.
+// Header photos from Unsplash (Unsplash License). Each one is credited under the photo, on the page
+// that shows it. Each one is stored in three widths in public/img/headers/.
 
 export interface HeaderPhoto {
   /** The file name without its width, e.g. 'circuit-board' for circuit-board-1280.jpg. */

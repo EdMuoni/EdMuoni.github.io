@@ -1,9 +1,5 @@
 <script setup lang="ts">
-import { headerPhotos, withReferral } from '@/data/photos'
 import { contactLinks, profile } from '@/data/profile'
-
-// Every header photo's author, credited on every page (also in CREDITS.md).
-const photos = Object.values(headerPhotos)
 </script>
 
 <template>
@@ -70,10 +66,6 @@ const photos = Object.values(headerPhotos)
 
   .footer-inner .small {
     grid-column: 1 / -1;
-  }
-
-  .credits {
-    margin-top: -8px;
   }
 }
 </style>
