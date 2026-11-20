@@ -60,7 +60,8 @@ const hasStory = computed(() =>
 
     <div v-if="project.screenshots.length" class="shots">
       <figure v-for="(shot, i) in project.screenshots" :key="shot.src" v-reveal="i">
-        <ThemedImage :shot="shot" />
+        <!-- Opens the picture full size, so small text in a screenshot can be read. -->
+        <a :href="shot.src" class="zoom"><ThemedImage :shot="shot" /></a>
         <figcaption v-if="shot.caption">{{ shot.caption }}</figcaption>
       </figure>
     </div>
@@ -152,6 +153,18 @@ const hasStory = computed(() =>
 .shots img {
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  transition: transform 0.3s ease-out, border-color 0.3s;
+}
+
+.zoom {
+  display: block;
+  cursor: zoom-in;
+}
+
+.zoom:hover img,
+.zoom:focus-visible img {
+  transform: translateY(-3px);
+  border-color: var(--accent);
 }
 
 .shots figcaption {

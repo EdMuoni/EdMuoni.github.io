@@ -220,7 +220,50 @@ export const projects: Project[] = [
       'GitHub Actions',
     ],
     code: 'https://github.com/EdMuoni/Elektrikilbi-ja--tarvete-komponentide-kalkulaator',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/thesis-calculator.jpg',
+        width: 1280,
+        height: 842,
+        alt: 'The calculator: the building details on the left, the priced list of breakers and cables on the right.',
+        caption: 'The calculator and its result. Product photos: Wikimedia Commons, CC BY-SA.',
+      },
+      {
+        src: '/img/projects/thesis-stock-warning.jpg',
+        width: 712,
+        height: 547,
+        alt: 'A yellow warning above the parts list: one cable is short in stock, and the line shows how much is missing.',
+        caption: 'It warns before you order more than the stock has. Product photos: Wikimedia Commons, CC BY-SA.',
+      },
+      {
+        src: '/img/projects/thesis-assumptions.jpg',
+        width: 712,
+        height: 317,
+        alt: 'Three cards above a short list of the assumptions the result is based on.',
+        caption: 'Every result says what it assumes.',
+      },
+      {
+        src: '/img/projects/thesis-tests.jpg',
+        width: 660,
+        height: 450,
+        alt: 'Visual Studio Test Explorer with every test class ticked green.',
+        caption: 'The test run: all green.',
+      },
+      {
+        src: '/img/projects/thesis-architecture.jpg',
+        width: 1800,
+        height: 1120,
+        alt: 'Four boxes from top to bottom: the web project, ApplicationServices, Data and Core, with arrows pointing down, and Tests beside them.',
+        caption: 'Four layers. The web project calculates nothing itself.',
+      },
+      {
+        src: '/img/projects/thesis-flow.jpg',
+        width: 1200,
+        height: 1600,
+        alt: 'A flowchart from the form, through the calculation rules, circuits, breaker and cable, to the bill of materials.',
+        caption: 'How one calculation runs.',
+      },
+    ],
   },
   {
     slug: 'achiral-nurse-assistant',
@@ -256,7 +299,15 @@ export const projects: Project[] = [
     stack: ['Flowise', 'Groq LLM', 'Pinecone', 'Gemini embeddings', 'JavaScript', 'HTML / CSS', 'json-server', 'Figma'],
     code: 'https://github.com/EdMuoni/aChiral-Nurse-Assistant',
     codeNote: 'The public copy leaves out the company’s server address and its user-guide texts.',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/achiral-flowchart.jpg',
+        width: 1600,
+        height: 1119,
+        alt: 'The assistant’s flowchart: how a nurse’s question goes to the patient data or the care guide and back as an answer.',
+        caption: 'The flowchart I drew for the assistant.',
+      },
+    ],
   },
   {
     slug: 'defence-forces-internship',
@@ -343,7 +394,14 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS', 'Bootstrap'],
     live: 'https://edmuoni.github.io/Aksesuaaride_Veebileht/',
     code: 'https://github.com/EdMuoni/Aksesuaaride_Veebileht',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/accessories-website.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The shop’s home page with its welcome text.',
+      },
+    ],
   },
   {
     slug: 'bicycle-website',
@@ -355,7 +413,14 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS'],
     live: 'https://edmuoni.github.io/Jalgratta_Veebileht/',
     code: 'https://github.com/EdMuoni/Jalgratta_Veebileht',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/bicycle-website.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The magazine’s home page: a bicycle photo inside a big triangle, with short articles beside it.',
+      },
+    ],
   },
   {
     slug: 'salary-calculator',
@@ -498,7 +563,14 @@ export const projects: Project[] = [
     stack: ['JavaScript', 'Canvas'],
     live: 'https://edmuoni.github.io/Space_Invaders/',
     code: 'https://github.com/EdMuoni/Space_Invaders',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/space-invaders.jpg',
+        width: 600,
+        height: 620,
+        alt: 'The game at the start: aliens at the top, the player’s green ship at the bottom.',
+      },
+    ],
   },
   {
     slug: 'candy-crush',
@@ -509,7 +581,14 @@ export const projects: Project[] = [
     stack: ['JavaScript'],
     live: 'https://edmuoni.github.io/Candy_Crush/',
     code: 'https://github.com/EdMuoni/Candy_Crush',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/candy-crush.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The board full of candies, with the score above it.',
+      },
+    ],
   },
 ]
 
