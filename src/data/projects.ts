@@ -124,6 +124,29 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'bill-watcher',
+    title: 'Bill Watcher',
+    group: 'now',
+    summary:
+      'A service in progress that reads household and small-business bills and will warn when a price rises, a new fee appears or a notice deadline is near.',
+    context: 'My next product · in development · solo developer',
+    built: [
+      'Reads a bill with an AI model and checks that the numbers add up before anything is trusted.',
+      'Measures how well each model reads a set of test bills, so the model is chosen on results.',
+      'Accounts with sign-in on the server, and a web app that can be installed on a phone.',
+      'Automatic checks on every push, and the server setup scripted for a European host.',
+    ],
+    next: [
+      'The customer screens: upload a bill and see what changed.',
+      'Alerts for price rises, new fees, ended discounts and notice deadlines.',
+      'A free beta on the web and Google Play.',
+    ],
+    stack: ['Rust', 'actix-web', 'SQLite', 'Vue 3', 'Quasar', 'TypeScript', 'Gemini', 'Mistral', 'GitHub Actions', 'Docker'],
+    codeNote: 'The code is private while the product is being built.',
+    screenshots: [],
+    mascotLine: 'His next product. It reads your bills, and soon it will tell you what changed.',
+  },
+  {
     slug: 'portfolio-website',
     mascotLine: 'You’re looking at it right now.',
     title: 'This website',

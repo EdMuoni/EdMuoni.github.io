@@ -11,6 +11,7 @@ const props = defineProps<{ project: Project }>()
 // The file extension and the large label for the first technology in the stack we know.
 const known: [match: RegExp, extension: string, label: string][] = [
   [/^(C#|ASP\.NET)/, 'cs', 'C#'],
+  [/^Rust/, 'rs', 'Rust'],
   [/^Python/, 'py', 'Python'],
   [/^Vue/, 'vue', 'Vue'],
   [/^React/, 'tsx', 'React'],
