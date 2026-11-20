@@ -4,6 +4,7 @@ import CircuitBackground from '@/components/CircuitBackground.vue'
 import ContactCta from '@/components/ContactCta.vue'
 import HeroRotator from '@/components/HeroRotator.vue'
 import OhmMascot from '@/components/OhmMascot.vue'
+import RoleCards from '@/components/RoleCards.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import TerminalWindow from '@/components/TerminalWindow.vue'
 import TypeText from '@/components/TypeText.vue'
@@ -93,6 +94,13 @@ const nextPages = [
 
   <section class="section">
     <div class="container">
+      <SectionHeading kicker="What I do" title="Where I can help your team" />
+      <RoleCards />
+    </div>
+  </section>
+
+  <section class="section">
+    <div class="container">
       <SectionHeading kicker="My path" title="From electrician to developer" />
       <ol class="path">
         <li v-for="(step, i) in path" :key="step.period" v-reveal="i">
@@ -110,14 +118,12 @@ const nextPages = [
       <div class="how">
         <div v-reveal class="how-text">
           <p>
-            As an electrician I learned not to swap parts until a fault goes away, because it usually
-            comes back. I treat code the same way. I make the bug happen again, fix what really causes
-            it and add a test so it can’t sneak back in.
+            As an electrician I learned not to swap parts until a fault goes away. In code I make the
+            bug happen again, fix the real cause and add a test so it stays fixed.
           </p>
           <p>
-            I like to work in small steps. Each ticket gets its own branch and pull request, and someone
-            reviews it before it goes into main. I only call a change done when it works in the running
-            app and the tests pass.
+            I work in small steps, each in its own branch and reviewed pull request. A change is done
+            when it works in the running app and the tests pass.
           </p>
         </div>
         <TerminalWindow v-reveal="1" />
