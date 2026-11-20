@@ -37,6 +37,8 @@ export interface Project {
   summary: string
   /** One line under the title: where, when, what role. */
   context?: string
+  /** Three short lines for the big rows on Now building and Finished work. */
+  highlights?: string[]
 
   // Case study parts, all optional.
   problem?: string
@@ -65,6 +67,11 @@ export const projects: Project[] = [
     mascotLine: 'This is the big one: his diploma thesis, growing into a real web shop.',
     title: 'VoltVibe',
     group: 'now',
+    highlights: [
+      'Turns a building’s details into a priced parts list',
+      'In Estonian, English, Finnish, Swedish and Norwegian',
+      'Tested on every push, works without JavaScript',
+    ],
     summary:
       'A web shop for electrical components with a built-in calculator that turns building data into a priced bill of materials.',
     context: 'My diploma thesis, grown into a product · since 2026 · solo developer',
@@ -127,6 +134,11 @@ export const projects: Project[] = [
     slug: 'bill-watcher',
     title: 'Bill Watcher',
     group: 'now',
+    highlights: [
+      'Reads bills with an AI model',
+      'Checks that the numbers add up',
+      'Compares models on a set of test bills',
+    ],
     summary:
       'A service in progress that reads household and small-business bills and will warn when a price rises, a new fee appears or a notice deadline is near.',
     context: 'My next product · in development · solo developer',
@@ -173,6 +185,11 @@ export const projects: Project[] = [
     mascotLine: 'This is where VoltVibe started.',
     title: 'Electrical Panel and Supplies Component Calculator',
     group: 'finished',
+    highlights: [
+      'Groups loads into circuits based on EVS-HD 60364',
+      'Picks the cheapest suitable part in stock',
+      'Unit, integration and security tests in CI',
+    ],
     summary:
       'My diploma thesis: a web app that turns basic building data into a priced list of electrical panel components.',
     context:
@@ -210,6 +227,11 @@ export const projects: Project[] = [
     mascotLine: 'An AI assistant for nurses, built during his Erasmus+ internship in Sicily.',
     title: 'aChiral Nurse Assistant',
     group: 'finished',
+    highlights: [
+      'Patient data and care guides in one chat',
+      'RAG search over the nursing guide',
+      'English, French and Italian interface',
+    ],
     summary:
       'An AI chat assistant that gives nurses a patient’s data and the right care guide, in English, French and Italian.',
     context:
@@ -241,6 +263,11 @@ export const projects: Project[] = [
     mascotLine: 'This one is internal, so there is no code and no screenshots. His part is described below.',
     title: 'Messaging app for military personnel (KOLT-chat)',
     group: 'finished',
+    highlights: [
+      'Vue 3 front end, Rust back end',
+      'Tracked down and blocked a race condition',
+      'A Playwright test keeps it fixed',
+    ],
     summary:
       'Full-stack work in a team building a messaging app for military personnel, with a Vue 3 front end and a Rust back end.',
     context: 'Software Development Intern, full-stack · Estonian Defence Forces · June–September 2026',

@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
-import ProjectCard from '@/components/ProjectCard.vue'
+import ProjectRow from '@/components/ProjectRow.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
 import { isCaseStudy, projectsIn } from '@/data/projects'
@@ -23,15 +23,13 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
   <section class="section">
     <div class="container">
       <SectionHeading kicker="Case studies" title="The larger projects" />
-      <div class="grid">
-        <ProjectCard
-          v-for="(project, i) in caseStudies"
-          :key="project.slug"
-          v-reveal="i"
-          :project="project"
-          large
-        />
-      </div>
+      <ProjectRow
+        v-for="(project, i) in caseStudies"
+        :key="project.slug"
+        v-reveal
+        :project="project"
+        :flip="i % 2 === 1"
+      />
     </div>
   </section>
 

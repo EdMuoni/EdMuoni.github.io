@@ -23,14 +23,14 @@ const hasStory = computed(() =>
 
         <template v-if="project.built?.length">
           <TypeText as="h2" :text="project.problem ? 'What I built' : 'What it does'" :speed="26" when-visible />
-          <ul>
+          <ul class="ticks">
             <li v-for="item in project.built" :key="item">{{ item }}</li>
           </ul>
         </template>
 
         <template v-if="project.next?.length">
           <TypeText as="h2" text="What I’d do next" :speed="26" when-visible />
-          <ul>
+          <ul class="ticks">
             <li v-for="item in project.next" :key="item">{{ item }}</li>
           </ul>
         </template>
@@ -39,7 +39,7 @@ const hasStory = computed(() =>
       <aside v-reveal="1" class="cs-side">
         <template v-if="project.proof?.length">
           <h2 class="side-title">Highlights</h2>
-          <ul class="proof">
+          <ul class="proof ticks">
             <li v-for="item in project.proof" :key="item">{{ item }}</li>
           </ul>
         </template>

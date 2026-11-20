@@ -3,11 +3,15 @@ import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import ProjectCard from '@/components/ProjectCard.vue'
+import ProjectRow from '@/components/ProjectRow.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
-import { isCaseStudy, projectsIn } from '@/data/projects'
+import { projectsIn } from '@/data/projects'
 
+// Projects with highlights get a big row, the rest a small card.
 const current = projectsIn('now')
+const rows = current.filter((project) => project.highlights)
+const cards = current.filter((project) => !project.highlights)
 </script>
 
 <template>
@@ -22,14 +26,15 @@ const current = projectsIn('now')
   <section class="section">
     <div class="container">
       <SectionHeading kicker="In progress" title="On my bench" />
+      <ProjectRow
+        v-for="(project, i) in rows"
+        :key="project.slug"
+        v-reveal
+        :project="project"
+        :flip="i % 2 === 1"
+      />
       <div class="grid">
-        <ProjectCard
-          v-for="(project, i) in current"
-          :key="project.slug"
-          v-reveal="i"
-          :project="project"
-          :large="isCaseStudy(project)"
-        />
+        <ProjectCard v-for="(project, i) in cards" :key="project.slug" v-reveal="i" :project="project" />
       </div>
     </div>
   </section>

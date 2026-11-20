@@ -18,8 +18,9 @@ defineProps<{ project: Project; large?: boolean }>()
         {{ project.title }}<span class="arrow" aria-hidden="true"> →</span>
       </RouterLink>
     </h3>
-    <p class="muted summary">{{ project.summary }}</p>
-    <ul class="chips">
+    <!-- Small cards are picture-first: the details are on the project's own page. -->
+    <p v-if="large" class="muted summary">{{ project.summary }}</p>
+    <ul v-if="large" class="chips">
       <li v-for="tech in project.stack" :key="tech">{{ tech }}</li>
     </ul>
     <div v-if="project.live || project.code" class="card-links">
@@ -120,5 +121,8 @@ defineProps<{ project: Project; large?: boolean }>()
 .large {
   padding: 24px;
   border-top: 4px solid var(--accent);
+}
+.card:not(.large) :deep(.cover) {
+  aspect-ratio: 16 / 9;
 }
 </style>
