@@ -122,7 +122,7 @@ const credit = computed(() =>
 .photo-credit {
   position: absolute;
   right: 12px;
-  bottom: 8px;
+  bottom: clamp(26px, 4vw, 50px);
   z-index: 1;
   margin: 0;
   font-size: 0.72rem;

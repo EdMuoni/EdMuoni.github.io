@@ -1,6 +1,8 @@
 /* Colours and fonts. #FF5100 is only used for lines and shapes, text uses the darker
    --accent-text for contrast. */
 :root {
+  /* The page colour itself. Headers on a photo switch --bg to dark, this stays the page's. */
+  --page-bg: var(--bg);
   --bg: #ffffff;
   --surface: #fafafa;
   --surface-raised: #ffffff;

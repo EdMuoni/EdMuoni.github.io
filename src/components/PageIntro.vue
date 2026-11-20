@@ -4,6 +4,7 @@ import type { MascotScript } from '@/data/mascot'
 import type { HeaderPhoto } from '@/data/photos'
 import CircuitBackground from './CircuitBackground.vue'
 import HeaderBackdrop from './HeaderBackdrop.vue'
+import WaveEdge from './WaveEdge.vue'
 import OhmMascot from './OhmMascot.vue'
 import TypeText from './TypeText.vue'
 
@@ -37,6 +38,7 @@ defineProps<{
       </div>
       <OhmMascot v-if="mascot" class="intro-mascot" :lines="mascot.lines" :readout="mascot.readout" />
     </div>
+    <WaveEdge />
   </section>
 </template>
 
@@ -46,7 +48,6 @@ defineProps<{
   overflow: hidden;
   padding: 48px 0 40px;
   background: linear-gradient(to bottom, var(--tint), var(--bg));
-  border-bottom: 1px solid var(--border);
 }
 
 .page-intro h1 {

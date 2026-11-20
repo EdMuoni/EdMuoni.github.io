@@ -8,6 +8,7 @@ import RoleCards from '@/components/RoleCards.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import TerminalWindow from '@/components/TerminalWindow.vue'
 import TypeText from '@/components/TypeText.vue'
+import WaveEdge from '@/components/WaveEdge.vue'
 import HeaderBackdrop from '@/components/HeaderBackdrop.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
@@ -90,6 +91,7 @@ const nextPages = [
       </div>
       <OhmMascot :lines="mascot.home.lines" :readout="mascot.home.readout" />
     </div>
+    <WaveEdge />
   </section>
 
   <section class="section">
@@ -165,7 +167,6 @@ const nextPages = [
   overflow: hidden;
   padding: 56px 0 48px;
   background: linear-gradient(to bottom, var(--tint), var(--bg));
-  border-bottom: 1px solid var(--border);
 }
 
 /* Above the moving background. */
