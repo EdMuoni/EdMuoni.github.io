@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { computed } from 'vue'
+import { computed, onMounted, ref, watch } from 'vue'
+import { motionAllowed, useMotion } from '@/composables/useMotion'
 import { photoWidths, withReferral, type HeaderPhoto } from '@/data/photos'
 
 // Header photo under a dark shade, with a slow zoom. It is decoration (empty alt), the credit
@@ -8,10 +9,30 @@ const props = defineProps<{ photo: HeaderPhoto }>()
 
 const file = (width: number) => `/img/headers/${props.photo.name}-${width}.jpg`
 const srcset = computed(() => photoWidths.map((width) => `${file(width)} ${width}w`).join(', '))
+
+// The video only starts in the browser, on wide screens, with animations on and no data saver.
+// Everyone else (and the pre-rendered page) keeps the photo.
+const playVideo = ref(false)
+const ready = ref(false)
+const { motionOn } = useMotion()
+function decide() {
+  const saveData = (navigator as Navigator & { connection?: { saveData?: boolean } }).connection?.saveData
+  ready.value = false
+  playVideo.value =
+    !!props.photo.video && motionAllowed() && !saveData && window.matchMedia('(min-width: 900px)').matches
+}
+onMounted(decide)
+watch(motionOn, decide)
+
+const credit = computed(() =>
+  playVideo.value && props.photo.video
+    ? { kind: 'Video', author: props.photo.video.author, url: props.photo.video.url, site: 'Pexels', home: 'https://www.pexels.com/' }
+    : { kind: 'Photo', author: props.photo.author, url: withReferral(props.photo.url), site: 'Unsplash', home: withReferral('https://unsplash.com/') },
+)
 </script>
 
 <template>
-  <div class="backdrop" aria-hidden="true">
+  <div class="backdrop" :class="{ 'has-video': ready }" aria-hidden="true">
     <img
       class="backdrop-photo"
       :src="file(1280)"
@@ -23,13 +44,24 @@ const srcset = computed(() => photoWidths.map((width) => `${file(width)} ${width
       fetchpriority="high"
       decoding="async"
     />
+    <video
+      v-if="playVideo && photo.video"
+      class="backdrop-video"
+      :class="{ ready }"
+      :src="photo.video.file"
+      autoplay
+      muted
+      loop
+      playsinline
+      @canplay="ready = true"
+    ></video>
     <span class="backdrop-shade"></span>
   </div>
   <p class="photo-credit">
-    Photo:
-    <a :href="withReferral(photo.url)">{{ photo.author }}</a>
+    {{ credit.kind }}:
+    <a :href="credit.url">{{ credit.author }}</a>
     /
-    <a :href="withReferral('https://unsplash.com/')">Unsplash</a>
+    <a :href="credit.home">{{ credit.site }}</a>
   </p>
 </template>
 
@@ -49,6 +81,21 @@ const srcset = computed(() => photoWidths.map((width) => `${file(width)} ${width
   animation: photo-zoom 28s ease-in-out infinite alternate;
 }
 
+/* Fades in over the photo once it can play, so there is never a black frame. */
+.backdrop-video {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  opacity: 0;
+  transition: opacity 0.8s ease-out;
+}
+
+.backdrop-video.ready {
+  opacity: 1;
+}
+
 /* Darkest on the left, where the text is; lighter towards the right, where Ohm stands. */
 .backdrop-shade {
   position: absolute;
@@ -56,6 +103,13 @@ const srcset = computed(() => photoWidths.map((width) => `${file(width)} ${width
   background:
     linear-gradient(to top, rgb(9 9 11 / 0.55), transparent 45%),
     linear-gradient(90deg, rgb(9 9 11 / 0.93) 0%, rgb(9 9 11 / 0.86) 50%, rgb(9 9 11 / 0.7) 100%);
+}
+
+/* With the video playing, the right side (behind Ohm) is lighter so the motion shows. */
+.has-video .backdrop-shade {
+  background:
+    linear-gradient(to top, rgb(9 9 11 / 0.5), transparent 40%),
+    linear-gradient(90deg, rgb(9 9 11 / 0.92) 0%, rgb(9 9 11 / 0.84) 50%, rgb(9 9 11 / 0.35) 100%);
 }
 
 /* Phones: the text runs the full width, so the shade is strong everywhere. */

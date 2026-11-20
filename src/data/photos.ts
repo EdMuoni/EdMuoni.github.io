@@ -12,6 +12,8 @@ export interface HeaderPhoto {
   author: string
   /** The photo's own page on Unsplash. */
   url: string
+  /** A short muted loop (Pexels License) that plays over the photo on wide screens. */
+  video?: { file: string; author: string; url: string }
 }
 
 export const photoWidths = [640, 1280, 1920] as const
@@ -24,6 +26,11 @@ export const headerPhotos = {
     subject: 'Close-up of a black circuit board',
     author: 'Alexandre Debiève',
     url: 'https://unsplash.com/photos/macro-photography-of-black-circuit-board-FO7JIlwjOtU',
+    video: {
+      file: '/video/circuit-board.mp4',
+      author: 'Tima Miroshnichenko',
+      url: 'https://www.pexels.com/video/printed-circuit-board-close-up-6754820/',
+    },
   },
   whatIBring: {
     name: 'code-screen',
@@ -48,6 +55,11 @@ export const headerPhotos = {
     subject: 'Blue network cables in a server rack',
     author: 'Scott Rodgerson',
     url: 'https://unsplash.com/photos/a-bunch-of-blue-wires-connected-to-each-other-PSpf_XgOM5w',
+    video: {
+      file: '/video/network-cables.mp4',
+      author: 'MrColo',
+      url: 'https://www.pexels.com/video/a-close-up-video-of-cable-wires-connected-on-a-motherboard-7140937/',
+    },
   },
   school: {
     name: 'keyboard',
