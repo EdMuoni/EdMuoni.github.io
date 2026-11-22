@@ -85,6 +85,51 @@
   }
 }
 
+/* The palette. Orange is the brand colour for buttons and links; the others mark roles, projects
+   and courses. Each colour has four shades: the plain one for lines and shapes, -text for text on
+   the page, -bright for text on dark surfaces in both themes, -tint for soft backgrounds. */
+:root {
+  --navy: #0b1530;
+  --navy-2: #1a2b5c;
+  --orange-bright: #fb923c;
+  --blue: #2563eb; --blue-text: #1d4ed8; --blue-bright: #60a5fa; --blue-tint: #eff6ff;
+  --teal: #0d9488; --teal-text: #0f766e; --teal-bright: #2dd4bf; --teal-tint: #f0fdfa;
+  --green: #16a34a; --green-text: #15803d; --green-bright: #4ade80; --green-tint: #f0fdf4;
+  --violet: #7c3aed; --violet-text: #6d28d9; --violet-bright: #a78bfa; --violet-tint: #f5f3ff;
+  --pink: #db2777; --pink-text: #be185d; --pink-bright: #f472b6; --pink-tint: #fdf2f8;
+  --yellow: #eab308; --yellow-text: #a16207; --yellow-bright: #facc15; --yellow-tint: #fefce8;
+}
+
+@media (prefers-color-scheme: dark) {
+  :root:not([data-theme='light']) {
+    --blue-text: #60a5fa; --blue-tint: #111a2e;
+    --teal-text: #2dd4bf; --teal-tint: #0c1f1d;
+    --green-text: #4ade80; --green-tint: #0f1f15;
+    --violet-text: #a78bfa; --violet-tint: #1b1530;
+    --pink-text: #f472b6; --pink-tint: #26121d;
+    --yellow-text: #facc15; --yellow-tint: #231e0b;
+  }
+}
+
+:root[data-theme='dark'] {
+  --blue-text: #60a5fa; --blue-tint: #111a2e;
+  --teal-text: #2dd4bf; --teal-tint: #0c1f1d;
+  --green-text: #4ade80; --green-tint: #0f1f15;
+  --violet-text: #a78bfa; --violet-tint: #1b1530;
+  --pink-text: #f472b6; --pink-tint: #26121d;
+  --yellow-text: #facc15; --yellow-tint: #231e0b;
+}
+
+/* Give a block one colour of the palette: class="hue-blue" and so on. Components use --hue,
+   --hue-text, --hue-bright and --hue-tint, which fall back to orange outside such a block. */
+.hue-orange { --hue: var(--accent); --hue-text: var(--accent-text); --hue-bright: var(--orange-bright); --hue-tint: var(--tint); }
+.hue-blue { --hue: var(--blue); --hue-text: var(--blue-text); --hue-bright: var(--blue-bright); --hue-tint: var(--blue-tint); }
+.hue-teal { --hue: var(--teal); --hue-text: var(--teal-text); --hue-bright: var(--teal-bright); --hue-tint: var(--teal-tint); }
+.hue-green { --hue: var(--green); --hue-text: var(--green-text); --hue-bright: var(--green-bright); --hue-tint: var(--green-tint); }
+.hue-violet { --hue: var(--violet); --hue-text: var(--violet-text); --hue-bright: var(--violet-bright); --hue-tint: var(--violet-tint); }
+.hue-pink { --hue: var(--pink); --hue-text: var(--pink-text); --hue-bright: var(--pink-bright); --hue-tint: var(--pink-tint); }
+.hue-yellow { --hue: var(--yellow); --hue-text: var(--yellow-text); --hue-bright: var(--yellow-bright); --hue-tint: var(--yellow-tint); }
+
 /* Headers with a photo use the dark colours in both themes. */
 .on-photo {
   --bg: #111113;

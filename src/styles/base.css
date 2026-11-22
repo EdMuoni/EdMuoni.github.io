@@ -99,7 +99,7 @@ img {
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--hue-text, var(--accent-text));
   margin-bottom: 10px;
 }
 
@@ -165,7 +165,7 @@ img {
   font-size: 0.78rem;
   padding: 3px 9px;
   border-radius: 999px;
-  background: var(--tint);
+  background: var(--hue-tint, var(--tint));
   color: var(--ink);
 }
 
@@ -184,7 +184,7 @@ img {
 
 /* Reduced motion is handled in motion.css. */
 
-/* A list with orange ticks instead of bullets. */
+/* A list with ticks instead of bullets, in the colour of the block it is in (orange by default). */
 .ticks {
   list-style: none;
   padding: 0;
@@ -206,7 +206,7 @@ img {
   width: 20px;
   height: 20px;
   border-radius: 50%;
-  background: var(--accent-text);
+  background: var(--hue-text, var(--accent-text));
 }
 
 .ticks li::after {

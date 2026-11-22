@@ -5,7 +5,7 @@ import CaseStudy from '@/components/CaseStudy.vue'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
 import { mascotForProject } from '@/data/mascot'
-import { findProject, groups, neighbours, projectPath } from '@/data/projects'
+import { findProject, groups, hueOf, neighbours, projectPath } from '@/data/projects'
 
 // One project's own page, e.g. /projects/voltvibe. Everything on it comes from src/data/projects.ts.
 const route = useRoute()
@@ -39,7 +39,7 @@ const kicker = computed(() =>
     </div>
   </PageIntro>
 
-  <div class="container">
+  <div class="container" :class="`hue-${hueOf(project)}`">
     <CaseStudy :project="project" />
   </div>
 

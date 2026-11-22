@@ -99,7 +99,7 @@ const hasStory = computed(() =>
   align-self: start;
   padding: 20px;
   border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
+  border-top: 4px solid var(--hue, var(--accent));
   border-radius: var(--radius);
   background: var(--surface);
 }
@@ -110,7 +110,7 @@ const hasStory = computed(() =>
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--hue-text, var(--accent-text));
   margin: 0 0 10px;
 }
 
@@ -164,7 +164,7 @@ const hasStory = computed(() =>
 .zoom:hover img,
 .zoom:focus-visible img {
   transform: translateY(-3px);
-  border-color: var(--accent);
+  border-color: var(--hue, var(--accent));
 }
 
 .shots figcaption {

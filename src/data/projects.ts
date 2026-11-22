@@ -22,6 +22,9 @@ export interface Screenshot {
 /** Which overview page a project appears on. */
 export type ProjectGroup = 'now' | 'finished' | 'school'
 
+/** A colour from the palette in tokens.css (used as the class hue-<name>). */
+export type Hue = 'orange' | 'blue' | 'teal' | 'green' | 'violet' | 'pink' | 'yellow'
+
 /**
  * One project. Only `slug`, `title`, `group`, `summary` and `stack` are required; a small project
  * leaves the case-study parts out and its page simply shows less.
@@ -33,6 +36,8 @@ export interface Project {
   group: ProjectGroup
   /** School projects only: the course it was made for. */
   course?: Course
+  /** The project's colour. School projects take their course's colour instead. */
+  hue?: Hue
   /** One sentence for the card, the project page's lead and link previews. */
   summary: string
   /** One line under the title: where, when, what role. */
@@ -64,6 +69,7 @@ export const projects: Project[] = [
   // ---------------------------------------------------------------- Now building
   {
     slug: 'voltvibe',
+    hue: 'orange',
     mascotLine: 'This is the big one: his diploma thesis, growing into a real web shop.',
     title: 'VoltVibe',
     group: 'now',
@@ -132,6 +138,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'bill-watcher',
+    hue: 'violet',
     title: 'Bill Watcher',
     group: 'now',
     highlights: [
@@ -160,6 +167,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'portfolio-website',
+    hue: 'teal',
     mascotLine: 'You’re looking at it right now.',
     title: 'This website',
     group: 'now',
@@ -182,6 +190,7 @@ export const projects: Project[] = [
   // ---------------------------------------------------------------- Finished work
   {
     slug: 'panel-calculator-thesis',
+    hue: 'blue',
     mascotLine: 'This is where VoltVibe started.',
     title: 'Electrical Panel and Supplies Component Calculator',
     group: 'finished',
@@ -267,6 +276,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'achiral-nurse-assistant',
+    hue: 'pink',
     mascotLine: 'An AI assistant for nurses, built during his Erasmus+ internship in Sicily.',
     title: 'aChiral Nurse Assistant',
     group: 'finished',
@@ -311,6 +321,7 @@ export const projects: Project[] = [
   },
   {
     slug: 'defence-forces-internship',
+    hue: 'green',
     mascotLine: 'This one is internal, so there is no code and no screenshots. His part is described below.',
     title: 'Messaging app for military personnel (KOLT-chat)',
     group: 'finished',
@@ -604,6 +615,23 @@ export const courses = [
 ] as const
 
 export type Course = (typeof courses)[number]
+
+const courseHues: Record<Course, Hue> = {
+  'Web development': 'blue',
+  'Agile software development': 'teal',
+  'Software testing': 'green',
+  'Programming basics': 'violet',
+  'Mobile apps': 'pink',
+  Databases: 'yellow',
+  'JavaScript practice': 'orange',
+}
+
+/** The colour of a course's section on the School page. */
+export const courseHue = (course: Course): Hue => courseHues[course]
+
+/** The colour of a project: its own, or its course's. */
+export const hueOf = (project: Project): Hue =>
+  project.hue ?? (project.course ? courseHues[project.course] : 'orange')
 
 /** Where each group's projects are listed, for headings and "back" links. */
 export const groups: Record<ProjectGroup, { label: string; to: string }> = {

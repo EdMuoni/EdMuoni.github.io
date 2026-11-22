@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { projectPath, type Project } from '@/data/projects'
+import { hueOf, projectPath, type Project } from '@/data/projects'
 import ProjectCover from './ProjectCover.vue'
 
 // A big project as a row: picture on one side with an orange block behind it, a few short lines
@@ -9,7 +9,7 @@ defineProps<{ project: Project; flip?: boolean }>()
 </script>
 
 <template>
-  <article class="row" :class="{ flip }">
+  <article class="row" :class="[`hue-${hueOf(project)}`, { flip }]">
     <RouterLink :to="projectPath(project)" class="picture" tabindex="-1" aria-hidden="true">
       <ProjectCover :project="project" />
     </RouterLink>
@@ -48,7 +48,7 @@ defineProps<{ project: Project; flip?: boolean }>()
   position: absolute;
   inset: 14px -14px -14px 14px;
   border-radius: var(--radius);
-  background: var(--accent);
+  background: var(--hue);
   transition: transform 0.3s ease-out;
 }
 
@@ -79,7 +79,7 @@ defineProps<{ project: Project; flip?: boolean }>()
 }
 
 .title a:hover {
-  color: var(--accent-text);
+  color: var(--hue-text);
 }
 
 .text .btn {

@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import { RouterLink } from 'vue-router'
-import { projectPath, type Project } from '@/data/projects'
+import { hueOf, projectPath, type Project } from '@/data/projects'
 import ProjectCover from './ProjectCover.vue'
 
 // A project card. The whole card links to the project page, while "Open it" and "Code" go
@@ -9,7 +9,7 @@ defineProps<{ project: Project; large?: boolean }>()
 </script>
 
 <template>
-  <article class="card lift" :class="{ large }">
+  <article class="card lift" :class="[`hue-${hueOf(project)}`, { large }]">
     <ProjectCover :project="project" />
     <p v-if="large && project.context" class="card-context">{{ project.context }}</p>
     <h3 class="card-title">
@@ -42,6 +42,7 @@ defineProps<{ project: Project; large?: boolean }>()
   gap: 12px;
   padding: 20px;
   border: 1px solid var(--border);
+  border-top: 4px solid var(--hue);
   border-radius: var(--radius);
   background: var(--surface-raised);
   box-shadow: var(--shadow);
@@ -49,7 +50,7 @@ defineProps<{ project: Project; large?: boolean }>()
 
 .card:hover,
 .card:focus-within {
-  border-color: var(--accent);
+  border-color: var(--hue);
 }
 
 .card h3,
@@ -94,7 +95,7 @@ defineProps<{ project: Project; large?: boolean }>()
 }
 
 .arrow {
-  color: var(--accent-text);
+  color: var(--hue-text);
 }
 
 .large .summary {
@@ -120,7 +121,6 @@ defineProps<{ project: Project; large?: boolean }>()
 
 .large {
   padding: 24px;
-  border-top: 4px solid var(--accent);
 }
 .card:not(.large) :deep(.cover) {
   aspect-ratio: 16 / 9;

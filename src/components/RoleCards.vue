@@ -9,6 +9,7 @@ const roles = [
     to: '/projects/voltvibe',
     link: 'See VoltVibe',
     icon: 'stack',
+    hue: 'blue',
   },
   {
     title: 'AI Engineer',
@@ -16,6 +17,7 @@ const roles = [
     to: '/projects/bill-watcher',
     link: 'See Bill Watcher',
     icon: 'chip',
+    hue: 'violet',
   },
   {
     title: 'QA | Software Tester',
@@ -23,13 +25,14 @@ const roles = [
     to: '/projects/selenium-tests',
     link: 'See my browser tests',
     icon: 'check',
+    hue: 'green',
   },
 ]
 </script>
 
 <template>
   <ul class="roles">
-    <li v-for="(role, i) in roles" :key="role.title" v-reveal="i" class="role lift">
+    <li v-for="(role, i) in roles" :key="role.title" v-reveal="i" class="role lift" :class="`hue-${role.hue}`">
       <svg class="icon" viewBox="0 0 48 48" aria-hidden="true">
         <template v-if="role.icon === 'stack'">
           <path pathLength="1" d="M24 6 42 15 24 24 6 15Z" />
@@ -66,9 +69,9 @@ const roles = [
   position: relative;
   padding: 24px;
   border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
+  border-top: 4px solid var(--hue);
   border-radius: var(--radius);
-  background: var(--surface-raised);
+  background: linear-gradient(to bottom, var(--hue-tint), var(--surface-raised) 60%);
   box-shadow: var(--shadow);
 }
 
@@ -84,6 +87,7 @@ const roles = [
 .role-link {
   font-weight: 600;
   text-decoration: none;
+  color: var(--hue-text);
 }
 
 .role-link::after {
@@ -97,9 +101,9 @@ const roles = [
   height: 56px;
   padding: 8px;
   border-radius: 14px;
-  background: var(--tint);
+  background: var(--hue);
   fill: none;
-  stroke: var(--accent-text);
+  stroke: #fff;
   stroke-width: 2.5;
   stroke-linecap: round;
   stroke-linejoin: round;
