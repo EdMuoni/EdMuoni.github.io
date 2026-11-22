@@ -9,7 +9,8 @@ withDefaults(defineProps<{ heading?: string }>(), {
 </script>
 
 <template>
-  <section class="section contact-cta">
+  <section class="section contact-cta on-photo">
+    <span class="ohm" aria-hidden="true">Ω</span>
     <div class="container">
       <TypeText as="h2" :text="heading" :speed="40" when-visible />
       <p class="lead">
@@ -27,6 +28,31 @@ withDefaults(defineProps<{ heading?: string }>(), {
 </template>
 
 <style scoped>
+/* A dark closing band in both themes, with a big faded Ω behind the text. */
+.contact-cta {
+  position: relative;
+  overflow: hidden;
+  border-top: 0;
+  background: radial-gradient(circle at 80% 30%, rgb(255 81 0 / 0.16), transparent 55%), #111113;
+}
+
+.ohm {
+  position: absolute;
+  right: -0.06em;
+  bottom: -0.32em;
+  font-family: var(--font-serif);
+  font-size: clamp(14rem, 42vw, 28rem);
+  line-height: 1;
+  color: var(--orange-bright);
+  opacity: 0.08;
+  pointer-events: none;
+  user-select: none;
+}
+
+.contact-cta .container {
+  position: relative;
+}
+
 .contact-list {
   list-style: none;
   padding: 0;

@@ -9,6 +9,7 @@ import SectionHeading from '@/components/SectionHeading.vue'
 import TerminalWindow from '@/components/TerminalWindow.vue'
 import TypeText from '@/components/TypeText.vue'
 import WaveEdge from '@/components/WaveEdge.vue'
+import WorkCollage from '@/components/WorkCollage.vue'
 import HeaderBackdrop from '@/components/HeaderBackdrop.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
@@ -18,22 +19,28 @@ const pitch =
   'Electrical work taught me to find the cause of a fault before fixing anything. ' +
   'I bring the same habit to software: trace the bug, fix the cause, and prove the fix with a test.'
 
-// Three steps from electrician to developer.
+// Three steps from electrician to developer, each a badge with its own icon and colour.
 const path = [
   {
     period: '2015 – 2025',
     title: 'Electrician',
-    text: 'Electrical installation, assembly and technical work in shipbuilding, construction and manufacturing.',
+    text: 'Shipbuilding, construction and manufacturing.',
+    icon: 'bolt',
+    hue: 'yellow',
   },
   {
     period: '2024 – 2026',
-    title: 'Software development studies',
-    text: 'Tallinna Tehnoloogiakolledž. Diploma thesis: a calculator that prices the components of an electrical panel. Professional certificate Noorem tarkvaraarendaja, tase 4.',
+    title: 'Software development',
+    text: 'Tallinna Tehnoloogiakolledž. Thesis: a calculator that prices an electrical panel.',
+    icon: 'cap',
+    hue: 'blue',
   },
   {
     period: '2026',
     title: 'Internships',
-    text: 'In Italy (Erasmus+) I took an AI nurse assistant from idea to a working prototype. On a Defence Forces development team I delivered frontend and backend tickets through code review.',
+    text: 'An AI nurse assistant in Italy (Erasmus+), then a Defence Forces development team.',
+    icon: 'globe',
+    hue: 'pink',
   },
 ]
 
@@ -94,6 +101,8 @@ const nextPages = [
     <WaveEdge />
   </section>
 
+  <WorkCollage />
+
   <section class="section">
     <div class="container">
       <SectionHeading kicker="What I do" title="Where I can help your team" />
@@ -101,11 +110,22 @@ const nextPages = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section path-band">
     <div class="container">
       <SectionHeading kicker="My path" title="From electrician to developer" />
       <ol class="path">
-        <li v-for="(step, i) in path" :key="step.period" v-reveal="i">
+        <li v-for="(step, i) in path" :key="step.period" v-reveal="i" :class="`hue-${step.hue}`">
+          <svg class="badge" viewBox="0 0 48 48" aria-hidden="true">
+            <path v-if="step.icon === 'bolt'" d="M27 5 11 27h12l-3 16 17-23H25Z" />
+            <template v-else-if="step.icon === 'cap'">
+              <path d="M4 18 24 9l20 9-20 9Z" />
+              <path d="M12 22v9c0 3 5 6 12 6s12-3 12-6v-9M44 18v11" />
+            </template>
+            <template v-else>
+              <circle cx="24" cy="24" r="18" />
+              <path d="M6 24h36M24 6c-7 7-7 29 0 36M24 6c7 7 7 29 0 36" />
+            </template>
+          </svg>
           <span class="period">{{ step.period }}</span>
           <h3>{{ step.title }}</h3>
           <p>{{ step.text }}</p>
@@ -114,22 +134,18 @@ const nextPages = [
     </div>
   </section>
 
-  <section class="section">
+  <section class="section statement on-photo">
     <div class="container">
-      <SectionHeading kicker="Day to day" title="How I work" />
-      <div class="how">
-        <div v-reveal class="how-text">
-          <p>
-            As an electrician I learned not to swap parts until a fault goes away. In code I make the
-            bug happen again, fix the real cause and add a test so it stays fixed.
-          </p>
-          <p>
-            I work in small steps, each in its own branch and reviewed pull request. A change is done
-            when it works in the running app and the tests pass.
-          </p>
-        </div>
-        <TerminalWindow v-reveal="1" />
-      </div>
+      <h2 class="kicker">How I work</h2>
+      <p v-reveal class="statement-text">
+        As an electrician I learned not to swap parts until a fault goes away. In code I make the bug
+        happen again, <mark>fix the real cause</mark> and add a test so it stays fixed.
+      </p>
+      <p v-reveal class="statement-sub">
+        Small steps, each in its own branch and reviewed pull request. Done means it works in the
+        running app and the tests pass.
+      </p>
+      <TerminalWindow v-reveal="1" class="statement-term" />
     </div>
   </section>
 
@@ -202,41 +218,103 @@ const nextPages = [
   margin-bottom: 28px;
 }
 
-.path {
-  list-style: none;
-  padding: 0;
-  margin: 24px 0 0;
-  display: grid;
-  gap: 16px;
-  counter-reset: step;
-}
-
-.path li {
-  padding: 20px;
-  border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
-  border-radius: var(--radius);
+/* My path: a band of three round badges joined by a line. */
+.path-band {
   background: var(--surface);
 }
 
+.path {
+  position: relative;
+  list-style: none;
+  padding: 0;
+  margin: 28px 0 0;
+  display: grid;
+  gap: 28px;
+  text-align: center;
+}
+
+.path li {
+  position: relative;
+  display: grid;
+  align-content: start;
+  justify-items: center;
+}
+
+.badge {
+  width: 84px;
+  height: 84px;
+  padding: 18px;
+  margin-bottom: 12px;
+  border: 3px solid var(--hue);
+  border-radius: 50%;
+  background: var(--hue-tint);
+  fill: none;
+  stroke: var(--hue-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
 .path h3 {
-  margin: 6px 0 8px;
+  margin: 4px 0 4px;
 }
 
 .path p {
   margin: 0;
+  max-width: 30ch;
+  color: var(--muted);
 }
 
 .period {
   font-family: var(--font-mono);
   font-size: 0.8rem;
-  color: var(--accent-text);
+  color: var(--hue-text);
 }
 
-.how {
-  display: grid;
-  gap: 24px 40px;
-  align-items: start;
+/* How I work: a centred navy band with the key phrase highlighted. */
+.statement {
+  border-top: 0;
+  background: var(--navy);
+  text-align: center;
+}
+
+.statement + .section {
+  border-top: 0;
+}
+
+.statement .kicker {
+  color: var(--orange-bright);
+}
+
+.statement-text {
+  max-width: 34ch;
+  margin: 0 auto 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+mark {
+  padding: 0 0.2em;
+  border-radius: 4px;
+  background: var(--accent);
+  color: #111113;
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.statement-sub {
+  max-width: 52ch;
+  margin: 0 auto 32px;
+  color: var(--muted);
+}
+
+.statement-term {
+  max-width: 620px;
+  margin: 0 auto;
+  text-align: left;
 }
 
 .next-pages {
@@ -288,12 +366,18 @@ const nextPages = [
     grid-template-columns: repeat(3, minmax(0, 1fr));
   }
 
-  .next-pages {
-    grid-template-columns: repeat(2, minmax(0, 1fr));
+  /* The line through the middle of the badges, behind them. */
+  .path::before {
+    content: '';
+    position: absolute;
+    top: 42px;
+    left: 16%;
+    right: 16%;
+    border-top: 2px dashed var(--border);
   }
 
-  .how {
-    grid-template-columns: 1fr 1fr;
+  .next-pages {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
   }
 }
 </style>
