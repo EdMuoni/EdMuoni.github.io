@@ -49,22 +49,22 @@ const nextPages = [
   {
     to: '/what-i-bring',
     title: 'What I bring',
-    text: 'Skills, results, and how I would be useful to your team.',
+    text: 'Skills, results and how I work.',
   },
   {
     to: '/now-building',
     title: 'Now building',
-    text: 'VoltVibe: my diploma thesis, growing into a product.',
+    text: 'VoltVibe and Bill Watcher, both in progress.',
   },
   {
     to: '/work',
     title: 'Finished work',
-    text: 'The thesis, the AI nurse assistant and the Defence Forces internship.',
+    text: 'The thesis, the nurse assistant and the Defence Forces work.',
   },
   {
     to: '/school',
     title: 'School projects',
-    text: 'Course projects grouped by course, several of which you can open and play.',
+    text: 'Course projects, some you can open and play.',
   },
 ]
 </script>
@@ -167,9 +167,8 @@ const nextPages = [
     <div class="container outside">
       <TypeText as="span" class="kicker" text="Outside work" :speed="22" when-visible />
       <p v-reveal>
-        I volunteer with older people through Seltsilised. Away from the
-        keyboard: disc golf, swimming, long walks, board games, and books (science fiction, crime and
-        popular science).
+        I volunteer with older people through Seltsilised. Off the keyboard: disc golf, swimming,
+        long walks, board games and books.
       </p>
     </div>
   </section>

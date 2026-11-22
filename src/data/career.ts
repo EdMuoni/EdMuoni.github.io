@@ -27,51 +27,40 @@ export interface TimelineEntry {
 export const strengths: Strength[] = [
   {
     title: 'I look for the cause first',
-    text:
-      'As an electrician I learned that replacing parts until the fault goes away fixes nothing. ' +
-      'With software I do it the same way. First I make the bug happen again, then I fix what causes it.',
+    text: 'I make the bug happen again before I change anything, then fix what causes it.',
     evidence:
-      'At the Defence Forces I found a race condition, stopped it with a guard and checked it by firing the same request many times in a row. After that I wrote a Playwright test for it.',
+      'Defence Forces: I found a race condition, stopped it with a guard and backed it with a Playwright test.',
   },
   {
     title: 'I work in small steps',
-    text:
-      'A ticket gets its own branch and its own pull request. Small changes are easy to review ' +
-      'and easy to undo if something goes wrong.',
-    evidence:
-      'Daily grooming with the team, a branch for every ticket, and code reviews in Azure DevOps. Other developers reviewed my code and I reviewed theirs.',
+    text: 'One ticket, one branch, one pull request. Easy to review, easy to undo.',
+    evidence: 'Daily grooming and code reviews in Azure DevOps, my code and other developers’ code.',
   },
   {
     title: 'I know the electrical side',
-    text:
-      'I am a qualified electrician (level 4). When an app has to follow an electrical standard, ' +
-      'I can read the rules myself and see if the result makes sense.',
-    evidence: 'My diploma thesis and VoltVibe, a calculator for electrical panel parts.',
+    text: 'I am a qualified electrician (level 4), so I can check an app against the electrical rules myself.',
+    evidence: 'My diploma thesis and VoltVibe.',
   },
   {
     title: 'I tidy up as I go',
-    text:
-      'Messy code makes every later change slower. If I work in a file like that, I split it into ' +
-      'parts that make sense and write down how they fit together.',
+    text: 'When a file gets messy, I split it into parts that make sense and write down how they fit.',
     evidence:
-      'My first version of the aChiral Nurse Assistant was one big file. I split it into modules, fixed the bugs I found on the way and drew a workflow diagram and an access matrix for the next developer.',
+      'aChiral Nurse Assistant: one big file became modules, with a workflow diagram and an access matrix for the next developer.',
   },
 ]
 
 export const outcomes: Outcome[] = [
   {
     title: 'Tests with every fix',
-    text: 'When I fix something, a test comes with it. It runs on every change, so the bug does not quietly come back.',
+    text: 'Every fix comes with a test that runs on every change.',
   },
   {
     title: 'Unclear tasks are fine',
-    text:
-      'Give me a problem without a ready answer. I will split it into pieces, pick an approach and ' +
-      'have something running early, then improve it with your feedback.',
+    text: 'I split the problem, pick an approach and show something running early.',
   },
   {
     title: 'Fewer surprises',
-    text: 'Small reviewed changes, input checks and short docs. That keeps the code safe to change later.',
+    text: 'Small reviewed changes, input checks and short docs.',
   },
 ]
 
@@ -108,7 +97,7 @@ export const experience: TimelineEntry[] = [
     period: 'Apr – May 2026',
     title: 'Software Development Intern (Erasmus+)',
     place: 'Techdgiteasy · San Cataldo, Italy',
-    text: 'I built the aChiral Nurse Assistant from the first idea to a working prototype. Everything at work was in English.',
+    text: 'I took the aChiral Nurse Assistant from first idea to working prototype, all in English.',
   },
   {
     period: '2015 – 2025',

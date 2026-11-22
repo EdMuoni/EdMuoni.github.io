@@ -22,7 +22,7 @@ import { headerPhotos } from '@/data/photos'
     <div class="container">
       <h2 class="sr-only">In short</h2>
       <ul class="outcomes">
-        <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i">
+        <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i" :class="['hue-green', 'hue-blue', 'hue-violet'][i]">
           <h3 class="outcome-title">{{ item.title }}</h3>
           <p class="outcome-text">{{ item.text }}</p>
         </li>
@@ -97,8 +97,8 @@ import { headerPhotos } from '@/data/photos'
 .outcomes li {
   padding: 20px;
   border-radius: var(--radius);
-  border-top: 4px solid var(--accent);
-  background: var(--tint);
+  border-top: 4px solid var(--hue);
+  background: var(--hue-tint);
 }
 
 .outcome-title {
