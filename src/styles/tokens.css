@@ -35,6 +35,8 @@
   --forest-850: #0f2820;
   --forest-800: #143128;
   --forest-700: #24463a;
+  /* The shade over header photos, as r g b: dark green. */
+  --shade-rgb: 4 20 15;
 
   --radius: 10px;
   --gutter: 16px;

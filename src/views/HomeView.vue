@@ -135,6 +135,7 @@ const nextPages = [
   </section>
 
   <section class="section statement on-photo">
+    <HeaderBackdrop :photo="headerPhotos.howIWork" below />
     <div class="container">
       <h2 class="kicker">How I work</h2>
       <p v-reveal class="statement-text">
@@ -270,11 +271,18 @@ const nextPages = [
   color: var(--hue-text);
 }
 
-/* How I work: a centred navy band with the key phrase highlighted. */
+/* How I work: a centred navy band over code being typed, with the key phrase highlighted. */
 .statement {
+  --shade-rgb: 11 21 48;
+  position: relative;
+  overflow: hidden;
   border-top: 0;
   background: var(--navy);
   text-align: center;
+}
+
+.statement .container {
+  position: relative;
 }
 
 .statement + .section {

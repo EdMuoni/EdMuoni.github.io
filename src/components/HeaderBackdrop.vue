@@ -5,7 +5,8 @@ import { photoWidths, withReferral, type HeaderPhoto } from '@/data/photos'
 
 // Header photo under a dark shade, with a slow zoom. It is decoration (empty alt), the credit
 // below it is real text. The parent needs the class "on-photo".
-const props = defineProps<{ photo: HeaderPhoto }>()
+// below: the photo sits further down the page, so it loads lazily.
+const props = defineProps<{ photo: HeaderPhoto; below?: boolean }>()
 
 const file = (width: number) => `/img/headers/${props.photo.name}-${width}.jpg`
 const srcset = computed(() => photoWidths.map((width) => `${file(width)} ${width}w`).join(', '))
@@ -41,7 +42,8 @@ const credit = computed(() =>
       :width="photo.width"
       :height="photo.height"
       alt=""
-      fetchpriority="high"
+      :loading="below ? 'lazy' : 'eager'"
+      :fetchpriority="below ? 'auto' : 'high'"
       decoding="async"
     />
     <video
@@ -101,8 +103,8 @@ const credit = computed(() =>
   position: absolute;
   inset: 0;
   background:
-    linear-gradient(to top, rgb(9 9 11 / 0.55), transparent 45%),
-    linear-gradient(90deg, rgb(9 9 11 / 0.93) 0%, rgb(9 9 11 / 0.86) 50%, rgb(9 9 11 / 0.7) 100%);
+    linear-gradient(to top, rgb(var(--shade-rgb) / 0.55), transparent 45%),
+    linear-gradient(90deg, rgb(var(--shade-rgb) / 0.93) 0%, rgb(var(--shade-rgb) / 0.86) 50%, rgb(var(--shade-rgb) / 0.7) 100%);
 }
 
 /* With the video playing, the right side (behind Ohm) is lighter so the motion shows. */

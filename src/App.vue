@@ -1,6 +1,7 @@
 <script setup lang="ts">
 import { RouterView } from 'vue-router'
 import SiteHeader from '@/components/SiteHeader.vue'
+import PhotoStrip from '@/components/PhotoStrip.vue'
 import SiteFooter from '@/components/SiteFooter.vue'
 </script>
 
@@ -17,6 +18,7 @@ import SiteFooter from '@/components/SiteFooter.vue'
       </Transition>
     </RouterView>
   </main>
+  <PhotoStrip />
   <SiteFooter />
 </template>
 
