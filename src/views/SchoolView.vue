@@ -5,7 +5,7 @@ import ProjectCard from '@/components/ProjectCard.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
-import { courses, projectsIn } from '@/data/projects'
+import { courseHue, courses, projectsIn } from '@/data/projects'
 
 // Every school project, under the course it was made for, in the order of `courses`.
 const school = projectsIn('school')
@@ -15,6 +15,7 @@ const byCourse = courses
     // An address-friendly id for the course's section, e.g. 'web-development'.
     id: course.toLowerCase().replace(/[^a-z]+/g, '-'),
     projects: school.filter((project) => project.course === course),
+    hue: courseHue(course),
   }))
   .filter((group) => group.projects.length > 0)
 </script>
@@ -23,16 +24,18 @@ const byCourse = courses
   <PageIntro
     kicker="School projects"
     title="What I built while studying"
-    lead="Projects from my software development courses, sorted by course. Click a card for the details, or press “Open it” to try a project in your browser."
+    lead="From Tetris to browser tests, sorted by course. The ones with “Open it” run right in your browser."
     :mascot="mascot.school"
     :photo="headerPhotos.school"
   >
     <nav class="jump" aria-label="Courses on this page">
-      <a v-for="group in byCourse" :key="group.id" :href="`#${group.id}`">{{ group.course }}</a>
+      <a v-for="group in byCourse" :key="group.id" :href="`#${group.id}`" :class="`hue-${group.hue}`">{{
+        group.course
+      }}</a>
     </nav>
   </PageIntro>
 
-  <section v-for="group in byCourse" :id="group.id" :key="group.id" class="section">
+  <section v-for="group in byCourse" :id="group.id" :key="group.id" class="section" :class="`hue-${group.hue}`">
     <div class="container">
       <SectionHeading :kicker="group.course === 'JavaScript practice' ? 'Practice' : 'Course'" :title="group.course" />
       <div class="grid">
@@ -53,10 +56,25 @@ const byCourse = courses
 .jump {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 18px;
+  gap: 8px;
   margin-top: 8px;
   font-weight: 500;
-  font-size: 0.95rem;
+  font-size: 0.92rem;
+}
+
+/* Pill-shaped course links, each in its course's colour. */
+.jump a {
+  padding: 6px 14px;
+  border: 1px solid var(--hue-bright);
+  border-radius: 999px;
+  color: var(--hue-bright);
+  background: rgb(0 0 0 / 0.35);
+  text-decoration: none;
+}
+
+.jump a:hover {
+  color: var(--forest-950);
+  background: var(--hue-bright);
 }
 
 .grid {

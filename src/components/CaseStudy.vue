@@ -23,14 +23,14 @@ const hasStory = computed(() =>
 
         <template v-if="project.built?.length">
           <TypeText as="h2" :text="project.problem ? 'What I built' : 'What it does'" :speed="26" when-visible />
-          <ul>
+          <ul class="ticks">
             <li v-for="item in project.built" :key="item">{{ item }}</li>
           </ul>
         </template>
 
         <template v-if="project.next?.length">
           <TypeText as="h2" text="What I’d do next" :speed="26" when-visible />
-          <ul>
+          <ul class="ticks">
             <li v-for="item in project.next" :key="item">{{ item }}</li>
           </ul>
         </template>
@@ -38,8 +38,8 @@ const hasStory = computed(() =>
 
       <aside v-reveal="1" class="cs-side">
         <template v-if="project.proof?.length">
-          <h2 class="side-title">Highlights</h2>
-          <ul class="proof">
+          <h2 class="side-title">Behind the scenes</h2>
+          <ul class="proof ticks">
             <li v-for="item in project.proof" :key="item">{{ item }}</li>
           </ul>
         </template>
@@ -60,7 +60,8 @@ const hasStory = computed(() =>
 
     <div v-if="project.screenshots.length" class="shots">
       <figure v-for="(shot, i) in project.screenshots" :key="shot.src" v-reveal="i">
-        <ThemedImage :shot="shot" />
+        <!-- Opens the picture full size, so small text in a screenshot can be read. -->
+        <a :href="shot.src" class="zoom"><ThemedImage :shot="shot" /></a>
         <figcaption v-if="shot.caption">{{ shot.caption }}</figcaption>
       </figure>
     </div>
@@ -98,7 +99,7 @@ const hasStory = computed(() =>
   align-self: start;
   padding: 20px;
   border: 1px solid var(--border);
-  border-top: 4px solid var(--accent);
+  border-top: 4px solid var(--hue, var(--accent));
   border-radius: var(--radius);
   background: var(--surface);
 }
@@ -109,7 +110,7 @@ const hasStory = computed(() =>
   font-weight: 500;
   letter-spacing: 0.04em;
   text-transform: uppercase;
-  color: var(--accent-text);
+  color: var(--hue-text, var(--accent-text));
   margin: 0 0 10px;
 }
 
@@ -152,6 +153,18 @@ const hasStory = computed(() =>
 .shots img {
   border: 1px solid var(--border);
   border-radius: var(--radius);
+  transition: transform 0.3s ease-out, border-color 0.3s;
+}
+
+.zoom {
+  display: block;
+  cursor: zoom-in;
+}
+
+.zoom:hover img,
+.zoom:focus-visible img {
+  transform: translateY(-3px);
+  border-color: var(--hue, var(--accent));
 }
 
 .shots figcaption {

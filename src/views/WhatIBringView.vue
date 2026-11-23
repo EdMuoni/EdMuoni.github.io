@@ -6,7 +6,7 @@ import SectionHeading from '@/components/SectionHeading.vue'
 import TimelineList from '@/components/TimelineList.vue'
 import { education, experience, languages, outcomes, skillGroups, strengths } from '@/data/career'
 import { mascot } from '@/data/mascot'
-import { headerPhotos } from '@/data/photos'
+import { headerPhotos, sidePhoto, withReferral } from '@/data/photos'
 </script>
 
 <template>
@@ -22,7 +22,7 @@ import { headerPhotos } from '@/data/photos'
     <div class="container">
       <h2 class="sr-only">In short</h2>
       <ul class="outcomes">
-        <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i">
+        <li v-for="(item, i) in outcomes" :key="item.title" v-reveal="i" :class="['hue-green', 'hue-blue', 'hue-violet'][i]">
           <h3 class="outcome-title">{{ item.title }}</h3>
           <p class="outcome-text">{{ item.text }}</p>
         </li>
@@ -33,16 +33,36 @@ import { headerPhotos } from '@/data/photos'
   <section class="section">
     <div class="container">
       <SectionHeading kicker="Strengths" title="What I am good at" />
-      <ol class="strengths">
-        <li v-for="(item, i) in strengths" :key="item.title" v-reveal>
-          <span class="num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
-          <div>
-            <h3>{{ item.title }}</h3>
-            <p>{{ item.text }}</p>
-            <p class="evidence">{{ item.evidence }}</p>
+      <div class="strengths-wrap">
+        <ol class="strengths">
+          <li v-for="(item, i) in strengths" :key="item.title" v-reveal>
+            <span class="num" aria-hidden="true">{{ String(i + 1).padStart(2, '0') }}</span>
+            <div>
+              <h3>{{ item.title }}</h3>
+              <p>{{ item.text }}</p>
+              <p class="evidence">{{ item.evidence }}</p>
+            </div>
+          </li>
+        </ol>
+        <figure v-reveal class="side-photo hue-green">
+          <div class="side-frame">
+            <img
+              :src="sidePhoto.src"
+              :srcset="`${sidePhoto.srcSmall} 640w, ${sidePhoto.src} 1280w`"
+              sizes="(min-width: 960px) 420px, 100vw"
+              :width="sidePhoto.width"
+              :height="sidePhoto.height"
+              alt=""
+              loading="lazy"
+              decoding="async"
+            />
           </div>
-        </li>
-      </ol>
+          <figcaption>
+            Photo: <a :href="withReferral(sidePhoto.url)">{{ sidePhoto.author }}</a> /
+            <a :href="withReferral('https://unsplash.com/')">Unsplash</a>
+          </figcaption>
+        </figure>
+      </div>
     </div>
   </section>
 
@@ -97,8 +117,8 @@ import { headerPhotos } from '@/data/photos'
 .outcomes li {
   padding: 20px;
   border-radius: var(--radius);
-  border-top: 4px solid var(--accent);
-  background: var(--tint);
+  border-top: 4px solid var(--hue);
+  background: var(--hue-tint);
 }
 
 .outcome-title {
@@ -131,6 +151,61 @@ import { headerPhotos } from '@/data/photos'
   grid-template-columns: auto 1fr;
   gap: 16px;
   max-width: 820px;
+}
+
+/* The strengths next to a photo with a coloured block behind it; the photo goes under them on phones. */
+.strengths-wrap {
+  display: grid;
+  gap: 40px;
+  margin-top: 24px;
+}
+
+.strengths-wrap .strengths {
+  margin: 0;
+}
+
+.side-photo {
+  margin: 0 14px 0 0;
+}
+
+.side-frame {
+  position: relative;
+}
+
+.side-frame::before {
+  content: '';
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border-radius: var(--radius);
+  background: var(--hue);
+}
+
+.side-frame img {
+  position: relative;
+  width: 100%;
+  border-radius: var(--radius);
+}
+
+.side-photo figcaption {
+  margin-top: 22px;
+  font-size: 0.75rem;
+  color: var(--muted);
+}
+
+.side-photo figcaption a {
+  color: inherit;
+}
+
+@media (min-width: 960px) {
+  .strengths-wrap {
+    grid-template-columns: minmax(0, 1fr) 380px;
+    align-items: start;
+  }
+
+  .side-photo {
+    position: sticky;
+    top: 96px;
+  }
 }
 
 .num {

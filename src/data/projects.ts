@@ -22,6 +22,9 @@ export interface Screenshot {
 /** Which overview page a project appears on. */
 export type ProjectGroup = 'now' | 'finished' | 'school'
 
+/** A colour from the palette in tokens.css (used as the class hue-<name>). */
+export type Hue = 'orange' | 'blue' | 'teal' | 'green' | 'violet' | 'pink' | 'yellow'
+
 /**
  * One project. Only `slug`, `title`, `group`, `summary` and `stack` are required; a small project
  * leaves the case-study parts out and its page simply shows less.
@@ -33,10 +36,14 @@ export interface Project {
   group: ProjectGroup
   /** School projects only: the course it was made for. */
   course?: Course
+  /** The project's colour. School projects take their course's colour instead. */
+  hue?: Hue
   /** One sentence for the card, the project page's lead and link previews. */
   summary: string
   /** One line under the title: where, when, what role. */
   context?: string
+  /** Three short lines for the big rows on Now building and Finished work. */
+  highlights?: string[]
 
   // Case study parts, all optional.
   problem?: string
@@ -62,28 +69,34 @@ export const projects: Project[] = [
   // ---------------------------------------------------------------- Now building
   {
     slug: 'voltvibe',
+    hue: 'orange',
     mascotLine: 'This is the big one: his diploma thesis, growing into a real web shop.',
     title: 'VoltVibe',
     group: 'now',
+    highlights: [
+      'Turns a building’s details into a priced parts list',
+      'In Estonian, English, Finnish, Swedish and Norwegian',
+      'Tested on every push, attacked on purpose',
+    ],
     summary:
-      'A web shop for electrical components with a built-in calculator that turns building data into a priced bill of materials.',
+      'A web shop for electrical parts, with a calculator that turns a building’s details into a priced parts list.',
     context: 'My diploma thesis, grown into a product · since 2026 · solo developer',
     problem:
-      'Before an electrician can quote a job, someone has to work out which breakers, how much cable, ' +
-      'which residual-current device and what size of panel enclosure the building needs, and then ' +
-      'look up every price. That is normally a cost estimator’s job. I know these parts from my ' +
-      'electrician years, so I built VoltVibe: a web shop with that calculator built in.',
+      'An electrician can’t quote a job until someone works out the breakers, how much cable, the ' +
+      'residual-current device and the panel enclosure, then looks up every price. Usually a cost ' +
+      'estimator does that. I know these parts from my electrician years, so I built a web shop ' +
+      'that works it out for you.',
     built: [
-      'You enter the building type, the number of rooms, sockets and lights, and whether there is an electric cooker. The app gives back a priced bill of materials from a real product catalogue.',
+      'You enter the building type, how many rooms, sockets and lights it has, and whether there’s an electric cooker. Out comes a priced parts list from a real product catalogue.',
       'Every line shows the circuit type and the cable cross-section, so an electrician can check the numbers.',
-      'After the thesis I rebuilt the interface with Tailwind CSS 4 and TypeScript and added Estonian, English, Finnish, Swedish and Norwegian. Orders are now saved and the stock gets reserved.',
+      'After the thesis I rebuilt the interface in Tailwind CSS 4 and TypeScript. It now speaks Estonian, English, Finnish, Swedish and Norwegian, and an order reserves its stock.',
       'The plan is a wholesale web shop for electrical parts in the Nordic countries, with the calculator at the centre.',
     ],
     proof: [
       'GitHub Actions runs the automated tests on every push.',
       'A security script tries real attacks on the running app: login, CSRF, open redirects and bad input.',
       'Every page also works with JavaScript turned off.',
-      'The solution is split into layers (Core, Data, ApplicationServices, Web, Tests), and the calculation rules live apart from the web pages.',
+      'The calculation rules live in their own layer, apart from the web pages, so they can be tested alone.',
     ],
     next: [
       'Payments and order e-mails.',
@@ -93,9 +106,9 @@ export const projects: Project[] = [
     ],
     stack: [
       'ASP.NET Core 9 MVC',
+      'SQL Server',
       'ASP.NET Core Identity',
       'EF Core 9',
-      'SQL Server',
       'Razor',
       'Tailwind CSS 4',
       'TypeScript',
@@ -124,7 +137,38 @@ export const projects: Project[] = [
     ],
   },
   {
+    slug: 'bill-watcher',
+    hue: 'violet',
+    title: 'Bill Watcher',
+    group: 'now',
+    highlights: [
+      'Reads bills with an AI model',
+      'Checks that the numbers add up',
+      'Grades each AI model on test bills',
+    ],
+    summary:
+      'A service that reads household and small-business bills and will warn you when they change.',
+    context: 'My next product · in development · solo developer',
+    problem: 'Bills change quietly. A new fee or a higher price is easy to miss when nobody reads the small print.',
+    built: [
+      'Reads a bill with an AI model and checks that the numbers add up before anything is trusted.',
+      'Scores each AI model on the same test bills, so I pick the model on results.',
+      'Accounts with sign-in, and a web app you can install on a phone.',
+      'Automatic checks on every push, and the server setup scripted for a European host.',
+    ],
+    next: [
+      'The customer screens: upload a bill and see what changed.',
+      'Alerts for price rises, new fees, ended discounts and notice deadlines.',
+      'A free beta on the web and Google Play.',
+    ],
+    stack: ['Rust', 'actix-web', 'SQLite', 'Vue 3', 'Quasar', 'TypeScript', 'Gemini', 'Mistral', 'GitHub Actions', 'Docker'],
+    codeNote: 'The code is private while the product is being built.',
+    screenshots: [],
+    mascotLine: 'His next product. The AI reads the bill and his code checks the sums.',
+  },
+  {
     slug: 'portfolio-website',
+    hue: 'teal',
     mascotLine: 'You’re looking at it right now.',
     title: 'This website',
     group: 'now',
@@ -147,24 +191,30 @@ export const projects: Project[] = [
   // ---------------------------------------------------------------- Finished work
   {
     slug: 'panel-calculator-thesis',
+    hue: 'blue',
     mascotLine: 'This is where VoltVibe started.',
     title: 'Electrical Panel and Supplies Component Calculator',
     group: 'finished',
+    highlights: [
+      'Works out a building’s breakers and cable',
+      'Picks the cheapest suitable part in stock',
+      'Tested on every push, security included',
+    ],
     summary:
       'My diploma thesis: a web app that turns basic building data into a priced list of electrical panel components.',
     context:
       'Diploma thesis (ElektriKalkulaator) · Tallinna Tehnoloogiakolledž, 2026 · supervisor Kalle Olumets',
     problem:
-      'Pricing the parts for an electrical panel takes an estimator time and a good knowledge of the ' +
-      'wiring standard. In my thesis I wanted to find out if a web app could do the routine part ' +
-      'reliably, using a real product catalogue.',
+      'An estimator needs time and a good knowledge of the wiring standard to price the parts for an ' +
+      'electrical panel. My thesis asked if a web app could do the routine part reliably, from a real ' +
+      'product catalogue.',
     built: [
-      'A web app that groups the building’s loads into circuits, based on the Estonian wiring standard EVS-HD 60364, and picks the cheapest suitable breaker and cable that is in stock.',
+      'A web app that groups the building’s loads into circuits the way designers usually do, and picks the cheapest suitable breaker and cable that is in stock.',
       'The result is a priced bill of materials: breakers, cable quantity, residual-current device and panel enclosure.',
       'A product catalogue with stock, an admin login and a shopping basket around the calculator.',
     ],
     proof: [
-      'Unit and integration tests run in GitHub Actions on every commit.',
+      'Unit and integration tests run in GitHub Actions on every push.',
       'Security tests for authentication, CSRF, open redirects and input validation.',
       'Split into layers (Core, Data, ApplicationServices, Web, Tests), so the calculation rules can be tested on their own.',
       'The code is public, and the changelog says why each change was made.',
@@ -180,23 +230,72 @@ export const projects: Project[] = [
       'GitHub Actions',
     ],
     code: 'https://github.com/EdMuoni/Elektrikilbi-ja--tarvete-komponentide-kalkulaator',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/thesis-architecture.jpg',
+        width: 1800,
+        height: 1120,
+        alt: 'Four boxes from top to bottom: the web project, ApplicationServices, Data and Core, with arrows pointing down, and Tests beside them.',
+        caption: 'Four layers. The web project calculates nothing itself.',
+      },
+      {
+        src: '/img/projects/thesis-calculator.jpg',
+        width: 1280,
+        height: 842,
+        alt: 'The calculator: the building details on the left, the priced list of breakers and cables on the right.',
+        caption: 'The calculator and its result. Product photos: Wikimedia Commons, CC BY-SA.',
+      },
+      {
+        src: '/img/projects/thesis-stock-warning.jpg',
+        width: 712,
+        height: 547,
+        alt: 'A yellow warning above the parts list: one cable is short in stock, and the line shows how much is missing.',
+        caption: 'It warns before you order more than the stock has. Product photos: Wikimedia Commons, CC BY-SA.',
+      },
+      {
+        src: '/img/projects/thesis-assumptions.jpg',
+        width: 712,
+        height: 317,
+        alt: 'Three cards above a short list of the assumptions the result is based on.',
+        caption: 'Every result says what it assumes.',
+      },
+      {
+        src: '/img/projects/thesis-tests.jpg',
+        width: 660,
+        height: 450,
+        alt: 'Visual Studio Test Explorer with every test class ticked green.',
+        caption: 'The test run: all green.',
+      },
+      {
+        src: '/img/projects/thesis-flow.jpg',
+        width: 1200,
+        height: 1600,
+        alt: 'A flowchart from the form, through the calculation rules, circuits, breaker and cable, to the bill of materials.',
+        caption: 'How one calculation runs.',
+      },
+    ],
   },
   {
     slug: 'achiral-nurse-assistant',
+    hue: 'pink',
     mascotLine: 'An AI assistant for nurses, built during his Erasmus+ internship in Sicily.',
     title: 'aChiral Nurse Assistant',
     group: 'finished',
+    highlights: [
+      'Patient data and care guides in one chat',
+      'Looks up the nursing guide before answering',
+      'English, French and Italian interface',
+    ],
     summary:
       'An AI chat assistant that gives nurses a patient’s data and the right care guide, in English, French and Italian.',
     context:
       'Erasmus+ internship · Techdgiteasy, San Cataldo, Italy · April–May 2026 · working language English',
     problem:
-      'Nurses need a patient’s data and the right care guide quickly. The company wanted to see ' +
-      'whether an AI chat assistant could provide both.',
+      'A nurse needs a patient’s vital signs and the right care guide, fast. The company wondered if ' +
+      'an AI chat could give both.',
     built: [
       'I took it from an idea to a working prototype during the internship.',
-      'A Flowise Tool Agent with a Groq language model, conversation memory per session, and request tools that fetch each kind of patient record from a test database (json-server).',
+      'A nurse picks a patient and asks. A Flowise agent fetches the records from a test database, and a Groq model answers in plain language.',
       'RAG search (the model looks up relevant text before answering) with Pinecone and Gemini text embeddings over the nursing guide.',
       'Interface designed in Figma and built in HTML, CSS and JavaScript, fully translated into English, French and Italian so staff can use it in their own language.',
     ],
@@ -206,27 +305,39 @@ export const projects: Project[] = [
       'Wrote a workflow diagram, a role-based access matrix and a code analysis report.',
     ],
     next: [
-      'The prototype gave the model data in two ways at once, straight from the database and through RAG search, and the two got in each other’s way. In a next version I would take patient data only from the database and use vector search only for the guides.',
+      'The prototype fed the model data two ways at once, from the database and through RAG search, and they got in each other’s way. Next time I’d take patient data only from the database and use vector search only for the guides.',
     ],
     stack: ['Flowise', 'Groq LLM', 'Pinecone', 'Gemini embeddings', 'JavaScript', 'HTML / CSS', 'json-server', 'Figma'],
     code: 'https://github.com/EdMuoni/aChiral-Nurse-Assistant',
     codeNote: 'The public copy leaves out the company’s server address and its user-guide texts.',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/achiral-flowchart.jpg',
+        width: 1600,
+        height: 1119,
+        alt: 'The assistant’s flowchart: how a nurse’s question goes to the patient data or the care guide and back as an answer.',
+        caption: 'The flowchart I drew for the assistant.',
+      },
+    ],
   },
   {
     slug: 'defence-forces-internship',
-    mascotLine: 'This one is internal, so there is no code and no screenshots. His part is described below.',
+    hue: 'green',
+    mascotLine: 'Internal project, so no code or screenshots. Ask him about the race condition.',
     title: 'Messaging app for military personnel (KOLT-chat)',
     group: 'finished',
+    highlights: [
+      'Took tickets in Vue 3 and Rust',
+      'Tracked down and blocked a race condition',
+      'A Playwright test keeps it fixed',
+    ],
     summary:
       'Full-stack work in a team building a messaging app for military personnel, with a Vue 3 front end and a Rust back end.',
     context: 'Software Development Intern, full-stack · Estonian Defence Forces · June–September 2026',
     problem:
-      'The team was building a messaging app for military personnel. I took tickets on both the ' +
-      'front end and the back end and worked inside the team’s normal process.',
+      'The team’s messaging app had a race condition: the same action could run twice at the same time.',
     built: [
-      'On the front end I used Vue 3, TypeScript, Pinia and Quasar. On the back end, Rust with Actix-web and SQLite.',
-      'I fixed a race condition where the same action could run twice at the same time. A guard now blocks the second one, and I tested it by sending the same request many times very fast.',
+      'I fixed the race condition with a guard that stops a second run, then fired the same request at it many times, fast.',
       'I tracked down state bugs in Vue DevTools by comparing the store before and after an action.',
       'When a security policy blocked a library, I got the development container working again.',
     ],
@@ -247,15 +358,15 @@ export const projects: Project[] = [
     group: 'school',
     course: 'Web development',
     summary:
-      'An ASP.NET Core MVC web app for managing kindergarten groups, real estate and spaceships, with image uploads.',
+      'Manage kindergartens, real estate and spaceships in one ASP.NET Core web app, with picture uploads.',
     built: [
       'Create, view, edit and delete kindergartens, real-estate listings and spaceships.',
       'Upload several images for a record and delete them again. Real-estate images are saved in the database.',
       'Real-estate forms check their input before anything is saved.',
-      'Every form field has a stable id, so automated browser tests can find it (see “Browser tests with Selenium”).',
+      'I added fixed ids to the pages so my Selenium tests could find the buttons and fields.',
     ],
     proof: [
-      'Layered solution: Core (domain, DTOs, interfaces), Data (EF Core and its migrations), ApplicationServices and the web project, joined by dependency injection.',
+      'The same layers my thesis uses: Core, Data, ApplicationServices and the web project, joined by dependency injection.',
       'xUnit tests check the services against an in-memory database.',
     ],
     stack: ['C#', 'ASP.NET Core 9 MVC', 'EF Core 9', 'SQL Server', 'xUnit'],
@@ -268,7 +379,7 @@ export const projects: Project[] = [
     group: 'school',
     course: 'Web development',
     summary:
-      'A React and TypeScript front end on an ASP.NET Core Web API that lists schools and shows each school’s details.',
+      'Pick a school from the list and see its details. React in front, an ASP.NET Core API behind it.',
     built: [
       'The API returns all schools, or one school by its id, or “404 Not Found” when there is none.',
       'React pages show the schools in a table and open a details page for each one, using React Router.',
@@ -293,7 +404,14 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS', 'Bootstrap'],
     live: 'https://edmuoni.github.io/Aksesuaaride_Veebileht/',
     code: 'https://github.com/EdMuoni/Aksesuaaride_Veebileht',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/accessories-website.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The shop’s home page with its welcome text.',
+      },
+    ],
   },
   {
     slug: 'bicycle-website',
@@ -305,14 +423,21 @@ export const projects: Project[] = [
     stack: ['HTML', 'CSS'],
     live: 'https://edmuoni.github.io/Jalgratta_Veebileht/',
     code: 'https://github.com/EdMuoni/Jalgratta_Veebileht',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/bicycle-website.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The magazine’s home page: a bicycle photo inside a big triangle, with short articles beside it.',
+      },
+    ],
   },
   {
     slug: 'salary-calculator',
     title: 'Salary Calculator',
     group: 'school',
     course: 'Web development',
-    summary: 'Works out an Estonian monthly salary after income tax from the yearly gross salary.',
+    summary: 'Enter a yearly gross salary to see the monthly pay after Estonian income tax.',
     built: [
       'Shows the monthly gross salary, the tax-free income, the income tax and the net salary.',
       'The tax-free allowance shrinks as income grows, and invalid input gets a clear message.',
@@ -324,11 +449,11 @@ export const projects: Project[] = [
   },
   {
     slug: 'cocktail-recipes',
-    title: 'Cocktail recipes: API and web app',
+    title: 'Cocktail recipe site and API',
     group: 'school',
     course: 'Agile software development',
     summary:
-      'A cocktail recipe site: a documented REST API with accounts, sessions and ratings, and a Vue front end for visitors and admins.',
+      'Browse cocktail recipes, sign up and rate them. An Express API with a Vue front end.',
     context: 'Course project · planned as user stories, one Git branch per story',
     built: [
       'A REST API in Express and Sequelize on MariaDB: recipes, users, ratings, registration, login and logout.',
@@ -354,7 +479,7 @@ export const projects: Project[] = [
     group: 'school',
     course: 'Software testing',
     summary:
-      'Automated browser tests that create, edit and delete records in a web app, and check that bad input is turned away.',
+      'My tests take over Firefox and click through my web app: create, edit, delete, then check it refuses bad input.',
     built: [
       'NUnit tests drive Firefox through Selenium against my ShopTARge24 web app.',
       'For kindergartens and spaceships: create a record, check its details, edit it and delete it.',
@@ -432,7 +557,7 @@ export const projects: Project[] = [
     course: 'Databases',
     summary: 'SQL Server course work: tables, joins, stored procedures, functions, views, indexes and triggers.',
     built: [
-      'Builds tables step by step and works through joins, grouping, stored procedures, functions, views, indexes, triggers, cursors and temporary tables.',
+      'Starts with plain tables and works up to stored procedures, views, indexes, triggers and cursors.',
       'A graded task on Microsoft’s AdventureWorks sample database, with every kind of join explained.',
     ],
     stack: ['SQL Server', 'T-SQL'],
@@ -448,7 +573,14 @@ export const projects: Project[] = [
     stack: ['JavaScript', 'Canvas'],
     live: 'https://edmuoni.github.io/Space_Invaders/',
     code: 'https://github.com/EdMuoni/Space_Invaders',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/space-invaders.jpg',
+        width: 600,
+        height: 620,
+        alt: 'The game at the start: aliens at the top, the player’s green ship at the bottom.',
+      },
+    ],
   },
   {
     slug: 'candy-crush',
@@ -459,7 +591,14 @@ export const projects: Project[] = [
     stack: ['JavaScript'],
     live: 'https://edmuoni.github.io/Candy_Crush/',
     code: 'https://github.com/EdMuoni/Candy_Crush',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/img/projects/candy-crush.jpg',
+        width: 1280,
+        height: 800,
+        alt: 'The board full of candies, with the score above it.',
+      },
+    ],
   },
 ]
 
@@ -475,6 +614,23 @@ export const courses = [
 ] as const
 
 export type Course = (typeof courses)[number]
+
+const courseHues: Record<Course, Hue> = {
+  'Web development': 'blue',
+  'Agile software development': 'teal',
+  'Software testing': 'green',
+  'Programming basics': 'violet',
+  'Mobile apps': 'pink',
+  Databases: 'yellow',
+  'JavaScript practice': 'orange',
+}
+
+/** The colour of a course's section on the School page. */
+export const courseHue = (course: Course): Hue => courseHues[course]
+
+/** The colour of a project: its own, or its course's. */
+export const hueOf = (project: Project): Hue =>
+  project.hue ?? (project.course ? courseHues[project.course] : 'orange')
 
 /** Where each group's projects are listed, for headings and "back" links. */
 export const groups: Record<ProjectGroup, { label: string; to: string }> = {

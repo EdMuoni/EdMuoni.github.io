@@ -12,7 +12,7 @@ export const mascot = {
   home: {
     readout: '230 V',
     lines: [
-      'Hi, I’m Ohm. Edgar used to wire buildings. Now he wires software.',
+      'Hi, I’m Ohm. I run on 230 volts.',
       'The menu at the top has everything. “What I bring” is a good place to start.',
       'Click me again any time for another tip.',
     ],
@@ -25,9 +25,9 @@ export const mascot = {
     ],
   },
   nowBuilding: {
-    readout: 'LIVE',
+    readout: 'WIP',
     lines: [
-      'This is what he is working on at the moment.',
+      'Careful, these are still being built.',
       'VoltVibe turns a building’s data into a priced parts list. My kind of project.',
     ],
   },
@@ -35,13 +35,13 @@ export const mascot = {
     readout: 'DONE',
     lines: [
       'These are his bigger projects. Pick one and I’ll show you around.',
-      'Every card opens a page with the full story.',
+      'Click a picture for the full story.',
     ],
   },
   school: {
     readout: '101',
     lines: [
-      'Everything he made during his studies, sorted by course.',
+      'His school projects, one colour per course.',
       'Some of these run in your browser. Look for “Open it”.',
     ],
   },

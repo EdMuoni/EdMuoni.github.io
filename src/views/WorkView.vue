@@ -3,7 +3,7 @@ import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
-import ProjectCard from '@/components/ProjectCard.vue'
+import ProjectRow from '@/components/ProjectRow.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
 import { isCaseStudy, projectsIn } from '@/data/projects'
@@ -15,23 +15,21 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
   <PageIntro
     kicker="Finished work"
     title="Work I have finished"
-    lead="My bigger projects so far. Each one has its own page with the details."
+    lead="My thesis, an AI assistant for nurses and my Defence Forces internship."
     :mascot="mascot.work"
     :photo="headerPhotos.work"
   />
 
   <section class="section">
     <div class="container">
-      <SectionHeading kicker="Case studies" title="The larger projects" />
-      <div class="grid">
-        <ProjectCard
-          v-for="(project, i) in caseStudies"
-          :key="project.slug"
-          v-reveal="i"
-          :project="project"
-          large
-        />
-      </div>
+      <SectionHeading kicker="Case studies" title="The big ones" />
+      <ProjectRow
+        v-for="(project, i) in caseStudies"
+        :key="project.slug"
+        v-reveal
+        :project="project"
+        :flip="i % 2 === 1"
+      />
     </div>
   </section>
 

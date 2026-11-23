@@ -15,6 +15,14 @@ const pages = [
 </script>
 
 <template>
+  <div class="info-bar">
+    <p class="container info">
+      <span><span class="dot" aria-hidden="true"></span>Open to a developer job</span>
+      <span>{{ profile.location }}</span>
+      <span>EU or remote</span>
+      <a :href="`mailto:${profile.email}`" class="info-mail">{{ profile.email }}</a>
+    </p>
+  </div>
   <header class="site-header">
     <div class="container bar">
       <RouterLink to="/" class="brand">
@@ -36,6 +44,48 @@ const pages = [
 </template>
 
 <style scoped>
+/* A thin navy line above the header, the same in both themes. It scrolls away; the header stays. */
+.info-bar {
+  background: var(--navy);
+  color: #dbe4ff;
+  font-size: 0.8rem;
+}
+
+.info {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 2px 18px;
+  margin: 0 auto;
+  padding-top: 6px;
+  padding-bottom: 6px;
+}
+
+.dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  margin-right: 8px;
+  border-radius: 50%;
+  background: var(--green-bright);
+}
+
+.info-mail {
+  display: none;
+  color: var(--orange-bright);
+}
+
+@media (min-width: 720px) {
+  .info {
+    justify-content: flex-start;
+  }
+
+  .info-mail {
+    display: inline;
+    margin-left: auto;
+  }
+}
+
 /* Sticky only on wide screens, where the header is one row. */
 .site-header {
   background: var(--bg);

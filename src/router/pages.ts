@@ -10,9 +10,9 @@ export interface PageInfo {
 export const pages = {
   home: {
     path: '/',
-    title: 'Edgar Muoni · Full-stack developer',
+    title: 'Edgar Muoni · Full-Stack Developer + AI Engineer | QA | Software Tester',
     description:
-      'Edgar Muoni, a full-stack developer in Tallinn and a former electrician. Vue 3, TypeScript, C# / .NET and Rust.',
+      'Edgar Muoni, full-stack developer, AI engineer and software tester in Tallinn, and a former electrician. Vue 3, TypeScript, C# / .NET and Rust.',
   },
   whatIBring: {
     path: '/what-i-bring',
@@ -22,7 +22,7 @@ export const pages = {
   nowBuilding: {
     path: '/now-building',
     title: 'Now building · Edgar Muoni',
-    description: 'VoltVibe, the electrical panel calculator I am growing from my thesis into a product.',
+    description: 'VoltVibe, a web shop growing from my thesis, and Bill Watcher, which reads bills.',
   },
   work: {
     path: '/work',

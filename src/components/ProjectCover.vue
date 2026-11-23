@@ -11,6 +11,7 @@ const props = defineProps<{ project: Project }>()
 // The file extension and the large label for the first technology in the stack we know.
 const known: [match: RegExp, extension: string, label: string][] = [
   [/^(C#|ASP\.NET)/, 'cs', 'C#'],
+  [/^Rust/, 'rs', 'Rust'],
   [/^Python/, 'py', 'Python'],
   [/^Vue/, 'vue', 'Vue'],
   [/^React/, 'tsx', 'React'],
@@ -46,16 +47,16 @@ const badge = computed(() => {
 <style scoped>
 /* Dark in both themes, like a code editor. */
 .cover {
-  --circuit: rgb(251 146 60 / 0.4);
-  --circuit-pad: #0d0d10;
+  --circuit: color-mix(in srgb, var(--hue-bright, #fb923c) 40%, transparent);
+  --circuit-pad: var(--forest-950);
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 6;
   border-radius: calc(var(--radius) - 3px);
   background:
-    radial-gradient(circle at 85% 30%, rgb(255 81 0 / 0.18), transparent 60%),
-    #0d0d10;
-  border: 1px solid #2e2e33;
+    radial-gradient(circle at 85% 30%, color-mix(in srgb, var(--hue, #ff5100) 22%, transparent), transparent 60%),
+    var(--forest-950);
+  border: 1px solid #1f3d32;
 }
 
 .shot :deep(img) {
@@ -71,8 +72,8 @@ const badge = computed(() => {
   align-items: center;
   gap: 6px;
   padding: 8px 10px;
-  border-bottom: 1px solid #23232a;
-  background: rgb(24 24 27 / 0.8);
+  border-bottom: 1px solid #1f3d32;
+  background: rgb(15 40 32 / 0.8);
 }
 
 .light {
@@ -83,7 +84,7 @@ const badge = computed(() => {
 }
 
 .light:first-child {
-  background: #ff5100;
+  background: var(--hue, #ff5100);
 }
 
 .file {
@@ -104,7 +105,7 @@ const badge = computed(() => {
   font-weight: 500;
   font-size: clamp(1.6rem, 5vw, 2.2rem);
   line-height: 1;
-  color: #fb923c;
+  color: var(--hue-bright, #fb923c);
 }
 
 /* The pulses of current run only while the card is pointed at, so a page full of cards stays calm. */

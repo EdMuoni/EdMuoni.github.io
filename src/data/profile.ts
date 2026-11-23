@@ -9,7 +9,7 @@ export interface ContactLink {
 
 export const profile = {
   name: 'Edgar Muoni',
-  role: 'Full-stack developer',
+  role: 'Full-Stack Developer + AI Engineer | QA | Software Tester',
   location: 'Tallinn, Estonia',
   stack: ['Vue 3', 'TypeScript', 'Rust', 'C# / .NET', 'Automated testing'],
   email: 'edgar.muoni@gmail.com',

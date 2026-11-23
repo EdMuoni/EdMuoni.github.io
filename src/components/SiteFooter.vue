@@ -27,7 +27,6 @@ const photos = Object.values(headerPhotos)
 
 <style scoped>
 .site-footer {
-  margin-top: 40px;
   border-top: 1px solid var(--border);
   background: var(--surface);
   padding: 32px 0 40px;
