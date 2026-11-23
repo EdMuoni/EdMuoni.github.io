@@ -73,7 +73,7 @@ const byCourse = courses
 }
 
 .jump a:hover {
-  color: #111113;
+  color: var(--forest-950);
   background: var(--hue-bright);
 }
 

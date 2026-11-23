@@ -54,8 +54,8 @@ const timed = lines.reduce<{ line: Line; text: string; delay: number; speed: num
   margin: 0;
   border-radius: var(--radius);
   overflow: hidden;
-  background: #0d0d10;
-  border: 1px solid #2e2e33;
+  background: var(--forest-950);
+  border: 1px solid #1f3d32;
   box-shadow: 0 18px 40px -24px rgb(0 0 0 / 0.6);
   font-family: var(--font-mono);
   font-size: 0.82rem;
@@ -68,8 +68,8 @@ const timed = lines.reduce<{ line: Line; text: string; delay: number; speed: num
   align-items: center;
   gap: 7px;
   padding: 9px 12px;
-  background: #18181b;
-  border-bottom: 1px solid #2e2e33;
+  background: var(--forest-850);
+  border-bottom: 1px solid #1f3d32;
 }
 
 .light {

@@ -33,7 +33,7 @@ withDefaults(defineProps<{ heading?: string }>(), {
   position: relative;
   overflow: hidden;
   border-top: 0;
-  background: radial-gradient(circle at 80% 30%, rgb(255 81 0 / 0.16), transparent 55%), #111113;
+  background: radial-gradient(circle at 80% 30%, rgb(255 81 0 / 0.16), transparent 55%), var(--forest-900);
 }
 
 .ohm {

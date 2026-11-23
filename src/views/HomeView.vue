@@ -299,7 +299,7 @@ mark {
   padding: 0 0.2em;
   border-radius: 4px;
   background: var(--accent);
-  color: #111113;
+  color: var(--forest-950);
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

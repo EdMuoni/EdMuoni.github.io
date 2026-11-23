@@ -48,15 +48,15 @@ const badge = computed(() => {
 /* Dark in both themes, like a code editor. */
 .cover {
   --circuit: color-mix(in srgb, var(--hue-bright, #fb923c) 40%, transparent);
-  --circuit-pad: #0d0d10;
+  --circuit-pad: var(--forest-950);
   position: relative;
   overflow: hidden;
   aspect-ratio: 16 / 6;
   border-radius: calc(var(--radius) - 3px);
   background:
     radial-gradient(circle at 85% 30%, color-mix(in srgb, var(--hue, #ff5100) 22%, transparent), transparent 60%),
-    #0d0d10;
-  border: 1px solid #2e2e33;
+    var(--forest-950);
+  border: 1px solid #1f3d32;
 }
 
 .shot :deep(img) {
@@ -72,8 +72,8 @@ const badge = computed(() => {
   align-items: center;
   gap: 6px;
   padding: 8px 10px;
-  border-bottom: 1px solid #23232a;
-  background: rgb(24 24 27 / 0.8);
+  border-bottom: 1px solid #1f3d32;
+  background: rgb(15 40 32 / 0.8);
 }
 
 .light {
