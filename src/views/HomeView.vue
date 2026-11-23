@@ -44,6 +44,15 @@ const path = [
   },
 ]
 
+// Off the keyboard, each with an icon and a colour.
+const hobbies = [
+  { label: 'Disc golf', icon: 'disc', hue: 'green' },
+  { label: 'Swimming', icon: 'wave', hue: 'blue' },
+  { label: 'Long walks', icon: 'path', hue: 'teal' },
+  { label: 'Board games', icon: 'die', hue: 'yellow' },
+  { label: 'Books', icon: 'book', hue: 'violet' },
+]
+
 // Signposts to the other pages.
 const nextPages = [
   {
@@ -91,9 +100,16 @@ const nextPages = [
             {{ tech }}<span v-if="i < profile.stack.length - 1" aria-hidden="true"> · </span>
           </span>
         </p>
-        <div class="btn-row">
-          <RouterLink to="/what-i-bring" class="btn btn-primary">What I bring</RouterLink>
-          <a v-for="link in contactLinks" :key="link.label" :href="link.href" class="btn">{{ link.label }}</a>
+        <div class="hero-actions">
+          <RouterLink to="/what-i-bring" class="btn btn-primary btn-big">
+            What I bring <span aria-hidden="true">→</span>
+          </RouterLink>
+          <p class="hero-links">
+            <template v-for="(link, i) in contactLinks" :key="link.label">
+              <a :href="link.href">{{ link.label }}</a
+              ><span v-if="i < contactLinks.length - 1" aria-hidden="true"> · </span>
+            </template>
+          </p>
         </div>
       </div>
       <OhmMascot :lines="mascot.home.lines" :readout="mascot.home.readout" />
@@ -167,10 +183,34 @@ const nextPages = [
   <section class="section">
     <div class="container outside">
       <TypeText as="span" class="kicker" text="Outside work" :speed="22" when-visible />
-      <p v-reveal>
-        I volunteer with older people through Seltsilised. Off the keyboard: disc golf, swimming,
-        long walks, board games and books.
-      </p>
+      <p v-reveal>I volunteer with older people through Seltsilised.</p>
+      <ul class="hobbies" aria-label="Off the keyboard">
+        <li v-for="(hobby, i) in hobbies" :key="hobby.label" v-reveal="i" :class="`hue-${hobby.hue}`">
+          <svg class="hobby-icon" viewBox="0 0 48 48" aria-hidden="true">
+            <template v-if="hobby.icon === 'disc'">
+              <ellipse cx="24" cy="26" rx="18" ry="7" />
+              <path d="M8 24c3-5 29-5 32 0M14 12c4-2 8-3 12-3" />
+            </template>
+            <path
+              v-else-if="hobby.icon === 'wave'"
+              d="M4 20c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4M4 31c5 0 5-4 10-4s5 4 10 4 5-4 10-4 5 4 10 4"
+            />
+            <template v-else-if="hobby.icon === 'path'">
+              <path d="M16 43c0-8 18-8 18-16S16 19 16 11" />
+              <circle cx="16" cy="7" r="2" />
+            </template>
+            <template v-else-if="hobby.icon === 'die'">
+              <rect x="9" y="9" width="30" height="30" rx="6" />
+              <path d="M17 17h.01M31 17h.01M24 24h.01M17 31h.01M31 31h.01" class="pip" />
+            </template>
+            <template v-else>
+              <path d="M6 12c6-2 12-2 18 2 6-4 12-4 18-2v26c-6-2-12-2-18 2-6-4-12-4-18-2Z" />
+              <path d="M24 14v26" />
+            </template>
+          </svg>
+          {{ hobby.label }}
+        </li>
+      </ul>
     </div>
   </section>
 
@@ -271,52 +311,9 @@ const nextPages = [
   color: var(--hue-text);
 }
 
-/* How I work: a centred navy band over code being typed, with the key phrase highlighted. */
-.statement {
-  --shade-rgb: 11 21 48;
-  position: relative;
-  overflow: hidden;
-  border-top: 0;
-  background: var(--navy);
-  text-align: center;
-}
-
-.statement .container {
-  position: relative;
-}
-
-.statement + .section {
-  border-top: 0;
-}
-
-.statement .kicker {
-  color: var(--orange-bright);
-}
-
-.statement-text {
-  max-width: 34ch;
-  margin: 0 auto 16px;
-  font-family: var(--font-serif);
-  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
-  font-weight: 700;
-  line-height: 1.35;
-  text-wrap: balance;
-}
-
-mark {
-  padding: 0 0.2em;
-  border-radius: 4px;
-  background: var(--accent);
-  color: var(--forest-950);
+/* How I work: the band itself is in base.css. The short marked phrase stays on one line here. */
+.statement mark {
   white-space: nowrap;
-  box-decoration-break: clone;
-  -webkit-box-decoration-break: clone;
-}
-
-.statement-sub {
-  max-width: 52ch;
-  margin: 0 auto 32px;
-  color: var(--muted);
 }
 
 .statement-term {
@@ -361,6 +358,68 @@ mark {
 .outside p {
   max-width: var(--reading);
   margin: 0;
+}
+
+.hobbies {
+  list-style: none;
+  padding: 0;
+  margin: 20px 0 0;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px 20px;
+}
+
+.hobbies li {
+  display: grid;
+  justify-items: center;
+  align-content: start;
+  gap: 6px;
+  width: 88px;
+  text-align: center;
+  font-size: 0.9rem;
+}
+
+.hobby-icon {
+  width: 60px;
+  height: 60px;
+  padding: 12px;
+  border: 3px solid var(--hue);
+  border-radius: 50%;
+  background: var(--hue-tint);
+  fill: none;
+  stroke: var(--hue-text);
+  stroke-width: 2.5;
+  stroke-linecap: round;
+  stroke-linejoin: round;
+}
+
+.hobby-icon .pip {
+  stroke-width: 5;
+}
+
+/* One big button for the main next step, the contact links as plain links under it. */
+.btn-big {
+  min-height: 52px;
+  padding: 14px 28px;
+  font-size: 1.1rem;
+  box-shadow: 0 10px 28px -12px var(--accent);
+}
+
+.hero-links {
+  margin: 14px 0 0;
+  font-weight: 600;
+}
+
+.hero-links a {
+  display: inline-block;
+  padding: 8px 0;
+}
+
+@media (max-width: 560px) {
+  .btn-big {
+    width: 100%;
+    justify-content: center;
+  }
 }
 
 @media (min-width: 720px) {

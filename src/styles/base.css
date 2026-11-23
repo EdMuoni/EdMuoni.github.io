@@ -92,6 +92,79 @@ img {
 }
 
 /* Small upper-case label above headings, set in the monospace font. */
+/* A centred navy band with one phrase marked: How I work on Home, The problem on project pages.
+   Inside a .hue-* block the kicker and the mark take that colour, otherwise orange. */
+.section.statement {
+  --shade-rgb: 11 21 48;
+  position: relative;
+  overflow: hidden;
+  border-top: 0;
+  background: var(--navy);
+  text-align: center;
+}
+
+.statement .container {
+  position: relative;
+}
+
+.statement + .section {
+  border-top: 0;
+}
+
+.statement .kicker {
+  color: var(--hue-bright, var(--orange-bright));
+}
+
+.statement-text {
+  max-width: 34ch;
+  margin: 0 auto 16px;
+  font-family: var(--font-serif);
+  font-size: clamp(1.4rem, 3.4vw, 2.1rem);
+  font-weight: 700;
+  line-height: 1.35;
+  text-wrap: balance;
+}
+
+.statement mark {
+  padding: 0 0.2em;
+  border-radius: 4px;
+  background: var(--hue-bright, var(--accent));
+  color: var(--forest-950);
+  box-decoration-break: clone;
+  -webkit-box-decoration-break: clone;
+}
+
+.statement-sub {
+  max-width: 52ch;
+  margin: 0 auto 32px;
+  color: var(--muted);
+}
+
+/* A picture with a block in the colour of its project offset behind it. */
+.offset-pic {
+  position: relative;
+  display: block;
+  margin: 0 14px 14px 0;
+}
+
+.offset-pic::before {
+  content: '';
+  position: absolute;
+  inset: 14px -14px -14px 14px;
+  border-radius: var(--radius);
+  background: var(--hue, var(--accent));
+  transition: transform 0.3s ease-out;
+}
+
+/* Without this the block, being positioned, would paint over the picture. */
+.offset-pic > * {
+  position: relative;
+}
+
+a.offset-pic:hover::before {
+  transform: translate(6px, 6px);
+}
+
 .kicker {
   display: inline-block;
   font-family: var(--font-mono);

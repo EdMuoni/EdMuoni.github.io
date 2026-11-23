@@ -2,13 +2,17 @@
 import { RouterLink } from 'vue-router'
 import ContactCta from '@/components/ContactCta.vue'
 import PageIntro from '@/components/PageIntro.vue'
+import ProjectCard from '@/components/ProjectCard.vue'
 import SectionHeading from '@/components/SectionHeading.vue'
 import ProjectRow from '@/components/ProjectRow.vue'
 import { mascot } from '@/data/mascot'
 import { headerPhotos } from '@/data/photos'
-import { isCaseStudy, projectsIn } from '@/data/projects'
+import { findProject, isCaseStudy, projectsIn } from '@/data/projects'
 
 const caseStudies = projectsIn('finished').filter(isCaseStudy)
+
+// Three school projects you can play right away, as a taste of the School page.
+const playable = ['space-invaders', 'candy-crush', 'bicycle-website'].map((slug) => findProject(slug)!)
 </script>
 
 <template>
@@ -35,12 +39,15 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
 
   <section class="section more">
     <div class="container">
-      <SectionHeading kicker="From my studies" title="School projects" />
-      <p class="muted">
-        Web apps, APIs, browser tests, mobile apps and a few games from my courses. Some of them run
-        right in your browser.
-      </p>
-      <RouterLink to="/school" class="btn btn-primary">See the school projects <span aria-hidden="true">→</span></RouterLink>
+      <div class="more-head">
+        <div><SectionHeading kicker="From my studies" title="School projects" /></div>
+        <RouterLink to="/school" class="view-all">
+          View all<span class="sr-only"> school projects</span> <span aria-hidden="true">→</span>
+        </RouterLink>
+      </div>
+      <div class="grid">
+        <ProjectCard v-for="(project, i) in playable" :key="project.slug" v-reveal="i" :project="project" />
+      </div>
     </div>
   </section>
 
@@ -50,6 +57,22 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
 <style scoped>
 .more {
   background: var(--surface);
+}
+
+/* The heading on the left, "View all" on the right, like a row of a project gallery. */
+.more-head {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-between;
+  align-items: flex-end;
+  gap: 8px 24px;
+}
+
+.view-all {
+  margin-bottom: 0.6em;
+  font-weight: 600;
+  text-decoration: none;
+  color: var(--accent-text);
 }
 
 .grid {

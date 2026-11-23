@@ -18,15 +18,25 @@ const ohm = computed(() => mascotForProject(project.value))
 const kicker = computed(() =>
   project.value.course ? `${overview.value.label} · ${project.value.course}` : overview.value.label,
 )
+
+// The problem in three parts: before, the marked words, after. Null when nothing is marked.
+const problemParts = computed(() => {
+  const { problem, problemMark } = project.value
+  if (!problem || !problemMark) return null
+  const i = problem.indexOf(problemMark)
+  return i < 0 ? null : [problem.slice(0, i), problemMark, problem.slice(i + problemMark.length)]
+})
 </script>
 
 <template>
+  <!-- With a problem band below, the header's wave is drawn in navy so it flows into the band. -->
   <PageIntro
     :kicker="kicker"
     :title="project.title"
     :lead="project.summary"
     :back="{ to: overview.to, label: overview.label }"
     :mascot="ohm"
+    :style="project.problem ? { '--page-bg': 'var(--navy)' } : undefined"
   >
     <p v-if="project.context" class="context">{{ project.context }}</p>
     <div v-if="project.live || project.code" class="btn-row">
@@ -38,6 +48,16 @@ const kicker = computed(() =>
       </a>
     </div>
   </PageIntro>
+
+  <section v-if="project.problem" class="section statement problem-band on-photo" :class="`hue-${hueOf(project)}`">
+    <div class="container">
+      <h2 class="kicker">The problem</h2>
+      <p v-reveal class="statement-text">
+        <template v-if="problemParts">{{ problemParts[0] }}<mark>{{ problemParts[1] }}</mark>{{ problemParts[2] }}</template>
+        <template v-else>{{ project.problem }}</template>
+      </p>
+    </div>
+  </section>
 
   <div class="container" :class="`hue-${hueOf(project)}`">
     <CaseStudy :project="project" />
@@ -58,6 +78,17 @@ const kicker = computed(() =>
 </template>
 
 <style scoped>
+/* Long problems read better left-aligned and a little smaller than Home's band. */
+.statement.problem-band {
+  text-align: left;
+}
+
+.problem-band .statement-text {
+  margin: 0;
+  max-width: 40ch;
+  font-size: clamp(1.25rem, 2.8vw, 1.7rem);
+}
+
 .context {
   font-family: var(--font-mono);
   font-size: 0.82rem;

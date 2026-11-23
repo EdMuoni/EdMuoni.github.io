@@ -3,14 +3,14 @@ import { RouterLink } from 'vue-router'
 import { hueOf, projectPath, type Project } from '@/data/projects'
 import ProjectCover from './ProjectCover.vue'
 
-// A big project as a row: picture on one side with an orange block behind it, a few short lines
+// A big project as a row: picture on one side with a coloured block behind it, a few short lines
 // on the other. `flip` puts the picture on the right, so rows alternate down the page.
 defineProps<{ project: Project; flip?: boolean }>()
 </script>
 
 <template>
   <article class="row" :class="[`hue-${hueOf(project)}`, { flip }]">
-    <RouterLink :to="projectPath(project)" class="picture" tabindex="-1" aria-hidden="true">
+    <RouterLink :to="projectPath(project)" class="picture offset-pic" tabindex="-1" aria-hidden="true">
       <ProjectCover :project="project" />
     </RouterLink>
     <div class="text">
@@ -36,28 +36,8 @@ defineProps<{ project: Project; flip?: boolean }>()
   padding: 28px 0;
 }
 
-.picture {
-  position: relative;
-  display: block;
-  margin: 0 14px 14px 0;
-}
-
-/* The orange block, offset behind the picture. */
-.picture::before {
-  content: '';
-  position: absolute;
-  inset: 14px -14px -14px 14px;
-  border-radius: var(--radius);
-  background: var(--hue);
-  transition: transform 0.3s ease-out;
-}
-
-.picture:hover::before {
-  transform: translate(6px, 6px);
-}
-
+/* The coloured block behind the picture comes from .offset-pic in base.css. */
 .picture :deep(.cover) {
-  position: relative;
   aspect-ratio: 16 / 10;
 }
 
