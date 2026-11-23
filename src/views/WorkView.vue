@@ -15,14 +15,14 @@ const caseStudies = projectsIn('finished').filter(isCaseStudy)
   <PageIntro
     kicker="Finished work"
     title="Work I have finished"
-    lead="My bigger projects so far. Each one has its own page with the details."
+    lead="My thesis, an AI assistant for nurses and my Defence Forces internship."
     :mascot="mascot.work"
     :photo="headerPhotos.work"
   />
 
   <section class="section">
     <div class="container">
-      <SectionHeading kicker="Case studies" title="The larger projects" />
+      <SectionHeading kicker="Case studies" title="The big ones" />
       <ProjectRow
         v-for="(project, i) in caseStudies"
         :key="project.slug"

@@ -22,7 +22,7 @@ export const pages = {
   nowBuilding: {
     path: '/now-building',
     title: 'Now building · Edgar Muoni',
-    description: 'VoltVibe, the electrical panel calculator I am growing from my thesis into a product.',
+    description: 'VoltVibe, a web shop growing from my thesis, and Bill Watcher, which reads bills.',
   },
   work: {
     path: '/work',

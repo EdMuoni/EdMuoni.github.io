@@ -39,7 +39,7 @@ const timed = lines.reduce<{ line: Line; text: string; delay: number; speed: num
       <span class="light"></span><span class="light"></span><span class="light"></span>
       <span class="title">~/project</span>
     </div>
-    <figcaption class="sr-only">A terminal session: reproduce the bug with a test, fix it, prove it.</figcaption>
+    <figcaption class="sr-only">A bug fix in a terminal, from failing test to pull request.</figcaption>
     <div class="screen">
       <div v-for="(item, i) in timed" :key="i" class="line" :class="item.line.kind">
         <TypeText :text="item.text" :speed="item.speed" :delay="item.delay" when-visible />

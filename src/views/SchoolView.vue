@@ -24,7 +24,7 @@ const byCourse = courses
   <PageIntro
     kicker="School projects"
     title="What I built while studying"
-    lead="Projects from my software development courses, sorted by course. Click a card for the details, or press “Open it” to try a project in your browser."
+    lead="From Tetris to browser tests, sorted by course. The ones with “Open it” run right in your browser."
     :mascot="mascot.school"
     :photo="headerPhotos.school"
   >

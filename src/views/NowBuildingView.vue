@@ -18,7 +18,7 @@ const cards = current.filter((project) => !project.highlights)
   <PageIntro
     kicker="Now building"
     title="What I am working on now"
-    lead="I am growing my diploma thesis into VoltVibe: a web shop for electrical components with the panel calculator built in."
+    lead="I am growing my thesis into VoltVibe, a web shop for electrical parts. Bill Watcher is my next product."
     :mascot="mascot.nowBuilding"
     :photo="headerPhotos.nowBuilding"
   />

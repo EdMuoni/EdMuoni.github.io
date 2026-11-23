@@ -16,8 +16,8 @@ import { headerPhotos } from '@/data/photos'
 import { contactLinks, profile } from '@/data/profile'
 
 const pitch =
-  'Electrical work taught me to find the cause of a fault before fixing anything. ' +
-  'I bring the same habit to software: trace the bug, fix the cause, and prove the fix with a test.'
+  'I used to wire ships and buildings. That taught me to find the fault before I swap any parts. ' +
+  'Now the parts are code.'
 
 // Three steps from electrician to developer, each a badge with its own icon and colour.
 const path = [
@@ -31,14 +31,14 @@ const path = [
   {
     period: '2024 – 2026',
     title: 'Software development',
-    text: 'Tallinna Tehnoloogiakolledž. Thesis: a calculator that prices an electrical panel.',
+    text: 'Tallinna Tehnoloogiakolledž. My thesis grew into VoltVibe.',
     icon: 'cap',
     hue: 'blue',
   },
   {
     period: '2026',
     title: 'Internships',
-    text: 'An AI nurse assistant in Italy (Erasmus+), then a Defence Forces development team.',
+    text: 'An AI nurse assistant in Sicily, then a Defence Forces messaging app.',
     icon: 'globe',
     hue: 'pink',
   },
@@ -82,7 +82,7 @@ const nextPages = [
         <HeroRotator
           :lines="[
             'I build web apps from the database up to the buttons.',
-            'Lately mostly Vue 3 and TypeScript, with some Rust.',
+            'I work in Estonian, English or Russian, your pick.',
             'Ask me about the race condition I tracked down.',
           ]"
         />
@@ -139,12 +139,12 @@ const nextPages = [
     <div class="container">
       <h2 class="kicker">How I work</h2>
       <p v-reveal class="statement-text">
-        As an electrician I learned not to swap parts until a fault goes away. In code I make the bug
-        happen again, <mark>fix the real cause</mark> and add a test so it stays fixed.
+        Reset a tripping breaker without finding out why, and you’ll be back tomorrow. I’d rather
+        <mark>fix it once</mark>. Then a test keeps it fixed.
       </p>
       <p v-reveal class="statement-sub">
-        Small steps, each in its own branch and reviewed pull request. Done means it works in the
-        running app and the tests pass.
+        Small changes, each one reviewed. I call it done when it runs in the real app and the tests
+        are green.
       </p>
       <TerminalWindow v-reveal="1" class="statement-term" />
     </div>
@@ -308,6 +308,7 @@ mark {
   border-radius: 4px;
   background: var(--accent);
   color: var(--forest-950);
+  white-space: nowrap;
   box-decoration-break: clone;
   -webkit-box-decoration-break: clone;
 }

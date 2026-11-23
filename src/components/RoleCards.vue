@@ -13,7 +13,7 @@ const roles = [
   },
   {
     title: 'AI Engineer',
-    text: 'Apps where a language model reads real data and answers from it.',
+    text: 'An AI reads a bill. My code checks that it adds up.',
     to: '/projects/bill-watcher',
     link: 'See Bill Watcher',
     icon: 'chip',
@@ -21,7 +21,7 @@ const roles = [
   },
   {
     title: 'QA | Software Tester',
-    text: 'Browser tests, bugs reproduced before they are fixed, checks on every push.',
+    text: 'My tests type letters into a number field. The app must refuse.',
     to: '/projects/selenium-tests',
     link: 'See my browser tests',
     icon: 'check',

@@ -38,7 +38,7 @@ const hasStory = computed(() =>
 
       <aside v-reveal="1" class="cs-side">
         <template v-if="project.proof?.length">
-          <h2 class="side-title">Highlights</h2>
+          <h2 class="side-title">Behind the scenes</h2>
           <ul class="proof ticks">
             <li v-for="item in project.proof" :key="item">{{ item }}</li>
           </ul>
