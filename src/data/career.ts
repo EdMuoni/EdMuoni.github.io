@@ -115,7 +115,7 @@ export const education: TimelineEntry[] = [
   },
   {
     period: '2026',
-    title: 'Professional certificate: Noorem tarkvaraarendaja, tase 4',
+    title: 'Professional certificate: Full-Stack Software Developer, level 4',
     place: 'Estonian professional register (kutseregister)',
   },
   {

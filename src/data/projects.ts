@@ -47,6 +47,8 @@ export interface Project {
 
   // Case study parts, all optional.
   problem?: string
+  /** A few words of `problem` shown on a highlight. */
+  problemMark?: string
   built?: string[]
   proof?: string[]
   next?: string[]
@@ -81,6 +83,7 @@ export const projects: Project[] = [
     summary:
       'A web shop for electrical parts, with a calculator that turns a building’s details into a priced parts list.',
     context: 'My diploma thesis, grown into a product · since 2026 · solo developer',
+    problemMark: 'works it out for you',
     problem:
       'An electrician can’t quote a job until someone works out the breakers, how much cable, the ' +
       'residual-current device and the panel enclosure, then looks up every price. Usually a cost ' +
@@ -149,6 +152,7 @@ export const projects: Project[] = [
     summary:
       'A service that reads household and small-business bills and will warn you when they change.',
     context: 'My next product · in development · solo developer',
+    problemMark: 'easy to miss',
     problem: 'Bills change quietly. A new fee or a higher price is easy to miss when nobody reads the small print.',
     built: [
       'Reads a bill with an AI model and checks that the numbers add up before anything is trusted.',
@@ -185,7 +189,14 @@ export const projects: Project[] = [
     ],
     stack: ['Vue 3', 'TypeScript', 'Vue Router', 'Vite', 'GitHub Actions', 'GitHub Pages'],
     code: 'https://github.com/EdMuoni/EdMuoni.github.io',
-    screenshots: [],
+    screenshots: [
+      {
+        src: '/og-image.jpg',
+        width: 1200,
+        height: 630,
+        alt: 'The top of this site’s home page: my name, a short intro and Ohm the mascot.',
+      },
+    ],
   },
 
   // ---------------------------------------------------------------- Finished work
@@ -204,6 +215,7 @@ export const projects: Project[] = [
       'My diploma thesis: a web app that turns basic building data into a priced list of electrical panel components.',
     context:
       'Diploma thesis (ElektriKalkulaator) · Tallinna Tehnoloogiakolledž, 2026 · supervisor Kalle Olumets',
+    problemMark: 'do the routine part reliably',
     problem:
       'An estimator needs time and a good knowledge of the wiring standard to price the parts for an ' +
       'electrical panel. My thesis asked if a web app could do the routine part reliably, from a real ' +
@@ -290,6 +302,7 @@ export const projects: Project[] = [
       'An AI chat assistant that gives nurses a patient’s data and the right care guide, in English, French and Italian.',
     context:
       'Erasmus+ internship · Techdgiteasy, San Cataldo, Italy · April–May 2026 · working language English',
+    problemMark: 'the right care guide, fast',
     problem:
       'A nurse needs a patient’s vital signs and the right care guide, fast. The company wondered if ' +
       'an AI chat could give both.',
@@ -334,6 +347,7 @@ export const projects: Project[] = [
     summary:
       'Full-stack work in a team building a messaging app for military personnel, with a Vue 3 front end and a Rust back end.',
     context: 'Software Development Intern, full-stack · Estonian Defence Forces · June–September 2026',
+    problemMark: 'could run twice at the same time',
     problem:
       'The team’s messaging app had a race condition: the same action could run twice at the same time.',
     built: [
@@ -602,6 +616,11 @@ export const projects: Project[] = [
   },
 ]
 
+// A typo in a highlight would silently drop it, so stop the build instead.
+for (const p of projects) {
+  if (p.problemMark && !p.problem?.includes(p.problemMark)) throw new Error(`problemMark not in problem: ${p.slug}`)
+}
+
 /** The School projects page lists its projects under these headings, in this order. */
 export const courses = [
   'Web development',
@@ -624,6 +643,21 @@ const courseHues: Record<Course, Hue> = {
   Databases: 'yellow',
   'JavaScript practice': 'orange',
 }
+
+/** The icon of each course on the School page (see CourseIcon.vue). */
+export type CourseIconName = 'browser' | 'board' | 'shield' | 'code' | 'phone' | 'database' | 'gamepad'
+
+const courseIcons: Record<Course, CourseIconName> = {
+  'Web development': 'browser',
+  'Agile software development': 'board',
+  'Software testing': 'shield',
+  'Programming basics': 'code',
+  'Mobile apps': 'phone',
+  Databases: 'database',
+  'JavaScript practice': 'gamepad',
+}
+
+export const courseIcon = (course: Course): CourseIconName => courseIcons[course]
 
 /** The colour of a course's section on the School page. */
 export const courseHue = (course: Course): Hue => courseHues[course]

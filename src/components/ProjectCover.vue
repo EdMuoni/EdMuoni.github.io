@@ -1,12 +1,16 @@
 <script setup lang="ts">
 import { computed } from 'vue'
-import type { Project } from '@/data/projects'
+import { courseIcon, type Project } from '@/data/projects'
 import CircuitBackground from './CircuitBackground.vue'
+import CourseIcon from './CourseIcon.vue'
+import ProjectDrawing from './ProjectDrawing.vue'
 import ThemedImage from './ThemedImage.vue'
 
-// Top of a project card: the screenshot if there is one, otherwise a drawn code window with the
-// project's main technology. Decoration only.
+// Top of a project card: the screenshot if there is one, a line drawing for the projects that
+// have one, otherwise a drawn code window with the project's main technology. Decoration only.
 const props = defineProps<{ project: Project }>()
+
+const drawn = ['bill-watcher', 'defence-forces-internship']
 
 // The file extension and the large label for the first technology in the stack we know.
 const known: [match: RegExp, extension: string, label: string][] = [
@@ -34,6 +38,9 @@ const badge = computed(() => {
   <div v-if="project.screenshots[0]" class="cover shot" aria-hidden="true">
     <ThemedImage :shot="project.screenshots[0]" />
   </div>
+  <div v-else-if="drawn.includes(project.slug)" class="cover" aria-hidden="true">
+    <ProjectDrawing :slug="project.slug" />
+  </div>
   <div v-else class="cover" aria-hidden="true">
     <CircuitBackground :seed="project.slug" />
     <div class="cover-bar">
@@ -41,6 +48,7 @@ const badge = computed(() => {
       <span class="file">{{ project.slug }}.{{ badge.extension }}</span>
     </div>
     <span class="label">{{ badge.label }}</span>
+    <CourseIcon v-if="project.course" :name="courseIcon(project.course)" class="ghost" />
   </div>
 </template>
 
@@ -106,6 +114,18 @@ const badge = computed(() => {
   font-size: clamp(1.6rem, 5vw, 2.2rem);
   line-height: 1;
   color: var(--hue-bright, #fb923c);
+}
+
+/* A school project's course icon, faint on the right of its drawn cover. */
+.ghost {
+  position: absolute;
+  right: 6%;
+  top: 50%;
+  height: 62%;
+  width: auto;
+  transform: translateY(-40%);
+  color: var(--hue-bright, #fb923c);
+  opacity: 0.3;
 }
 
 /* The pulses of current run only while the card is pointed at, so a page full of cards stays calm. */

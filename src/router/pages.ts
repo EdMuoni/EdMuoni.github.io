@@ -35,4 +35,9 @@ export const pages = {
     description:
       'Projects from my software development courses: web apps, APIs, browser tests, mobile apps and games.',
   },
+  electrical: {
+    path: '/electrical-work',
+    title: 'Electrical work · Edgar Muoni',
+    description: 'Photos of my work as an electrician: distribution boards, junction boxes, sockets and a relay test.',
+  },
 } satisfies Record<string, PageInfo>
