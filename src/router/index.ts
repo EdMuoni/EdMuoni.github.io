@@ -72,6 +72,12 @@ export function createAppRouter(): Router {
         meta: meta(pages.school),
       },
       {
+        path: pages.electrical.path,
+        name: 'electrical',
+        component: () => import('@/views/ElectricalView.vue'),
+        meta: meta(pages.electrical),
+      },
+      {
         // One page per project, e.g. /projects/voltvibe.
         path: '/projects/:slug',
         name: 'project',

@@ -11,6 +11,7 @@ const pages = [
   { to: '/now-building', label: 'Now building' },
   { to: '/work', label: 'Finished work' },
   { to: '/school', label: 'School' },
+  { to: '/electrical-work', label: 'Electrical' },
 ]
 </script>
 
@@ -130,7 +131,7 @@ const pages = [
   color: var(--accent-text);
 }
 
-/* Phones: links in two rows (3 + 2) on a six-column grid. */
+/* Phones: links in two rows of three. */
 .nav {
   grid-column: 1 / -1;
   display: grid;
@@ -140,10 +141,6 @@ const pages = [
 
 .nav-link {
   grid-column: span 2;
-}
-
-.nav-link:nth-child(n + 4) {
-  grid-column: span 3;
 }
 
 .tools {
